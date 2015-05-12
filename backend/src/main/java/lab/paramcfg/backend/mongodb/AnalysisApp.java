@@ -1,17 +1,11 @@
 package lab.paramcfg.backend.mongodb;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.sound.sampled.Line;
-
 import lab.paramcfg.backend.common.TupleKeyComparable;
 import lab.paramcfg.backend.common.Util;
 
@@ -19,6 +13,7 @@ public class AnalysisApp {
 	public static void main(String[] args) {
 		// input the cmd
 		System.out.println("please submit your app:");
+		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 		String cmd = in.nextLine();
 		// run the job

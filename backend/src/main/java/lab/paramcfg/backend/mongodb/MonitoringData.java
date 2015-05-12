@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 
 import lab.paramcfg.backend.common.Config;
 
+@SuppressWarnings("serial")
 public class MonitoringData implements Serializable {
 
 	private String jobid;
@@ -19,8 +20,8 @@ public class MonitoringData implements Serializable {
 	private String[] MONITOR_METRICS = { "cpu_user", "cpu_system", "bytes_in",
 			"bytes_out", "disk_writes", "disk_reads", };
 
-	public MonitoringData(String jobid, long startTime, long endTime) {
-		this.setJobid(jobid);
+	public MonitoringData(String cjobid, long startTime, long endTime) {
+		jobid = cjobid;
 		datas = new HashMap<String, ArrayList<String[]>>();
 		Extractor(Config.RRDSPATH, Config.NODENAMES, startTime, endTime);
 	}
@@ -72,16 +73,8 @@ public class MonitoringData implements Serializable {
 		return jobid;
 	}
 
-	public void setJobid(String jobid) {
-		this.jobid = jobid;
-	}
-
 	public HashMap<String, ArrayList<String[]>> getDatas() {
 		return datas;
-	}
-
-	public void setDatas(HashMap<String, ArrayList<String[]>> datas) {
-		this.datas = datas;
 	}
 
 }

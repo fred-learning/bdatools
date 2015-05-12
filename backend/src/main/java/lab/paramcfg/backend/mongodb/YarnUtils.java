@@ -46,8 +46,7 @@ public class YarnUtils {
 				JSONObject jsonObject2 = new JSONObject(appvalue);
 				ret[0] = Integer.valueOf(jsonObject2
 						.getString("availableVirtualCores"));
-				ret[1] = Integer.valueOf(jsonObject2
-						.getString("availableMB"));
+				ret[1] = Integer.valueOf(jsonObject2.getString("availableMB"));
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -59,19 +58,21 @@ public class YarnUtils {
 		}
 		return ret;
 	}
-	
+
 	/**
 	 * 
-	 * @return 
+	 * @return
 	 */
-	public static String pullNewestAppId(long starttime,long endtime) {
+	public static String pullNewestAppId(long starttime, long endtime) {
 		String ret = "application_00";
 		try {
 			// 拼凑get请求的URL字串
-			// String url = Config.REST_NEWESTJOB_PATH+"?startedTimeBegin="+starttime+"&finishedTimeBegin="+endtime
-            // 以上命令在运行时会出现时间范围不正确的现象，endtime有可能比任务结束时间晚
-            // TODO： 制定搜索范围，确保任务返回没有问题
-            String url = Config.REST_NEWESTJOB_PATH+"?startedTimeBegin="+starttime;
+			// String url =
+			// Config.REST_NEWESTJOB_PATH+"?startedTimeBegin="+starttime+"&finishedTimeBegin="+endtime
+			// 以上命令在运行时会出现时间范围不正确的现象，endtime有可能比任务结束时间晚
+			// TODO： 制定搜索范围，确保任务返回没有问题
+			String url = Config.REST_NEWESTJOB_PATH + "?startedTimeBegin="
+					+ starttime;
 			URL getUrl = new URL(url);
 			System.out.println(url);
 			// 根据拼凑的URL，打开连接，URL.openConnection()函数会根据
@@ -99,7 +100,7 @@ public class YarnUtils {
 				for (int i = 0; i < jsonArray.length(); i++) {
 					JSONObject jsontmp = new JSONObject(jsonArray.getString(i));
 					String tmpid = jsontmp.getString("id");
-					if (tmpid.compareTo(ret)>0) {
+					if (tmpid.compareTo(ret) > 0) {
 						ret = tmpid;
 					}
 				}
@@ -113,15 +114,15 @@ public class YarnUtils {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		System.out.println("I get the new id:"+ret);
+		System.out.println("I get the new id:" + ret);
 		return ret;
 	}
-	
+
 	public static int pullJobStatus(String jobid) {
-		int ret=0;
+		int ret = 0;
 		try {
 			// 拼凑get请求的URL字串
-			URL getUrl = new URL(Config.REST_NEWESTJOB_PATH+jobid);
+			URL getUrl = new URL(Config.REST_NEWESTJOB_PATH + jobid);
 
 			// 根据拼凑的URL，打开连接，URL.openConnection()函数会根据
 			// URL的类型，返回不同的URLConnection子类的对象，在这里我们的URL是一个http，因此它实际上返回的是HttpURLConnection

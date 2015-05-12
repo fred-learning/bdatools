@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@SuppressWarnings("serial")
 public class JournalData implements Serializable {
 
 	private String jobid;
@@ -49,7 +50,7 @@ public class JournalData implements Serializable {
 		vector = new double[partname.length];
 		retrieveFromYarn();
 	}
-	
+
 	public JournalData() {
 		jobid = "-1";
 	}
@@ -72,10 +73,10 @@ public class JournalData implements Serializable {
 				// String logtype = part[2];
 				String component = part[3].substring(0, part[3].length() - 1);
 				if (timestamp.compareTo(starttime) < 0) {
-					setStarttime(timestamp);
+					starttime = timestamp;
 				}
 				if (timestamp.compareTo(endtime) > 0) {
-					setEndtime(timestamp);
+					endtime = timestamp;
 				}
 				if (num_line.containsKey(component)) {
 					int count = num_line.get(component);
@@ -90,6 +91,7 @@ public class JournalData implements Serializable {
 
 		}
 	}
+
 	/**
 	 * 读取log存入hashmap和数组
 	 */
@@ -139,7 +141,7 @@ public class JournalData implements Serializable {
 		}
 		double denominator = Math.sqrt(lengthSquaredp1)
 				* Math.sqrt(lengthSquaredp2);
-        // correct for floating-point rounding errors
+		// correct for floating-point rounding errors
 		if (denominator < dotProduct) {
 			denominator = dotProduct;
 		}
@@ -164,40 +166,20 @@ public class JournalData implements Serializable {
 		return jobid;
 	}
 
-	public void setJobid(String jobid) {
-		this.jobid = jobid;
-	}
-
 	public String getStarttime() {
 		return starttime;
-	}
-
-	public void setStarttime(String starttime) {
-		this.starttime = starttime;
 	}
 
 	public String getEndtime() {
 		return endtime;
 	}
 
-	public void setEndtime(String endtime) {
-		this.endtime = endtime;
-	}
-
 	public Map<String, Integer> getNum_line() {
 		return num_line;
 	}
 
-	public void setNum_line(HashMap<String, Integer> num_line) {
-		this.num_line = num_line;
-	}
-
 	public double[] getVector() {
 		return vector;
-	}
-
-	public void setVector(double[] vector) {
-		this.vector = vector;
 	}
 
 }
