@@ -68,7 +68,10 @@ public class YarnUtils {
 		String ret = "application_00";
 		try {
 			// 拼凑get请求的URL字串
-			String url = Config.REST_NEWESTJOB_PATH+"?startedTimeBegin="+starttime+"&finishedTimeBegin="+endtime;
+			// String url = Config.REST_NEWESTJOB_PATH+"?startedTimeBegin="+starttime+"&finishedTimeBegin="+endtime
+            // 以上命令在运行时会出现时间范围不正确的现象，endtime有可能比任务结束时间晚
+            // TODO： 制定搜索范围，确保任务返回没有问题
+            String url = Config.REST_NEWESTJOB_PATH+"?startedTimeBegin="+starttime;
 			URL getUrl = new URL(url);
 			System.out.println(url);
 			// 根据拼凑的URL，打开连接，URL.openConnection()函数会根据

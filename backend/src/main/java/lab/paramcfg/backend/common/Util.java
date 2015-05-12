@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import lab.paramcfg.backend.mongodb.*;
 import org.bson.Document;
 import org.bson.types.Binary;
 import org.mortbay.util.ajax.JSON;
@@ -45,6 +46,28 @@ public class Util {
 		inputStream.close();
 		return ret;
 	}
+
+    public static JobData mongodocToJobData(Document doc)
+            throws ClassNotFoundException, IOException {
+        String id = doc.getString("id");
+        int status = doc.getInteger("status");
+
+        JobConfig config = Util.deserializeFromMongo(doc.get("config"),	JobConfig.class);
+        JobResource resource = Util.deserializeFromMongo(
+                doc.get("limited_resource"), JobResource.class);
+        Date startTime = doc.getDate("startTime");
+        Date endTime = doc.getDate("endTime");
+        JournalData jData = Util.deserializeFromMongo(
+                doc.get("journal_data"), JournalData.class);
+        MonitoringData mData = Util.deserializeFromMongo(
+                doc.get("monitoring_data"), MonitoringData.class);
+        RDDSData rData = Util.deserializeFromMongo(	doc.get("rdds_data"), RDDSData.class);
+        JobData ret = new JobData(id, status, config, resource,
+                startTime, endTime, jData, mData, rData);
+
+        return ret;
+    }
+
 
 	public static Date timechanger(String time) {
 		SimpleDateFormat df = new SimpleDateFormat("yy/MM/dd hh:mm:ss");

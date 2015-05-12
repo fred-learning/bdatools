@@ -1,13 +1,12 @@
 package lab.paramcfg.backend.mongodb;
 
-import java.util.Date;
-import java.util.TreeMap;
+import java.util.*;
 
+import lab.paramcfg.backend.common.TupleKeyComparable;
 import lab.paramcfg.backend.common.Util;
 
 import org.bson.Document;
 
-import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 
 public class JobData {
@@ -49,38 +48,31 @@ public class JobData {
 		return sum;
 	}
 
-	public JobData computeAllSimi(DBInstance db, int k) {
-		JobData ret = new JobData();
-		double simi = -1;
-		MongoCollection<Document> collection = db.getMongoCollection();
-		MongoCursor<Document> cursor = collection.find().iterator();
+    /**
+     * Compute all similarity score between this and all instance in DB.
+     *
+     * @param db, mongodb instance.
+     * @param k, number of neighbors.
+     * @return k items. Each item are (sim between this and other, other jobdata).
+     *         Items are sorted in descending ordered.
+     */
+	public List<TupleKeyComparable<Double, JobData>> computeAllSimi(DBInstance db, int k) {
+        // min-heap, tuple for sim_score, application id
+        PriorityQueue<TupleKeyComparable<Double, JobData>> Q =
+                new PriorityQueue<TupleKeyComparable<Double, JobData>>();
+
+		MongoCursor<Document> cursor = db.getMongoCollection().find().iterator();
 		try {
 			while (cursor.hasNext()) {
-				System.out.println("I found a saved job");
 				Document doc = cursor.next();
-				String id = doc.getString("id");
-				int status = doc.getInteger("status");
+                JobData other = Util.mongodocToJobData(doc);
 
-				JobConfig config = Util.deserializeFromMongo(doc.get("config"),
-						JobConfig.class);
-				JobResource resource = Util.deserializeFromMongo(
-						doc.get("limited_resource"), JobResource.class);
-				Date startTime = doc.getDate("startTime");
-				Date endTime = doc.getDate("endTime");
-				JournalData jData = Util.deserializeFromMongo(
-						doc.get("journal_data"), JournalData.class);
-				MonitoringData mData = Util.deserializeFromMongo(
-						doc.get("monitoring_data"), MonitoringData.class);
-				RDDSData rData = Util.deserializeFromMongo(
-						doc.get("rdds_data"), RDDSData.class);
-				JobData tmpdata = new JobData(id, status, config, resource,
-						startTime, endTime, jData, mData, rData);
-				double tmpsimi = this.computeOneSimi(tmpdata);
-				System.out.println(id+":it's simi is"+tmpsimi);
-				if (tmpsimi > simi) {
-					simi = tmpsimi;
-					ret = tmpdata;
-				}
+                // compute similarity, update heap
+				double sim = this.computeOneSimi(other);
+                Q.offer(new TupleKeyComparable<Double, JobData>(sim, other));
+                if (Q.size() > k) Q.poll();
+
+                System.out.println("I found a saved job " + other.getId() + ", simi " + sim);
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -88,8 +80,20 @@ public class JobData {
 		} finally {
 			cursor.close();
 		}
+
+        // sort jobdata by descending similarity
+        Object[] arr = Q.toArray();
+        Arrays.sort(arr);
+        List<TupleKeyComparable<Double, JobData>> ret =
+                new ArrayList<TupleKeyComparable<Double, JobData>>();
+        for (int i = arr.length - 1; i >= 0; -- i) {
+            TupleKeyComparable<Double, JobData> data = (TupleKeyComparable<Double, JobData>) arr[i];
+            ret.add(data);
+        }
+
 		return ret;
 	}
+
 
 	public String getId() {
 		return id;

@@ -39,7 +39,7 @@ public class JournalData implements Serializable {
 	/**
 	 * init
 	 * 
-	 * @param jobid
+	 * @param id
 	 */
 	public JournalData(String id) {
 		starttime = "99/99/99 99:99:99";
@@ -128,7 +128,7 @@ public class JournalData implements Serializable {
 	 * @param p2
 	 * @return
 	 */
-	private double cosdistance(double[] p1, double[] p2) {
+	private double cosSimilarity(double[] p1, double[] p2) {
 		double dotProduct = 0.0;
 		double lengthSquaredp1 = 0.0;
 		double lengthSquaredp2 = 0.0;
@@ -139,7 +139,7 @@ public class JournalData implements Serializable {
 		}
 		double denominator = Math.sqrt(lengthSquaredp1)
 				* Math.sqrt(lengthSquaredp2);
-		// correct for floating-point rounding errors
+        // correct for floating-point rounding errors
 		if (denominator < dotProduct) {
 			denominator = dotProduct;
 		}
@@ -147,7 +147,7 @@ public class JournalData implements Serializable {
 		if (denominator == 0 && dotProduct == 0) {
 			return 0;
 		}
-		return 1.0 - dotProduct / denominator;
+		return dotProduct / denominator;
 	}
 
 	/**
@@ -157,14 +157,7 @@ public class JournalData implements Serializable {
 	 * @return
 	 */
 	public double similarity(JournalData other) {
-
-		double[] otherarr = new double[partname.length];
-		for (int i = 0; i < partname.length; i++) {
-			if (num_line.containsKey(partname[i])) {
-				otherarr[i] = num_line.get(partname[i]);
-			}
-		}
-		return cosdistance(vector, otherarr);
+		return cosSimilarity(vector, other.getVector());
 	}
 
 	public String getJobid() {

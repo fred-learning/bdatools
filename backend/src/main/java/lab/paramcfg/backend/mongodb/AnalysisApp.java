@@ -5,12 +5,14 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.sound.sampled.Line;
 
+import lab.paramcfg.backend.common.TupleKeyComparable;
 import lab.paramcfg.backend.common.Util;
 
 public class AnalysisApp {
@@ -62,7 +64,6 @@ public class AnalysisApp {
 
 		// 初始化db,存储jobdata
 		DBInstance db = new DBInstance("192.168.3.57", "test", "job");
-		db.clearCollection();
 		try {
 			db.saveJobData(id, status, config, resource, startTime, endTime,
 					jData, mData, rData);
@@ -87,8 +88,14 @@ public class AnalysisApp {
 		System.out.println(data.getId() + "always be saved");
 
 		// 计算与其他所有的相似度
-		JobData simiData = data.computeAllSimi(db, 10);
-		System.out.println("simidata:" + simiData.getId());
+        int k = 10;
+        List<TupleKeyComparable<Double, JobData> > sim_datas = data.computeAllSimi(db, k);
+
+        System.out.println("Top " + k + "similar datas:");
+        for (TupleKeyComparable<Double, JobData> sim_data : sim_datas) {
+            System.out.println(String.format("id %s, sim %f", sim_data.y.getId(), sim_data.x));
+        }
+
 		db.close();
 		System.out.println("Finish all tasks");
 	}
