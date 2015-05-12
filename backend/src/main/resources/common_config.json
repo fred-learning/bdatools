@@ -1,0 +1,12 @@
+{
+	"hdfs_remote_uri" : "hdfs://192.168.3.57:8020",
+	"sparklog_remote_path" : "/logs/spark/logs",
+	"local_logs_path" : "logs",
+	"local_temp_path" : "temp",
+	"es_sparklog_path" : "http://192.168.3.223:9200/logs/spark",
+	"rest_resource_url":"http://192.168.3.57:8088/ws/v1/cluster/metrics",
+	"rest_job_url":"http://192.168.3.57:8088/ws/v1/cluster/apps/",
+	"rrds_path":"/home/spark/wangjue/software/ganglia-3.6.0/rrds/apache-cluster/",
+	"nodenames":"pc57,pc59,pc61,pc63",
+	
+}
