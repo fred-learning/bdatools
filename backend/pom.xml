@@ -68,7 +68,15 @@
 			<version>4.4</version>
 		</dependency>
 
-	</dependencies>
+        <dependency>
+            <groupId>com.alexmerz</groupId>
+            <artifactId>graphviz</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/jarlib/com.alexmerz.graphviz.jar</systemPath>
+        </dependency>
+
+    </dependencies>
 
 	<build>
 		<plugins>
