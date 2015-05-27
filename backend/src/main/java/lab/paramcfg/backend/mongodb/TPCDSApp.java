@@ -30,7 +30,7 @@ public class TPCDSApp {
 				"org.apache.spark.serializer.JavaSerializer",
 				"org.apache.spark.serializer.KryoSerializer" };
 		String[] datasetlist = { "default", "10", "100" };
-		String cmd1 = "spark-submit --class bda.test.TPCDSCluster  --master yarn-client ";
+		String cmd1 = "spark-submit --class bda.test.TPCDSCluster --master yarn-client ";
 		String cmd2 = " /home/spark/yateng/tpcds.jar hdfs:///yateng/dsdgen_";
 
 		for (int numexecutor : numexecutorslist) {
@@ -59,7 +59,12 @@ public class TPCDSApp {
 									Date startForSearch = new Date();
 									Process runPro = null;
 									try {
-										String[] command_arr = cmd.split(" ");
+										String[] command_tmp = cmd.split(" ");
+										String[] command_arr = new String[18];
+										for (int i = 0; i < command_arr.length-1; i++) {
+											command_arr[i]=command_tmp[i];
+										}
+										command_arr[17]=query;
 										runPro = Runtime.getRuntime().exec(
 												command_arr);
 										String line;
