@@ -11,11 +11,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import lab.paramcfg.backend.mongodb.*;
+
 import org.bson.Document;
 import org.bson.types.Binary;
-import org.mortbay.util.ajax.JSON;
 
-import com.google.gson.Gson;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
@@ -41,6 +40,7 @@ public class Util {
 		byte[] bytes = (byte[]) dbo.getData();
 		InputStream inputStream = new ByteArrayInputStream(bytes);
 		ObjectInputStream in = new ObjectInputStream(inputStream);
+		@SuppressWarnings("unchecked")
 		T ret = (T) in.readObject();
 		in.close();
 		inputStream.close();

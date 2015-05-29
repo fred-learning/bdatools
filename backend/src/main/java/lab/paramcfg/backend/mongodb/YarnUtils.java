@@ -10,8 +10,6 @@ import lab.paramcfg.backend.common.Config;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.google.gson.JsonArray;
-
 public class YarnUtils {
 	/**
 	 * 

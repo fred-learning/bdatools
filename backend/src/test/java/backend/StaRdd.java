@@ -1,9 +1,6 @@
 package backend;
 
-import static org.junit.Assert.*;
-
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
@@ -34,6 +31,7 @@ public class StaRdd {
 				if (matcher.find()) {
 					try {
 						String[] part = context.split(" ");
+						@SuppressWarnings("unused")
 						String timestamp = context.substring(0, 17);
 						// String logtype = part[2];
 						String component = part[3].substring(0,
@@ -77,6 +75,7 @@ public class StaRdd {
 				}
 			}
 		}
+		strCon.close();
 		rddmap.size();
 	}
 

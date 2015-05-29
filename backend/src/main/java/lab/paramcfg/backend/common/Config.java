@@ -2,8 +2,6 @@ package lab.paramcfg.backend.common;
 
 import java.nio.charset.StandardCharsets;
 
-import net.schmizz.sshj.SSHClient;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.log4j.Logger;

@@ -10,8 +10,6 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import backend.StaRdd.BSize;
-
 @SuppressWarnings("serial")
 public class JournalData implements Serializable {
 	public enum BSize

@@ -1,8 +1,6 @@
 package lab.paramcfg.backend.mongodb;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -57,6 +55,7 @@ public class TPCDSApp {
 									// run the job
 									System.out.println("Start running the job");
 									Date startForSearch = new Date();
+									ProcessBuilder pb = new ProcessBuilder(); 
 									Process runPro = null;
 									try {
 										String[] command_tmp = cmd.split(" ");
@@ -65,8 +64,9 @@ public class TPCDSApp {
 											command_arr[i]=command_tmp[i];
 										}
 										command_arr[17]=query;
-										runPro = Runtime.getRuntime().exec(
-												command_arr);
+//										runPro = Runtime.getRuntime().exec(
+//												command_arr);
+										runPro = pb.command(command_arr).start();
 										String line;
 										BufferedReader in2 = new BufferedReader(
 												new InputStreamReader(runPro

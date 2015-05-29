@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.StringWriter;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -204,7 +203,8 @@ public class ESUploader {
     }
   }
   
-  @Deprecated
+  @SuppressWarnings("unused")
+@Deprecated
   private boolean uploadSingleQuery(
       CloseableHttpClient client, String query) {
     HttpPost httpPost = new HttpPost(Config.ES_SPARKLOG_PATH);

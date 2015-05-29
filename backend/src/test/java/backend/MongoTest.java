@@ -16,7 +16,6 @@ import lab.paramcfg.backend.mongodb.YarnUtils;
 
 import org.junit.Test;
 
-@SuppressWarnings("deprecation")
 public class MongoTest {
 
 	@Test
@@ -68,7 +67,7 @@ public class MongoTest {
 		
 		//计算与其他所有的相似度
 		
-		
+		in.close();
 		Assert.assertNotNull(data);
 		db.clearCollection();
 		System.out.println("Finish all tasks");
