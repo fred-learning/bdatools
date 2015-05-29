@@ -16,12 +16,17 @@ public class AnalysisApp {
 		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 		String cmd = in.nextLine();
+		System.out.println("cmd is "+cmd);
 		// run the job
 		System.out.println("Start running the job");
 		Date startForSearch = new Date();
 		Process runPro = null;
 		try {
 			String[] command_arr = cmd.split(" ");
+//			String[] command_test = {"sh","-c","\""+cmd+">/tmp/1111\""};
+//			for (String testString : command_test) {
+//				System.out.println(testString);
+//			}
 			runPro = Runtime.getRuntime().exec(command_arr);
 			String line;
 			BufferedReader in2 = new BufferedReader(new InputStreamReader(
@@ -30,6 +35,7 @@ public class AnalysisApp {
 				System.out.println(line);
 			}
 			runPro.waitFor();
+			System.out.println("exitvalue:"+runPro.exitValue());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
