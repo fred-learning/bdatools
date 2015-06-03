@@ -22,11 +22,8 @@ public class AnalysisApp {
 		Date startForSearch = new Date();
 		Process runPro = null;
 		try {
-			String[] command_arr = cmd.split(" ");
-//			String[] command_test = {"sh","-c","\""+cmd+">/tmp/1111\""};
-//			for (String testString : command_test) {
-//				System.out.println(testString);
-//			}
+			String[] command_arr = cmd.split("\\s+");
+//			String[] command_arr = {"sh","-c","\""+cmd+">/tmp/backend.output\""};
 			runPro = Runtime.getRuntime().exec(command_arr);
 			String line;
 			BufferedReader in2 = new BufferedReader(new InputStreamReader(

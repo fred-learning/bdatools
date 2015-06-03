@@ -12,10 +12,9 @@ import java.util.regex.Pattern;
 
 @SuppressWarnings("serial")
 public class JournalData implements Serializable {
-	public enum BSize
-	 {
-	     B,KB,MB,GB; 
-	 }
+	public enum BSize {
+		B, KB, MB, GB;
+	}
 
 	private String jobid;
 	private String starttime;
@@ -23,7 +22,6 @@ public class JournalData implements Serializable {
 	private HashMap<String, Integer> num_line;
 	private double[] vector;
 	private TreeMap<Integer, Float> rddmap;
-	
 
 	private String[] partname = new String[] { "storage.DiskBlockManager",
 			"storage.BlockManager", "storage.BlockManagerMaster",
@@ -80,35 +78,36 @@ public class JournalData implements Serializable {
 				String timestamp = context.substring(0, 17);
 				// String logtype = part[2];
 				String component = part[3].substring(0, part[3].length() - 1);
-				
-				//sta rdd
-				if(component.equals("storage.MemoryStore")){
-					if (part.length==18&&part[5].startsWith("rdd")){
-						int key = Integer.valueOf(part[5].charAt(4))-48;
+
+				// sta rdd
+				if (component.equals("storage.MemoryStore")) {
+					if (part.length == 18 && part[5].startsWith("rdd")) {
+						int key = Integer.valueOf(part[5].charAt(4)) - 48;
 						float value = Float.valueOf(part[13]);
-						String unit = part[14].substring(0, part[14].length()-1);
+						String unit = part[14].substring(0,
+								part[14].length() - 1);
 						switch (BSize.valueOf(unit)) {
 						case B:
-							value/=1024;
+							value /= 1024;
 							break;
 						case MB:
-							value*=1024;
+							value *= 1024;
 							break;
 						case GB:
-							value*=1024*1024;
+							value *= 1024 * 1024;
 							break;
 						default:
 							break;
 						}
 						if (rddmap.containsKey(key)) {
 							float tmpvalue = rddmap.get(key);
-							rddmap.put(key, value+tmpvalue);
-						}else {
+							rddmap.put(key, value + tmpvalue);
+						} else {
 							rddmap.put(key, value);
 						}
 					}
 				}
-				
+
 				if (timestamp.compareTo(starttime) < 0) {
 					starttime = timestamp;
 				}
@@ -133,31 +132,44 @@ public class JournalData implements Serializable {
 	 * 读取log存入hashmap和数组
 	 */
 	private void retrieveFromYarn() {
+		int limitcount = 5;
 		String strCmd = "yarn logs -applicationId " + jobid;
 		System.out.println(strCmd);
 		Process process;
-		try {
-			String[] cmdarr = strCmd.split(" ");
-			process = Runtime.getRuntime().exec(cmdarr);
-			// process.waitFor();
-			// 读取屏幕输出
-			BufferedReader strCon = new BufferedReader(new InputStreamReader(
-					process.getInputStream()));
-			String line;
-			while ((line = strCon.readLine()) != null) {
-				lineparser(line);
+		String[] cmdarr = strCmd.split(" ");
+
+		for (int lc = 0; lc < limitcount; lc++) {
+			try {
+				process = Runtime.getRuntime().exec(cmdarr);
+				// process.waitFor();
+				// 读取屏幕输出
+				BufferedReader strCon = new BufferedReader(
+						new InputStreamReader(process.getInputStream()));
+				String line;
+				while ((line = strCon.readLine()) != null) {
+					lineparser(line);
+				}
+				
+				if (num_line.isEmpty()) {
+					System.out.println("sleep 1s and get log again");
+					Thread.sleep(1000);
+				} else {
+					// compute the statistic array
+					for (int i = 0; i < partname.length; i++) {
+						if (num_line.containsKey(partname[i])) {
+							vector[i] = num_line.get(partname[i]);
+						}
+					}
+					break;
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
+
 		System.out.println(num_line);
-		// compute the statistic array
-		for (int i = 0; i < partname.length; i++) {
-			if (num_line.containsKey(partname[i])) {
-				vector[i] = num_line.get(partname[i]);
-			}
-		}
+
 	}
 
 	/**
@@ -218,7 +230,7 @@ public class JournalData implements Serializable {
 	public double[] getVector() {
 		return vector;
 	}
-	
+
 	public TreeMap<Integer, Float> getRddmap() {
 		return rddmap;
 	}

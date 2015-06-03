@@ -48,7 +48,8 @@ public class TPCDSDemo {
 									Date startForSearch = new Date();
 									Process runPro = null;
 									try {
-										String[] command_arr = cmd.split(" ");
+										String[] command_arr = cmd.split("\\s+");
+//										String[] command_arr = {"sh","-c","\""+cmd+">/tmp/backend.output\""};
 										runPro = Runtime.getRuntime().exec(
 												command_arr);
 										String line;
@@ -59,6 +60,7 @@ public class TPCDSDemo {
 											System.out.println(line);
 										}
 										runPro.waitFor();
+										System.out.println("exitvalue:"+runPro.exitValue());
 									} catch (Exception e) {
 										// TODO Auto-generated catch block
 										e.printStackTrace();
