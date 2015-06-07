@@ -49,7 +49,7 @@ public class TPCDSDemo {
 									Process runPro = null;
 									try {
 										String[] command_arr = cmd.split("\\s+");
-//										String[] command_arr = {"sh","-c","\""+cmd+">/tmp/backend.output\""};
+//										String[] command_arr = {"sh","-c","\""+cmd+"\""};
 										runPro = Runtime.getRuntime().exec(
 												command_arr);
 										String line;

@@ -8,6 +8,8 @@ import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import lab.paramcfg.backend.common.Config;
+
 import com.alexmerz.graphviz.Parser;
 import com.alexmerz.graphviz.objects.Edge;
 import com.alexmerz.graphviz.objects.Graph;
@@ -69,7 +71,8 @@ public class RDDSData implements Serializable {
 
 	public void getGraph(String appid) {
 		WebCrawler crawler = new WebCrawler();
-		String url = "http://pc57:18080/history/" + appid + "/jobs/";
+//		String url = "http://pc57:18080/history/" + appid + "/jobs/";
+		String url = Config.DAG_PATH+"/history/" + appid + "/jobs/";
 		String content = crawler.getContentFromUrl(url);
 
 		String jobsNumReg = "Completed Jobs \\((\\d+)\\)";
