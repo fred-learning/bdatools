@@ -7,6 +7,8 @@ import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import lab.paramcfg.backend.common.Config;
+
 import org.apache.http.HttpEntity;  
 import org.apache.http.HttpResponse;  
 import org.apache.http.client.HttpClient;  
@@ -60,13 +62,13 @@ public class WebCrawler {
         return content;  
     }  
 	
-    public DAG getDAG(String ip_port, String appId)
+    public DAG getDAG(String appId)
     {  	
     	ArrayList<LinkedList<Integer>> graph ;
         ArrayList<Nodem> nodems = new ArrayList<Nodem>();
     	Hashtable<String, Integer> maps = new Hashtable<String, Integer>();
     	/* used to crawl one page */
-    	String url = "http://" + ip_port + "/history/" + appId + "/jobs/";
+    	String url = Config.DAG_PATH + "/history/" + appId + "/jobs/";
     	String content = getContentFromUrl(url);
     	if(null == content){
     		return null;
