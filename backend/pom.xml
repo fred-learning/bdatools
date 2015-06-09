@@ -60,15 +60,21 @@
 			<version>4.4</version>
 		</dependency>
 
-        <dependency>
-            <groupId>com.alexmerz</groupId>
-            <artifactId>graphviz</artifactId>
-            <version>1.0.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/jarlib/com.alexmerz.graphviz.jar</systemPath>
-        </dependency>
+		<dependency>
+			<groupId>com.alexmerz</groupId>
+			<artifactId>graphviz</artifactId>
+			<version>1.0.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/jarlib/com.alexmerz.graphviz.jar</systemPath>
+		</dependency>
 
-    </dependencies>
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.7.2</version>
+		</dependency>
+
+	</dependencies>
 
 	<build>
 		<plugins>

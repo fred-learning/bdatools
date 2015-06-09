@@ -7,8 +7,11 @@ public class UnitTest
 	public static void main( String[] args ){
 		//String url = "http://pc57:18080/history/application_1429098422682_1367/jobs/";
 		
-		String appId1 = "application_1429098422682_1367";
-		String appId2 = "application_1429098422682_1368";
+		String ip_port = "pc57:18080";
+		//String appId1 = "application_1433623322646_0019";
+		//String appId1 = "application_1433623322646_0025";
+		String appId1 = "application_1433623322646_0024";
+		String appId2 = "application_1433623322646_0026";
 		
 		GraphMatching gMatching = new GraphMatching();
 		WebCrawler crawler = new WebCrawler();
@@ -22,7 +25,7 @@ public class UnitTest
 			System.out.println("crawl dag success.");
 		}
 		
-		double sim = gMatching.similarity(dag1, dag2);
+		double sim = 1- gMatching.similarity(dag1, dag2);
 		System.out.println("similarity of job " + appId1 + " and " + appId2 +" is "+ sim);
 		
 	} 

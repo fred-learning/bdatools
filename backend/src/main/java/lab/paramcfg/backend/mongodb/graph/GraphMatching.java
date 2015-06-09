@@ -47,6 +47,9 @@ public class GraphMatching {
 		Map<Integer,String> labels1 = new HashMap<Integer,String>();
 		Map<Integer,String> labels2 = new HashMap<Integer,String>();
 		
+		System.out.println(nodes1.size());
+		System.out.println(nodes2.size());
+		
 		/* initialize idMap1 and idMap2 */
 		for (int i = 0; i < nodes1.size(); i++) {
 			idIdxMap1.put(Integer.parseInt(nodes1.get(i).getId()), i);
@@ -54,7 +57,7 @@ public class GraphMatching {
 		}
 		for (int i = 0; i < nodes2.size(); i++) {
 			idIdxMap2.put(Integer.parseInt(nodes2.get(i).getId()), i);
-			idxIdMap2.put(i, Integer.parseInt(nodes1.get(i).getId()));
+			idxIdMap2.put(i, Integer.parseInt(nodes2.get(i).getId()));
 		}
 		
 		/* initialize vertices1 and vertices2 */
@@ -64,6 +67,8 @@ public class GraphMatching {
 		for(Nodem node:nodes2){
 			vertices2.add(Integer.parseInt(node.getId()));
 		}
+		
+
 		
 		/* initialize outgoingEdges1 and outgoingEdges2 */
 		for(int i=0; i<edges1.size(); i++){
@@ -109,7 +114,7 @@ public class GraphMatching {
 				tmpSets.get(idIdxMap2.get(id)).add(idxIdMap2.get(i));
 			}
 		}
-		for(int i=0; i<edges1.size(); i++){
+		for(int i=0; i<edges2.size(); i++){
 			incomingEdges2.put(idxIdMap2.get(i), tmpSets.get(i));
 		}
 		
