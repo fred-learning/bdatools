@@ -73,7 +73,7 @@ public class WebCrawler {
         ArrayList<Nodem> nodems = new ArrayList<Nodem>();
     	Hashtable<String, Integer> maps = new Hashtable<String, Integer>();
     	/* used to crawl one page */
-    	String url = Config.DAG_PATH + "/history/" + appId + "/jobs/";
+    	String url = Config.OP_DAG_PATH + "/history/" + appId + "/jobs/";
     	Document doc;
     	String content = null;
 		try {			

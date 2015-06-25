@@ -1,0 +1,19 @@
+DELETE /logs/
+
+POST /logs/
+{
+    "settings" : {
+        "number_of_shards" : 1,
+        "number_of_replicas": 0
+    },
+    "mappings" : {
+        "spark": {
+            "properties": { 
+		        "date" : {"type" : "date", "format" : "yy/MM/dd HH:mm:ss"},
+		        "logType" : {"type" : "string", "index" : "not_analyzed"},
+		        "storagePath" : {"type" : "string", "index" : "not_analyzed"},
+		        "content" : {"type" : "string"}
+            }
+        }
+    }
+}

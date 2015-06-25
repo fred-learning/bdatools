@@ -67,6 +67,14 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/jarlib/com.alexmerz.graphviz.jar</systemPath>
 		</dependency>
+		
+		<dependency>
+			<groupId>bda</groupId>
+			<artifactId>graphmatching</artifactId>
+			<version>1.0.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/jarlib/graphmatching.jar</systemPath>
+		</dependency>
 
 		<dependency>
 			<groupId>org.jsoup</groupId>

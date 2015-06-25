@@ -15,11 +15,12 @@ public class RDDSData implements Serializable {
 
 	public RDDSData(String jobid) {
 		this.jobid = jobid;
-		this.dag = new WebCrawler().getDAG(jobid);
+//		this.dag = new WebCrawler().getDAG(jobid);
 	}
 
 	public double similarity(RDDSData other) {
-		return new GraphMatching().similarity(this.dag, other.dag);
+//		return new GraphMatching().similarity(this.dag, other.dag);
+		return 0;
 	}
 
 	public String getJobid() {

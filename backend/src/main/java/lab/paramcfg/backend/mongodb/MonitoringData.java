@@ -23,14 +23,14 @@ public class MonitoringData implements Serializable {
 	public MonitoringData(String cjobid, long startTime, long endTime) {
 		jobid = cjobid;
 		datas = new HashMap<String, ArrayList<String[]>>();
-		Extractor(Config.RRDSPATH, Config.NODENAMES, startTime, endTime);
+		Extractor(Config.OP_RRDS_PATH, Config.OP_NODENAMES, startTime, endTime);
 	}
 
 	private void Extractor(String rrdsPath, String[] nodeNames, long startTime,
 			long endTime) {
 		for (String nodename : nodeNames) {
 			for (String monitor : MONITOR_METRICS) {
-				String strCmd = "rrdtool fetch " + rrdsPath + "/" + nodename
+				String strCmd = "ssh -i /home/ubuntu/gangliassh.pem ubuntu@192.168.111.77 "+"rrdtool fetch " + rrdsPath + nodename
 						+ "/" + monitor + ".rrd" + " AVERAGE -s " + startTime
 						+ " -e " + endTime;
 				System.out.println(strCmd);
@@ -44,18 +44,21 @@ public class MonitoringData implements Serializable {
 					BufferedReader strCon = new BufferedReader(
 							new InputStreamReader(process.getInputStream()));
 					String line;
+					int count=0;
 					while ((line = strCon.readLine()) != null) {
 						// 存储key,value
 						String regex = "^\\d+: \\d";
 						Pattern pt = Pattern.compile(regex);
 						Matcher matcher = pt.matcher(line);
 						if (matcher.find()) {
+							count++;
 							String key = line.split(": ")[0];
 							String value = line.split(": ")[1];
 							String[] eachdata = { key, value };
 							onetypelist.add(eachdata);
 						}
 					}
+//					System.out.println("get monitor data counts:"+count);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

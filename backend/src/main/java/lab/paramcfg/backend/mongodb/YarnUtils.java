@@ -19,8 +19,8 @@ public class YarnUtils {
 		int ret[] = new int[2];
 		try {
 			// 拼凑get请求的URL字串
-			URL getUrl = new URL(Config.REST_PATH+"/ws/v1/cluster/metrics");
-
+			URL getUrl = new URL("http://"+Config.OP_REST_URL+"/ws/v1/cluster/metrics");
+//			System.out.println("http://"+Config.OP_REST_URL+"/ws/v1/cluster/metrics");
 			// 根据拼凑的URL，打开连接，URL.openConnection()函数会根据
 			// URL的类型，返回不同的URLConnection子类的对象，在这里我们的URL是一个http，因此它实际上返回的是HttpURLConnection
 			HttpURLConnection connection = (HttpURLConnection) getUrl
@@ -42,8 +42,8 @@ public class YarnUtils {
 				JSONObject jsonObject1 = new JSONObject(jsonString);
 				String appvalue = jsonObject1.getString("clusterMetrics");
 				JSONObject jsonObject2 = new JSONObject(appvalue);
-				ret[0] = Integer.valueOf(jsonObject2
-						.getString("availableVirtualCores"));
+//				ret[0] = Integer.valueOf(jsonObject2
+//						.getString("availableVirtualCores"));
 				ret[1] = Integer.valueOf(jsonObject2.getString("availableMB"));
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -53,6 +53,7 @@ public class YarnUtils {
 			connection.disconnect();
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 		return ret;
 	}
@@ -69,10 +70,10 @@ public class YarnUtils {
 			// Config.REST_NEWESTJOB_PATH+"?startedTimeBegin="+starttime+"&finishedTimeBegin="+endtime
 			// 以上命令在运行时会出现时间范围不正确的现象，endtime有可能比任务结束时间晚
 			// TODO： 制定搜索范围，确保任务返回没有问题
-			String url = Config.REST_PATH + "/ws/v1/cluster/apps/?startedTimeBegin="
+			String url = Config.OP_REST_URL + "/ws/v1/cluster/apps/?startedTimeBegin="
 					+ starttime;
-			URL getUrl = new URL(url);
-			System.out.println(url);
+			URL getUrl = new URL("http://"+url);
+//			System.out.println(url);
 			// 根据拼凑的URL，打开连接，URL.openConnection()函数会根据
 			// URL的类型，返回不同的URLConnection子类的对象，在这里我们的URL是一个http，因此它实际上返回的是HttpURLConnection
 			HttpURLConnection connection = (HttpURLConnection) getUrl
@@ -111,6 +112,7 @@ public class YarnUtils {
 			connection.disconnect();
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 		System.out.println("I get the new id:" + ret);
 		return ret;
@@ -120,8 +122,8 @@ public class YarnUtils {
 		int ret = 0;
 		try {
 			// 拼凑get请求的URL字串
-			URL getUrl = new URL(Config.REST_PATH+"/ws/v1/cluster/apps/" + jobid);
-
+			URL getUrl = new URL("http://"+Config.OP_REST_URL+"/ws/v1/cluster/apps/" + jobid);
+//			System.out.println("http://"+Config.OP_REST_URL+"/ws/v1/cluster/apps/" + jobid);
 			// 根据拼凑的URL，打开连接，URL.openConnection()函数会根据
 			// URL的类型，返回不同的URLConnection子类的对象，在这里我们的URL是一个http，因此它实际上返回的是HttpURLConnection
 			HttpURLConnection connection = (HttpURLConnection) getUrl
@@ -149,6 +151,7 @@ public class YarnUtils {
 				}
 			} catch (Exception e) {
 				// TODO: handle exception
+				e.printStackTrace();
 			}
 			reader.close();
 			// 断开连接

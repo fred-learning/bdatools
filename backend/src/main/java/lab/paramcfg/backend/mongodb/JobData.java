@@ -69,15 +69,14 @@ public class JobData {
 			while (cursor.hasNext()) {
 				Document doc = cursor.next();
 				JobData other = Util.mongodocToJobData(doc);
-
 				// compute similarity, update heap
 				double sim = this.computeOneSimi(other);
 				Q.offer(new TupleKeyComparable<Double, JobData>(sim, other));
 				if (Q.size() > k)
 					Q.poll();
 
-				System.out.println("I found a saved job " + other.getId()
-						+ ", simi " + sim);
+				// System.out.println("I found a saved job " + other.getId()
+				// + ", simi " + sim);
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
