@@ -1,0 +1,11 @@
+{
+	"rrds_path":"/home/spark/wangjue/software/ganglia-3.6.0/rrds/apache-cluster/",
+	"mongodb_config":"192.168.3.57,test,job",
+	"nodenames":"pc57,pc59,pc61,pc63",
+	"dag_path":"http://192.168.3.57:18080",
+	"rest_url":"192.168.3.57:8088",
+	"op_rrds_path":"/var/lib/ganglia/rrds/openstack/",
+	"op_ssh_path":"/home/ubuntu/gangliassh.pem",
+	"op_mongodb_config":"192.168.111.77,test,job",
+	"op_front_ip":"http://166.111.80.29:8001/demo/src/analyse.php?";
+}

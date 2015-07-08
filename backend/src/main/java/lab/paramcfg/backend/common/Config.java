@@ -12,11 +12,6 @@ import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
 public class Config {
-//	public static String REST_URL;
-//	public static String DAG_PATH;
-//	public static String RRDS_PATH;
-//	public static String[] NODENAMES;
-//	public static String[] MONGODB_CONFIG;
 	
 	public static String OP_SSH_PATH;
 	public static String OP_CLUSTER_ID;
@@ -38,12 +33,6 @@ public class Config {
 			byte[] bytes = IOUtils.toByteArray(Config.class.getResourceAsStream(CONFIG_PATH));
 			String text = new String(bytes, StandardCharsets.UTF_8);
 			JSONObject jobj = new JSONObject(text);
-			
-//			REST_URL = jobj.getString("rest_url");
-//			RRDS_PATH = jobj.getString("rrds_path");
-//			NODENAMES = jobj.getString("nodenames").split(",");
-//			DAG_PATH = jobj.getString("dag_path");
-//			MONGODB_CONFIG = jobj.getString("mongodb_config").split(",");
 			
 			parseHosts();
 			OP_FRONT_IP = jobj.getString("op_front_ip");
@@ -86,6 +75,7 @@ public class Config {
 			e.printStackTrace();
 		}		
 	}
+	
 	public static void testOutput() {
 		System.out.println("OP_SSH_PATH:"+OP_SSH_PATH);
 		System.out.println("OP_CLUSTER_ID:"+OP_CLUSTER_ID);
@@ -98,26 +88,5 @@ public class Config {
 		System.out.println("OP_MONGODB_CONFIG:"+OP_MONGODB_CONFIG.length);
 		
 	}
-	
-//	public static void configByHand() {
-//		@SuppressWarnings("resource")
-//		Scanner in = new Scanner(System.in);
-//		System.out.println("please set rest_url(e.g. http://192.168.3.57:8088):");
-//		String resturl = in.nextLine();
-//		System.out.println(resturl);
-//		Config.REST_URL = resturl;
-//		System.out.println("please set dag_path(e.g. http://192.168.3.57:18080):");
-//		String dagpath = in.nextLine();
-//		System.out.println(dagpath);
-//		Config.DAG_PATH = dagpath;
-//		System.out.println("please set rrds_path(e.g. /home/spark/wangjue/software/ganglia-3.6.0/rrds/apache-cluster/):");
-//		String rrdspath = in.nextLine();
-//		System.out.println(rrdspath);
-//		Config.RRDS_PATH = rrdspath;
-//		System.out.println("please set nodenames(e.g. pc57,pc59,pc61,pc63):");
-//		String nodenames = in.nextLine();
-//		System.out.println(nodenames);
-//		Config.NODENAMES = nodenames.split(",");
-//	}
 	
 };

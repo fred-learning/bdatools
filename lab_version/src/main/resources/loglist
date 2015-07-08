@@ -1,0 +1,837 @@
+spark.ExecutorAllocationManager:Starting timer to add more executors (to *expire in * seconds)*
+spark.ExecutorAllocationManager:Not adding executors because there are already * *registered and * pending executor(s) (limit *)*
+spark.ExecutorAllocationManager:Requesting * new executor(s) because tasks are backlogged* (new desired total will be *)*
+spark.ExecutorAllocationManager:Unable to reach the cluster manager to request * total executors!*
+spark.ExecutorAllocationManager:Attempted to remove unknown executor *!*
+spark.ExecutorAllocationManager:Attempted to remove executor * *when it is already pending to be removed!*
+spark.ExecutorAllocationManager:Not removing idle executor * because there are only ** executor(s) left (limit *)*
+spark.ExecutorAllocationManager:Removing executor * because it has been idle for ** seconds (new desired total will be *)*
+spark.ExecutorAllocationManager:Unable to reach the cluster manager to kill executor *!*
+spark.ExecutorAllocationManager:New executor * has registered (new total is *)*
+spark.ExecutorAllocationManager:Decremented number of pending executors (* left)*
+spark.ExecutorAllocationManager:Duplicate executor * has registered*
+spark.ExecutorAllocationManager:Existing executor * has been removed (new total is *)*
+spark.ExecutorAllocationManager:Executor * is no longer pending to *be removed (* left)*
+spark.ExecutorAllocationManager:Unknown executor * has been removed!*
+spark.ExecutorAllocationManager:Starting timer to add executors because pending tasks *are building up (to expire in * seconds)*
+spark.ExecutorAllocationManager:Clearing timer to add executors because there are no more pending tasks*
+spark.ExecutorAllocationManager:Starting idle timer for * because there are no more tasks *scheduled to run on the executor (to expire in * seconds)*
+spark.ExecutorAllocationManager:Attempted to mark unknown executor * idle*
+spark.ExecutorAllocationManager:Clearing idle timer for * because it is now running a task*
+spark.ExecutorAllocationManager:No stages are running, but numRunningTasks != 0*
+spark.HttpFileServer:HTTP File server directory is *
+spark.HttpFileServer:HTTP file server started at: *
+spark.HttpServer:Starting HTTP Server*
+spark.HttpServer:HttpServer is using security*
+spark.HttpServer:HttpServer is not using security*
+spark.MapOutputTracker:Asked to send map output locations for shuffle * to *
+spark.MapOutputTracker:MapOutputTrackerActor stopped!*
+spark.MapOutputTracker:Error communicating with MapOutputTracker*
+spark.MapOutputTracker:Don't have map outputs for shuffle *, fetching them*
+spark.MapOutputTracker:Doing the fetch; tracker actor = *
+spark.MapOutputTracker:Got the output locations*
+spark.MapOutputTracker:Missing all output locations for shuffle *
+spark.MapOutputTracker:Updating epoch to * and clearing cache*
+spark.MapOutputTracker:Increasing epoch to *
+spark.MapOutputTracker:Size of output statuses for shuffle * is * bytes*
+spark.MapOutputTracker:Missing an output location for shuffle *
+spark.SecurityManager:SecurityManager: authentication *enabled*disabled*; ui acls *enabled*disabled*; users with view permissions: *; users with modify permissions: *
+spark.SecurityManager:SSLConfiguration for file server: **
+spark.SecurityManager:SSLConfiguration for Akka: **
+spark.SecurityManager:Using 'accept-all' trust manager for SSL connections.*
+spark.SecurityManager:Changing view acls to: *,*
+spark.SecurityManager:Changing modify acls to: *,*
+spark.SecurityManager:Changing admin acls to: *,*
+spark.SecurityManager:Changing acls enabled to: *
+spark.SecurityManager:in yarn mode, getting secret from credentials*
+spark.SecurityManager:getSecretKey: yarn mode, secret key from credentials is null*
+spark.SecurityManager:adding secret to credentials in yarn mode*
+spark.SecurityManager:user=* aclsEnabled=* viewAcls=*,*
+spark.SecurityManager:user=* aclsEnabled=* modifyAcls=*,*
+spark.SparkConf:Setting '*' to '*' as a work-around.*
+spark.SparkConf:Setting '*' to '*' as a work-around.*
+spark.SparkConf:The configuration option '*' has been replaced as of Spark * and *may be removed in the future. **
+spark.SparkConf:The configuration option '*' has been deprecated as of Spark * and *may be removed in the future. **
+spark.SparkContext:Running Spark version **
+spark.SparkContext:Spark configuration:\n*
+spark.SparkContext:Using SPARK_MEM to set amount of memory to use per executor process is *deprecated, please use spark.executor.memory instead.*
+spark.SparkContext:Exception getting thread dump from executor **
+spark.SparkContext:Can not directly broadcast RDDs; instead, call collect() and *broadcast the result (see SPARK-5063)*
+spark.SparkContext:Created broadcast * from *
+spark.SparkContext:Added file * at * with timestamp *
+spark.SparkContext:Requesting executors is only supported in coarse-grained mode*
+spark.SparkContext:Requesting executors is only supported in coarse-grained mode*
+spark.SparkContext:Killing executors is only supported in coarse-grained mode*
+spark.SparkContext:null specified as parameter to addJar*
+spark.SparkContext:Error adding jar (*), was the --addJars option used?*
+spark.SparkContext:Jar not found at **
+spark.SparkContext:Error adding jar (*), was the --addJars option used?*
+spark.SparkContext:Added JAR * at * with timestamp *
+spark.SparkContext:Successfully stopped SparkContext*
+spark.SparkContext:SparkContext already stopped*
+spark.SparkContext:Starting job: *
+spark.SparkContext:RDD's recursive dependencies:\n*
+spark.SparkContext:Starting job: *
+spark.SparkContext:Job finished: *, took * s*
+spark.SparkContext:Registered listener **
+spark.SparkContext:Multiple running SparkContexts detected in the same JVM!*
+spark.SparkEnv:Using serializer: **
+spark.SparkEnv:Registering *
+spark.SparkEnv:The spark.cache.class property is no longer being used! Specify storage *levels using the RDD.persist() method instead.*
+spark.TaskContextImpl:Error in TaskCompletionListener*
+spark.CacheManager:Looking for partition **
+spark.CacheManager:Partition * not found, computing it*
+spark.CacheManager:Another thread is loading *, waiting for it to finish...*
+spark.CacheManager:Exception while waiting for another thread to load **
+spark.CacheManager:Finished waiting for **
+spark.CacheManager:Whoever was loading * failed; we'll try it ourselves*
+spark.CacheManager:Failure to store **
+spark.CacheManager:Persisting partition * to disk instead.*
+spark.ContextCleaner:Got cleaning task *
+spark.ContextCleaner:Cleaning RDD *
+spark.ContextCleaner:Cleaned RDD *
+spark.ContextCleaner:Cleaning shuffle *
+spark.ContextCleaner:Cleaned shuffle *
+spark.ContextCleaner:Cleaning broadcast *
+spark.ContextCleaner:Cleaned broadcast *
+broadcast.Broadcast:Destroying * (from *)*
+broadcast.HttpBroadcast:Started reading broadcast variable *
+broadcast.HttpBroadcast:Reading broadcast variable * took * s*
+broadcast.HttpBroadcast:Broadcast server started at *
+broadcast.HttpBroadcast:broadcast read server: * id: broadcast-*
+broadcast.HttpBroadcast:broadcast security enabled*
+broadcast.HttpBroadcast:broadcast not using security*
+broadcast.HttpBroadcast:Deleted broadcast file: **
+broadcast.HttpBroadcast:Could not delete broadcast file: **
+broadcast.HttpBroadcast:Exception while deleting broadcast file: **
+broadcast.TorrentBroadcast:Reading piece * of **
+broadcast.TorrentBroadcast:Started reading broadcast variable *
+broadcast.TorrentBroadcast:Reading broadcast variable * took*
+broadcast.TorrentBroadcast:Unpersisting TorrentBroadcast **
+deploy.FaultToleranceTest:==============================================*
+deploy.FaultToleranceTest:Passed: *
+deploy.FaultToleranceTest:==============================================*
+deploy.FaultToleranceTest:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*
+deploy.FaultToleranceTest:FAILED: *
+deploy.FaultToleranceTest:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*
+deploy.FaultToleranceTest:>>>>> ADD MASTERS * <<<<<*
+deploy.FaultToleranceTest:>>>>> ADD WORKERS * <<<<<*
+deploy.FaultToleranceTest:>>>>> CREATE CLIENT <<<<<*
+deploy.FaultToleranceTest:>>>>> KILL LEADER <<<<<*
+deploy.FaultToleranceTest:>>>>> TERMINATE CLUSTER <<<<<*
+deploy.FaultToleranceTest:assertUsable() had exception*
+deploy.FaultToleranceTest:>>>>> ASSERT VALID CLUSTER STATE <<<<<*
+deploy.FaultToleranceTest:assertValidClusterState() had exception*
+deploy.FaultToleranceTest:Master states: *
+deploy.FaultToleranceTest:Num apps: *
+deploy.FaultToleranceTest:IPs expected: * / found: *
+deploy.FaultToleranceTest:Ran * tests, * passed and * failed*
+deploy.FaultToleranceTest:Created master: *
+deploy.FaultToleranceTest:Exception*
+deploy.FaultToleranceTest:Created worker: *
+deploy.FaultToleranceTest:Run command: *
+deploy.LocalSparkCluster:Starting a local Spark cluster with * workers.*
+deploy.LocalSparkCluster:Shutting down local Spark cluster.*
+deploy.SparkHadoopUtil:running as user: *
+deploy.SparkHadoopUtil:Couldn't find method for retrieving thread-level FileSystem input data*
+deploy.SparkHadoopUtil:Couldn't find method for retrieving thread-level FileSystem output data*
+executor.CoarseGrainedExecutorBackend:Connecting to driver: *
+executor.CoarseGrainedExecutorBackend:Successfully registered with driver*
+executor.CoarseGrainedExecutorBackend:Slave registration failed: *
+executor.CoarseGrainedExecutorBackend:Received LaunchTask command but executor was null*
+executor.CoarseGrainedExecutorBackend:Got assigned task *
+executor.CoarseGrainedExecutorBackend:Received KillTask command but executor was null*
+executor.CoarseGrainedExecutorBackend:Driver * disassociated! Shutting down.*
+executor.CoarseGrainedExecutorBackend:Received irrelevant DisassociatedEvent **
+executor.CoarseGrainedExecutorBackend:Driver commanded a shutdown*
+executor.Executor:Starting executor ID * on host **
+executor.Executor:Executor is trying to kill * (TID *)*
+executor.Executor:Running * (TID *)*
+executor.Executor:Task *'s epoch is *
+executor.Executor:Finished * (TID *). Result is larger than maxResultSize *(*), *dropping it.*
+executor.Executor:Finished * (TID *). * bytes result sent via BlockManager)*
+executor.Executor:Finished * (TID *). * bytes result sent to driver*
+executor.Executor:Executor killed * (TID *)*
+executor.Executor:Exception in * (TID *)*
+executor.Executor:Using REPL class URI: *
+executor.Executor:Could not find org.apache.spark.repl.ExecutorClassLoader on classpath!*
+executor.Executor:Fetching * with timestamp *
+executor.Executor:Fetching * with timestamp *
+executor.Executor:Adding * to class loader*
+executor.Executor:Told to re-register on heartbeat*
+executor.MesosExecutorBackend:Registered with Mesos as executor ID * with * cpus*
+executor.MesosExecutorBackend:Received launchTask but executor was null*
+executor.MesosExecutorBackend:Error from Mesos: *
+executor.MesosExecutorBackend:Received KillTask but executor was null*
+mapred.SparkHadoopMapRedUtil:*: Committed*
+mapred.SparkHadoopMapRedUtil:Error committing the output of task: **
+mapred.SparkHadoopMapRedUtil:No need to commit output of task because needsTaskCommit=false: **
+metrics.MetricsConfig:Error loading default configuration file*
+metrics.MetricsSystem:Stopping a MetricsSystem that is not running*
+metrics.MetricsSystem:Sink class * cannot be instantialized*
+rdd.CheckpointRDD:Deleting tempOutputPath *
+rdd.CheckpointRDD:Final output path * already exists; not overwriting it*
+rdd.CoGroupedRDD:Adding one-to-one dependency with *
+rdd.CoGroupedRDD:Adding shuffle dependency with *
+rdd.HadoopRDD:Cloning Hadoop Configuration*
+rdd.HadoopRDD:Re-using user-broadcasted JobConf*
+rdd.HadoopRDD:Re-using cached JobConf*
+rdd.HadoopRDD:Creating new JobConf and caching it for later re-use*
+rdd.HadoopRDD:Input split: *
+rdd.HadoopRDD:Unable to get input size to set InputMetrics for task*
+rdd.HadoopRDD:Exception in RecordReader.close()*
+rdd.HadoopRDD:Failed to use InputSplitWithLocations.*
+rdd.HadoopRDD:Caching NewHadoopRDDs as deserialized objects usually leads to undesired* behavior because Hadoop's RecordReader reuses the same Writable object for all records.* Use a map transformation to make copies of the records.*
+rdd.HadoopRDD:SplitLocationInfo and other new Hadoop classes are *unavailable. Using the older Hadoop location info code.*
+rdd.HadoopRDD:Partition * is cached by Hadoop.*
+rdd.JdbcRDD:statement fetch size set to: * to force MySQL streaming *
+rdd.JdbcRDD:closed connection*
+rdd.NewHadoopRDD:Input split: *
+rdd.NewHadoopRDD:Unable to get input size to set InputMetrics for task*
+rdd.NewHadoopRDD:Exception in RecordReader.close()*
+rdd.NewHadoopRDD:Failed to use InputSplit#getLocationInfo.*
+rdd.NewHadoopRDD:Caching NewHadoopRDDs as deserialized objects usually leads to undesired* behavior because Hadoop's RecordReader reuses the same Writable object for all records.* Use a map transformation to make copies of the records.*
+rdd.PairRDDFunctions:Saving as hadoop file of type (*, *)*
+rdd.PartitionerAwareUnionRDD:Finding preferred location for *, partition *
+rdd.PartitionerAwareUnionRDD:Location of * partition * = *
+rdd.PartitionerAwareUnionRDD:Selected location for *, partition * = *
+rdd.PipedRDD:taskDirectory = *
+rdd.PipedRDD:currentDir = *
+rdd.PipedRDD:Removed task working directory *
+rdd.RDD:Spark does not support nested RDDs (see SPARK-5063)*
+rdd.RDD:Removing RDD * from persistence list*
+rdd.RDD:Needed to re-sample due to insufficient sample size. Repeat #**
+rdd.RDDCheckpointData:Done checkpointing RDD * to *, new parent is RDD *
+rdd.SequenceFileRDDFunctions:Saving as sequence file of type (*,*)*
+rdd.SubtractedRDD:Adding one-to-one dependency with *
+rdd.SubtractedRDD:Adding shuffle dependency with *
+scheduler.DAGScheduler:Registering RDD * (*)*
+scheduler.DAGScheduler:No stages registered for job *
+scheduler.DAGScheduler:Job * not registered for stage * even though that stage was registered for the job*
+scheduler.DAGScheduler:Removing running stage **
+scheduler.DAGScheduler:Removing stage * from waiting set.*
+scheduler.DAGScheduler:Removing stage * from failed set.*
+scheduler.DAGScheduler:After removal of stage *, remaining stages = **
+scheduler.DAGScheduler:Job * finished: *, took * s*
+scheduler.DAGScheduler:Job * failed: *, took * s*
+scheduler.DAGScheduler:Asked to cancel job *
+scheduler.DAGScheduler:Asked to cancel job group *
+scheduler.DAGScheduler:Resubmitting failed stages*
+scheduler.DAGScheduler:Checking for newly runnable parent stages*
+scheduler.DAGScheduler:running: *
+scheduler.DAGScheduler:waiting: *
+scheduler.DAGScheduler:failed: *
+scheduler.DAGScheduler:Computing the requested partition locally*
+scheduler.DAGScheduler:Creating new stage failed due to exception - job: *
+scheduler.DAGScheduler:Got job * (*) with * output partitions (allowLocal=*)*
+scheduler.DAGScheduler:Final stage: *(*)*
+scheduler.DAGScheduler:Parents of final stage: *
+scheduler.DAGScheduler:Missing parents: *
+scheduler.DAGScheduler:submitStage(*)*
+scheduler.DAGScheduler:missing: *
+scheduler.DAGScheduler:Submitting * (*), which has no missing parents*
+scheduler.DAGScheduler:submitMissingTasks(*)*
+scheduler.DAGScheduler:Submitting * missing tasks from * (*)*
+scheduler.DAGScheduler:New pending tasks: *
+scheduler.DAGScheduler:Stage * is actually done; * * **
+scheduler.DAGScheduler:Failed to update accumulators for **
+scheduler.DAGScheduler:Ignoring result from * because its job has finished*
+scheduler.DAGScheduler:ShuffleMapTask finished on *
+scheduler.DAGScheduler:Ignoring possibly bogus ShuffleMapTask completion from *
+scheduler.DAGScheduler:looking for newly runnable stages*
+scheduler.DAGScheduler:running: *
+scheduler.DAGScheduler:waiting: *
+scheduler.DAGScheduler:failed: *
+scheduler.DAGScheduler:Resubmitting * (*) because some of its tasks had failed: *, *
+scheduler.DAGScheduler:Missing parents for *: *
+scheduler.DAGScheduler:Submitting * (*), which is now runnable*
+scheduler.DAGScheduler:Resubmitted *, so marking it as still running*
+scheduler.DAGScheduler:Marking * (*)*
+scheduler.DAGScheduler:Resubmitting * (*) due to fetch failure*
+scheduler.DAGScheduler:Executor lost: * (epoch *)*
+scheduler.DAGScheduler:Additional executor lost message for *(epoch *)*
+scheduler.DAGScheduler:Host added was in lost list earlier: *
+scheduler.DAGScheduler:No active jobs to kill for Stage *
+scheduler.DAGScheduler:Trying to cancel unregistered job *
+scheduler.DAGScheduler:* (*) finished in * s*
+scheduler.DAGScheduler:* (*) failed in * s*
+scheduler.DAGScheduler:Ignoring failure of * because all jobs depending on it are done*
+scheduler.DAGScheduler:No stages registered for job *
+scheduler.DAGScheduler:Job * not registered for stage * even though that stage was registered for the job*
+scheduler.DAGScheduler:Missing Stage for stage with id **
+scheduler.DAGScheduler:Could not cancel tasks for stage **
+scheduler.DAGScheduler:Stopping DAGScheduler*
+scheduler.DAGScheduler:DAGSchedulerEventProcessLoop failed; shutting down SparkContext*
+scheduler.EventLoggingListener:Event log * already exists. Overwriting...*
+scheduler.EventLoggingListener:Logging events to **
+scheduler.EventLoggingListener:Event log * already exists. Overwriting...*
+scheduler.InputFormatInfo:validate InputFormatInfo : *, path  *
+scheduler.InputFormatInfo:inputformat is from mapreduce package*
+scheduler.InputFormatInfo:inputformat is from mapred package*
+scheduler.InputFormatInfo:mapreduceInputFormat : *, mapredInputFormat : *, inputFormatClazz : *
+scheduler.LiveListenerBus:Dropping SparkListenerEvent because no remaining room in event queue. *This likely means one of the SparkListeners is too slow and cannot keep up with *the rate at which tasks are being started by the scheduler.*
+scheduler.OutputCommitCoordinator:canCommit called after coordinator was stopped (is SparkEnv shutdown in progress)?*
+scheduler.OutputCommitCoordinator:Ignoring task completion for completed stage*
+scheduler.OutputCommitCoordinator:Task was denied committing, stage: *, partition: *, attempt: **
+scheduler.OutputCommitCoordinator:Authorized committer * (stage=*, partition=*) failed;* clearing lock*
+scheduler.OutputCommitCoordinator:Denying * to commit for stage=*, partition=*; *existingCommitter = **
+scheduler.OutputCommitCoordinator:Authorizing * to commit for stage=*, partition=**
+scheduler.OutputCommitCoordinator:Stage * has completed, so not allowing task attempt * to commit*
+scheduler.OutputCommitCoordinator:OutputCommitCoordinator stopped!*
+scheduler.ReplayListenerBus:Exception parsing Spark event log: **
+scheduler.ReplayListenerBus:Malformed line #*: *\n*
+scheduler.SchedulableBuilder:Created default pool *, schedulingMode: *, minShare: *, weight: **
+scheduler.SchedulableBuilder:Error xml schedulingMode, using default schedulingMode*
+scheduler.SchedulableBuilder:Created pool *, schedulingMode: *, minShare: *, weight: **
+scheduler.SchedulableBuilder:Created pool *, schedulingMode: *, minShare: *, weight: **
+scheduler.SchedulableBuilder:Added task set * tasks to pool *
+scheduler.SparkListener:\t*\t*
+scheduler.Stage:* is now unavailable on executor * (*/*, *)*
+scheduler.TaskResultGetter:Fetching indirect task result for TID **
+scheduler.TaskResultGetter:Exception while getting task result*
+scheduler.TaskResultGetter:Could not deserialize TaskEndReason: ClassNotFound with classloader *
+scheduler.TaskSchedulerImpl:Starting speculative execution thread*
+scheduler.TaskSchedulerImpl:Adding task set * with * tasks*
+scheduler.TaskSchedulerImpl:Initial job has not accepted any resources; *check your cluster UI to ensure that workers are registered *and have sufficient resources*
+scheduler.TaskSchedulerImpl:Cancelling stage *
+scheduler.TaskSchedulerImpl:Stage * was cancelled*
+scheduler.TaskSchedulerImpl:Removed TaskSet *, whose tasks have all completed, from pool **
+scheduler.TaskSchedulerImpl:Resource offer failed, task set * was not serializable*
+scheduler.TaskSchedulerImpl:parentName: *, name: *, runningTasks: **
+scheduler.TaskSchedulerImpl:Ignoring update with state * for TID * because its task set is gone (this is *likely the result of receiving duplicate task finished status updates)*
+scheduler.TaskSchedulerImpl:Exiting due to error from cluster scheduler: *
+scheduler.TaskSchedulerImpl:Lost executor * on *: **
+scheduler.TaskSchedulerImpl:Lost an executor * (already removed): *
+scheduler.TaskSetManager:Epoch for *: *
+scheduler.TaskSetManager:Pending task * has a cached location at * *, where there are executors *,*
+scheduler.TaskSetManager:Stage * KB.*
+scheduler.TaskSetManager:Starting * (TID *, *, *, * bytes)*
+scheduler.TaskSetManager:No tasks for locality level **
+scheduler.TaskSetManager:Moving to *ms*
+scheduler.TaskSetManager:Finished task * in stage * (TID *) in * ms on * (*/*)*
+scheduler.TaskSetManager:Ignoring task-finished event for * in stage * because task * has already completed successfully*
+scheduler.TaskSetManager:Task * in stage * (TID *) had a not serializable result: *; not retrying*
+scheduler.TaskSetManager:Lost task *) [duplicate *]*
+scheduler.TaskSetManager:Unknown TaskEndReason: *
+scheduler.TaskSetManager:Task * in stage * failed * times; aborting job*
+scheduler.TaskSetManager:Re-queueing tasks for * from TaskSet *
+scheduler.TaskSetManager:Checking for speculative tasks: minFinished = *
+scheduler.TaskSetManager:Task length threshold for speculation: *
+scheduler.TaskSetManager:Marking task * in stage * (on *) as speculatable because it ran more than * ms*
+scheduler.TaskSetManager:Valid locality levels for *: *, *
+serializer.KryoSerializer:Failed to find the underlying field in *
+serializer.SerializationDebugger:Cannot find private methods using reflection*
+shuffle.FileShuffleBlockManager:Removed existing shuffle file **
+shuffle.FileShuffleBlockManager:Failed to remove existing shuffle file **
+shuffle.FileShuffleBlockManager:Deleted all files for shuffle *
+shuffle.FileShuffleBlockManager:Could not find files for shuffle * for deleting*
+shuffle.ShuffleMemoryManager:Thread * waiting for at least 1/2N of shuffle memory pool to be free*
+storage.BlockManager:Registering executor with local external shuffle service.*
+storage.BlockManager:Failed to connect to external shuffle server, will retry ** more times after waiting * seconds...*
+storage.BlockManager:Reporting * blocks to the master.*
+storage.BlockManager:Failed to report * to master; giving up.*
+storage.BlockManager:BlockManager re-registering with master*
+storage.BlockManager:Got told to re-register updating block **
+storage.BlockManager:Told master about block **
+storage.BlockManager:Got multiple block location in **
+storage.BlockManager:Getting local block **
+storage.BlockManager:Getting local block * as bytes*
+storage.BlockManager:Block * had been removed*
+storage.BlockManager:Block * was marked as failure.*
+storage.BlockManager:Level for block * is **
+storage.BlockManager:Getting block * from memory*
+storage.BlockManager:Block * not found in memory*
+storage.BlockManager:Getting block * from tachyon*
+storage.BlockManager:Block * not found in tachyon*
+storage.BlockManager:Getting block * from disk*
+storage.BlockManager:Block * not registered locally*
+storage.BlockManager:Getting remote block **
+storage.BlockManager:Getting remote block * as bytes*
+storage.BlockManager:Getting remote block * from **
+storage.BlockManager:The value of block * is null*
+storage.BlockManager:Block * not found*
+storage.BlockManager:Found block * locally*
+storage.BlockManager:Found block * remotely*
+storage.BlockManager:Block * already exists on this machine; not re-adding it*
+storage.BlockManager:Put for block * took * to get into synchronized block*
+storage.BlockManager:Putting block * failed*
+storage.BlockManager:Put block * locally took **
+storage.BlockManager:Put block * remotely took **
+storage.BlockManager:Putting block * with replication took **
+storage.BlockManager:Putting block * without replication took **
+storage.BlockManager:Fetched peers from master: *[*,*]*
+storage.BlockManager:Trying to replicate * of * bytes to **
+storage.BlockManager:Replicated * of * bytes to * in * ms*
+storage.BlockManager:Failed to replicate * to *, failure #**
+storage.BlockManager:Replicating * of * peer(s) took * ms*
+storage.BlockManager:Block * replicated to only ** peer(s) instead of * peers*
+storage.BlockManager:Dropping block * from memory*
+storage.BlockManager:Block * was marked as failure. Nothing to drop*
+storage.BlockManager:Block * was already dropped.*
+storage.BlockManager:Writing block * to disk*
+storage.BlockManager:Block * could not be dropped from memory as it does not exist*
+storage.BlockManager:Removing RDD **
+storage.BlockManager:Removing broadcast **
+storage.BlockManager:Removing block **
+storage.BlockManager:Block * could not be removed as it was not found in either *the disk, memory, or tachyon store*
+storage.BlockManager:Asked to remove block *, which does not exist*
+storage.BlockManager:Dropping non broadcast blocks older than **
+storage.BlockManager:Dropping broadcast blocks older than **
+storage.BlockManager:Dropped block **
+storage.BlockManager:BlockManager stopped*
+storage.BlockManager:Unmapping **
+storage.BlockManagerMaster:Removed * successfully in removeExecutor*
+storage.BlockManagerMaster:Trying to register BlockManager*
+storage.BlockManagerMaster:Registered BlockManager*
+storage.BlockManagerMaster:Updated info of block *
+storage.BlockManagerMaster:Failed to remove RDD * - **
+storage.BlockManagerMaster:Failed to remove shuffle * - **
+storage.BlockManagerMaster:Failed to remove broadcast ** with removeFromMaster = * - **
+storage.BlockManagerMaster:BlockManagerMaster stopped*
+storage.BlockManagerMasterActor:Got unknown message: *
+storage.BlockManagerMasterActor:Removing block manager **
+storage.BlockManagerMasterActor:Checking for hosts with no recent heart beats in BlockManagerMaster.*
+storage.BlockManagerMasterActor:Removing BlockManager * with no recent heart beats: *ms exceeds *ms*
+storage.BlockManagerMasterActor:Trying to remove executor * from BlockManagerMaster.*
+storage.BlockManagerMasterActor:Got two different block manager registrations on same executor - * will replace old one * with new one **
+storage.BlockManagerMasterActor:Registering block manager * with * RAM, **
+storage.BlockManagerMasterActor:Added * in memory on * (size: *, free: *)*
+storage.BlockManagerMasterActor:Added * on disk on * (size: *)*
+storage.BlockManagerMasterActor:Added * on tachyon on * (size: *)*
+storage.BlockManagerMasterActor:Removed * on * in memory (size: *, free: *)*
+storage.BlockManagerMasterActor:Removed * on * on disk (size: *)*
+storage.BlockManagerMasterActor:Removed * on * on tachyon (size: *)*
+storage.BlockManagerSlaveActor:Done *, response is *
+storage.BlockManagerSlaveActor:Sent response: * to *
+storage.BlockManagerSlaveActor:Error in *
+storage.BlockObjectWriter:Uncaught exception while reverting partial writes to file *
+storage.DiskBlockManager:Failed to create any local dir.*
+storage.DiskBlockManager:Created local directory at **
+storage.DiskBlockManager:Failed to create local dir in *. Ignoring this directory.*
+storage.DiskBlockManager:Shutdown hook called*
+storage.DiskBlockManager:Exception while deleting local spark dir: **
+storage.DiskStore:Attempting to put block **
+storage.DiskStore:Block * stored as * file on disk in * ms*
+storage.DiskStore:Attempting to write values for block **
+storage.DiskStore:Block * stored as * file on disk in * ms*
+storage.MemoryStore:Max memory * needed to store a block in *memory. Please configure Spark with more memory.*
+storage.MemoryStore:MemoryStore started with capacity **
+storage.MemoryStore:Persisting block * to disk instead.*
+storage.MemoryStore:Block * of size * dropped from memory (free *)*
+storage.MemoryStore:MemoryStore cleared*
+storage.MemoryStore:Failed to reserve initial memory threshold of ** for computing block * in memory.*
+storage.MemoryStore:Block * stored as * in memory (estimated size *, free *)*
+storage.MemoryStore:ensureFreeSpace(*) called with curMem=*, maxMem=**
+storage.MemoryStore:Will not store * as it is larger than our memory limit*
+storage.MemoryStore:* blocks selected for dropping*
+storage.MemoryStore:Will not store * as it would require dropping another block *from the same RDD*
+storage.MemoryStore:Memory use = *.*
+storage.MemoryStore:Not enough space to cache * in memory! *(computed * so far)*
+storage.ShuffleBlockFetcherIterator:Sending request for * blocks (*) from **
+storage.ShuffleBlockFetcherIterator:Got remote block * after *
+storage.ShuffleBlockFetcherIterator:Failed to get block(s) from **
+storage.ShuffleBlockFetcherIterator:maxBytesInFlight: *, targetRequestSize: *
+storage.ShuffleBlockFetcherIterator:Creating fetch request of * at **
+storage.ShuffleBlockFetcherIterator:Getting * non-empty blocks out of * blocks*
+storage.ShuffleBlockFetcherIterator:Error occurred while fetching local blocks*
+storage.ShuffleBlockFetcherIterator:Started * remote fetches in*
+storage.ShuffleBlockFetcherIterator:Got local blocks in *
+storage.TachyonBlockManager:Failed to connect to the Tachyon as the master address is not configured*
+storage.TachyonBlockManager:Creating tachyon directories at root dirs '*'*
+storage.TachyonBlockManager:Attempt * to create tachyon dir * failed*
+storage.TachyonBlockManager:Failed * attempts to create tachyon dir in *
+storage.TachyonBlockManager:Created tachyon directory at *
+storage.TachyonBlockManager:Shutdown hook called*
+storage.TachyonBlockManager:Exception while deleting tachyon spark dir: *
+storage.TachyonStore:TachyonStore started*
+storage.TachyonStore:Attempting to write values for block **
+storage.TachyonStore:Attempting to put block * into Tachyon*
+storage.TachyonStore:Block * stored as * file in Tachyon in * ms*
+storage.TachyonStore:Failed to fetch the block * from Tachyon*
+ui.JettyUtils:Adding filter: *
+ui.SparkUI:Stopped Spark web UI at **
+ui.UIUtils:Error converting time to string*
+ui.WebUI:Started * at http://*:**
+ui.WebUI:Failed to bind **
+util.AkkaUtils:In createActorSystem, requireCookie is: **
+util.AkkaUtils:Error sending message [message = *] in * attempts*
+util.AkkaUtils:Connecting to *: **
+util.AkkaUtils:Connecting to *: **
+util.AsynchronousListenerBus:* has already stopped! Dropping event **
+util.ListenerBus:Listener * threw an exception*
+util.MetadataCleaner:Ran metadata cleaner for *
+util.MetadataCleaner:Starting metadata cleaner for * with delay of * seconds *and period of * secs*
+util.SizeEstimator:Failed to check whether UseCompressedOops is set; assuming *
+util.SparkUncaughtExceptionHandler:Uncaught exception in thread *
+util.TimeStampedHashMap:Removing key *
+util.TimeStampedWeakValueHashMap:Removing key * because it is no longer strongly reachable.*
+util.Utils:Shutdown hook called*
+util.Utils:path = *, already present as root for deletion.*
+util.Utils:path = *, already present as root for deletion.*
+util.Utils:Untarring *
+util.Utils:Untarring *
+util.Utils:Fetching * to **
+util.Utils:File * exists and does not match contents of *, replacing it with **
+util.Utils:* has been previously copied to **
+util.Utils:Copying **
+util.Utils:fetchFile with security enabled*
+util.Utils:fetchFile not using security*
+util.Utils:Failed to create dir in *. Ignoring this directory.*
+util.Utils:Failed to create local root dir in *. Ignoring this directory.*
+util.Utils:Your hostname, * resolves to* a loopback address: *; using * instead (on interface *)*
+util.Utils:Set SPARK_LOCAL_IP if you need to bind to another address*
+util.Utils:Your hostname, * resolves to* a loopback address: *, but we couldn't find any* external IP address!*
+util.Utils:Set SPARK_LOCAL_IP if you need to bind to another address*
+util.Utils:Process * exited with code *: **
+util.Utils:Log files: \n*\n*
+util.Utils:Processing file *, *with start index = *, end index = **
+util.Utils:After processing file *, string built is **
+util.Utils:Uncaught exception in thread **
+util.Utils:Uncaught exception in thread **
+util.Utils:Successfully started service* on port *.*
+util.Utils:Service* could not bind on port *. *Attempting port *.*
+python.PythonGatewayServer:GatewayServer failed to bind; exiting*
+python.PythonGatewayServer:Started PythonGatewayServer on port **
+python.PythonGatewayServer:Communicating GatewayServer port to Python driver at *:**
+python.PythonGatewayServer:Exiting due to broken pipe from Python driver*
+python.PythonHadoopUtil:Loaded converter: **
+python.PythonHadoopUtil:Failed to load converter: **
+python.PythonRDD:Failed to close worker socket*
+python.PythonRDD:Times: total = *, boot = *, init = *, finish = **
+python.PythonRDD:Exception thrown after task interruption*
+python.PythonRDD:Exception thrown after context is stopped*
+python.PythonRDD:Python worker exited unexpectedly (crashed)*
+python.PythonRDD:This may have been caused by a prior exception:*
+python.PythonRDD:Exception thrown after task completion (likely due to cleanup)*
+python.PythonRDD:Incomplete task interrupted: Attempting to kill Python Worker*
+python.PythonRDD:Exception when trying to kill worker*
+python.PythonRDD:Error while sending iterator*
+python.PythonWorkerFactory:Failed to open socket to Python daemon:*
+python.PythonWorkerFactory:Assuming that daemon unexpectedly quit, attempting to restart*
+python.PythonWorkerFactory:Exception in redirecting streams*
+python.PythonWorkerFactory:Failed to close worker socket*
+python.PythonWorkerFactory:Failed to close worker socket*
+python.SerDeUtil:"*"*
+python.SerDeUtil:"*"*
+python.SerDeUtil:"*"*
+python.SerDeUtil:"*"*
+client.AppClient:Failed to connect to master*
+client.AppClient:Connecting to master *...*
+client.AppClient:Executor added: * on * (*) with * cores*
+client.AppClient:Executor updated: * is now ***
+client.AppClient:Master has changed, new master is at *
+client.AppClient:Connection to * failed; waiting for master to reconnect...*
+client.AppClient:Could not connect to *: **
+client.AppClient:Stop request to Master timed out; it may already be shut down.*
+client.TestClient:Connected to master, got app ID *
+client.TestClient:Disconnected from master*
+client.TestClient:Application died with error: *
+history.FsHistoryProvider:Checking for logs. Time is now **
+history.FsHistoryProvider:No permission to read *, ignoring.*
+history.FsHistoryProvider:Failed to load application log data from *.*
+history.FsHistoryProvider:Replaying log path: **
+history.HistoryServerArguments:Setting log directory through the command line is deprecated as of *Spark 1.1.0. Please set this through spark.history.fs.logDirectory instead.*
+master.Master:Starting Spark master at *
+master.Master:Running Spark version **
+master.Master:Persisting recovery state to ZooKeeper*
+master.Master:Master actor restarted due to exception*
+master.Master:I have been elected leader! New state: *
+master.Master:Leadership has been revoked -- master shutting down.*
+master.Master:Registering worker *:* with * cores, * RAM*
+master.Master:Worker registration failed. Attempted to re-register worker at same *address: *
+master.Master:Driver submitted *
+master.Master:Asked to kill driver *
+master.Master:Registering app *
+master.Master:Registered app * with ID *
+master.Master:Removing executor * because it is **
+master.Master:Application * times; removing it*
+master.Master:Got status update for unknown executor */**
+master.Master:Got heartbeat from unregistered worker *.* Asking it to re-register.*
+master.Master:Got heartbeat from unregistered worker *.* This worker was never registered, so ignoring the heartbeat.*
+master.Master:Application has been re-registered: *
+master.Master:Master change ack from unknown app: *
+master.Master:Worker has been re-registered: *
+master.Master:Scheduler state from unknown worker: *
+master.Master:* got disassociated, removing it.*
+master.Master:Trying to recover app: *
+master.Master:Trying to recover worker: *
+master.Master:Driver * was not found after master recovery*
+master.Master:Re-launching **
+master.Master:Did not re-launch * because it was not supervised*
+master.Master:Recovery complete - resuming operations!*
+master.Master:Launching executor * on worker *
+master.Master:Attempted to re-register worker at same address: *
+master.Master:Removing worker * on *:*
+master.Master:Telling app of lost executor: *
+master.Master:Re-launching **
+master.Master:Not re-launching * because it was not supervised*
+master.Master:Attempted to re-register application at same address: *
+master.Master:Removing app *
+master.Master:Removing * because we got no heartbeat in * seconds*
+master.Master:Launching driver * on worker *
+master.Master:Removing driver: **
+master.Master:Asked to remove unknown driver: **
+master.RecoveryModeFactory:Persisting recovery state to directory: *
+master.ZooKeeperLeaderElectionAgent:Starting ZooKeeper LeaderElection agent*
+master.ZooKeeperLeaderElectionAgent:We have gained leadership*
+master.ZooKeeperLeaderElectionAgent:We have lost leadership*
+master.ZooKeeperPersistenceEngine:Exception while reading persisted file, deleting*
+rest.StandaloneRestClient:Submitting a request to launch an application in *.*
+rest.StandaloneRestClient:Submitting a request to kill submission * in *.*
+rest.StandaloneRestClient:Submitting a request for the status of submission * in *.*
+rest.StandaloneRestClient:Sending GET request to server at *.*
+rest.StandaloneRestClient:Sending POST request to server at *.*
+rest.StandaloneRestClient:Sending POST request to server at *:\n**
+rest.StandaloneRestClient:Response from the server:\n**
+rest.StandaloneRestClient:Server responded with error:\n**
+rest.StandaloneRestClient:Submission successfully created as *. Polling submission state...*
+rest.StandaloneRestClient:Application successfully submitted, but submission ID was not provided!*
+rest.StandaloneRestClient:Application submission failed*
+rest.StandaloneRestClient:Error: Master did not recognize driver *.*
+rest.StandaloneRestClient:Server responded with **
+rest.StandaloneRestClient:Error: Server responded with message of unexpected type *.*
+rest.StandaloneRestServer:Started REST server for submitting applications on port **
+worker.CommandUtils:SPARK_JAVA_OPTS was set on the worker. It is deprecated in Spark 1.0.*
+worker.CommandUtils:Set SPARK_LOCAL_DIRS for node-specific storage locations.*
+worker.CommandUtils:Redirection to * closed: *
+worker.DriverRunner:Copying user jar * to **
+worker.DriverRunner:Launch Command: *\*, * \*, *
+worker.DriverRunner:Command exited with status *, re-launching after * s.*
+worker.ExecutorRunner:Killing process!*
+worker.ExecutorRunner:Launch command: *\*, * \*, *
+worker.ExecutorRunner:Runner thread for executor * interrupted*
+worker.ExecutorRunner:Error running executor*
+worker.StandaloneWorkerShuffleService:Starting shuffle service on port * with useSasl = **
+worker.Worker:Failed to create work directory *
+worker.Worker:Failed to create work directory *
+worker.Worker:Starting Spark worker *:* with * cores, * RAM*
+worker.Worker:Running Spark version **
+worker.Worker:Spark home: *
+worker.Worker:Connecting to master *...*
+worker.Worker:Retrying connection to master (attempt # *)*
+worker.Worker:All masters are unresponsive! Giving up.*
+worker.Worker:Not spawning another attempt to register with the master, since there is an* attempt scheduled already.*
+worker.Worker:Successfully registered with master *
+worker.Worker:Worker cleanup enabled; old application directories will be deleted in: **
+worker.Worker:Removing directory: **
+worker.Worker:App dir cleanup failed: *
+worker.Worker:Master has changed, new master is at *
+worker.Worker:Received heartbeat from driver **
+worker.Worker:Worker registration failed: *
+worker.Worker:Master with url * requested this worker to reconnect.*
+worker.Worker:Invalid Master (*) attempted to launch executor.*
+worker.Worker:Asked to launch executor */* for **
+worker.Worker:Failed to launch executor */* for *.*
+worker.Worker:Executor * finished with state * message *") +exitStatus.map(* + _).getOrElse(*
+worker.Worker:Unknown Executor * finished with state * message *") +exitStatus.map(* + _).getOrElse(*
+worker.Worker:Invalid Master (*) attempted to launch executor *
+worker.Worker:Asked to kill executor *
+worker.Worker:Asked to kill unknown executor *
+worker.Worker:Asked to launch driver **
+worker.Worker:Asked to kill driver **
+worker.Worker:Asked to kill unknown driver **
+worker.Worker:Driver * failed with unrecoverable exception: **
+worker.Worker:Driver * exited with failure*
+worker.Worker:Driver * exited successfully*
+worker.Worker:Driver * was killed by user*
+worker.Worker:Driver * changed state to **
+worker.Worker:* Disassociated !*
+worker.Worker:Connection to master failed! Waiting for master to reconnect...*
+worker.Worker:Cleaning up local directories for application **
+worker.WorkerWatcher:Connecting to worker **
+worker.WorkerWatcher:Successfully connected to **
+worker.WorkerWatcher:Could not initialize connection to worker *. Exiting.*
+worker.WorkerWatcher:Error was: **
+worker.WorkerWatcher:Lost connection to worker actor *. Exiting.*
+netty.NettyBlockRpcServer:Received request: **
+netty.NettyBlockRpcServer:Registered streamId * with * buffers*
+netty.NettyBlockTransferService:Server created on *
+netty.NettyBlockTransferService:Fetch blocks from *:* (executor id *)*
+netty.NettyBlockTransferService:Exception while beginning fetchBlocks*
+netty.NettyBlockTransferService:Successfully uploaded block **
+netty.NettyBlockTransferService:Error while uploading block **
+nio.BlockMessageArray:Creating block message of size * bytes*
+nio.BlockMessageArray:Trying to convert buffer * to block message*
+nio.BlockMessageArray:Created *
+nio.BlockMessageArray:Converted block message array from buffer message in * s*
+nio.BlockMessageArray:Adding *
+nio.BlockMessageArray:Added *
+nio.BlockMessageArray:Buffer list:*
+nio.Connection:Ignored error in onExceptionCallback*
+nio.Connection:Connection to * closed and OnExceptionCallback not registered*
+nio.Connection:Added [*] to outbox for sending to *[*]*
+nio.Connection:Starting to send [*] to [*]*
+nio.Connection:Sending chunk from [*] to [*]*
+nio.Connection:Finished sending [*] to [*] in *
+nio.Connection:Initiating connection to [*]*
+nio.Connection:Error connecting to *
+nio.Connection:finish connect failed [*], * messages pending*
+nio.Connection:Connected to [*], * messages pending*
+nio.Connection:Error finishing connection to *
+nio.Connection:Error writing in connection to *
+nio.Connection:Unexpected data read from SendingConnection to *
+nio.Connection:Exception while reading SendingConnection to *
+nio.Connection:Starting to receive [*] from [*]*
+nio.Connection:Receiving chunk of [*] from [*]*
+nio.Connection:Finished receiving [*] from *[*] in *
+nio.Connection:Error reading from connection to *
+nio.ConnectionManager:Error in handleMessageExecutor is not handled properly*
+nio.ConnectionManager:Error in handleReadWriteExecutor is not handled properly*
+nio.ConnectionManager:Error in handleConnectExecutor is not handled properly*
+nio.ConnectionManager:Bound socket to port * with id = *
+nio.ConnectionManager:Error when writing to *
+nio.ConnectionManager:Error when reading from *
+nio.ConnectionManager:Error when finishConnect for *
+nio.ConnectionManager:Changed key for connection to [*] changed from [*] to [*]*
+nio.ConnectionManager:Key not valid ? *
+nio.ConnectionManager:key already cancelled ? *
+nio.ConnectionManager:Exception processing key *
+nio.ConnectionManager:Key not valid ? *
+nio.ConnectionManager:key already cancelled ? *
+nio.ConnectionManager:Exception processing key *
+nio.ConnectionManager:Selector selected * of * keys*
+nio.ConnectionManager:Selector thread was interrupted!*
+nio.ConnectionManager:Key not valid ? *
+nio.ConnectionManager:key already cancelled ? *
+nio.ConnectionManager:Exception processing key *
+nio.ConnectionManager:Accepted connection from [*]*
+nio.ConnectionManager:Removing SendingConnection to *
+nio.ConnectionManager:Notifying *
+nio.ConnectionManager:Removing ReceivingConnection to *
+nio.ConnectionManager:Corresponding SendingConnection to * not found*
+nio.ConnectionManager:Notifying *
+nio.ConnectionManager:Handling connection error on connection to *
+nio.ConnectionManager:Received [*] from [*]*
+nio.ConnectionManager:Handler thread delay is * ms*
+nio.ConnectionManager:Handling delay is * ms*
+nio.ConnectionManager:Error when handling messages from *
+nio.ConnectionManager:Client sasl completed for id: *
+nio.ConnectionManager:Client sasl completed after evaluate for id: *
+nio.ConnectionManager:Error handling sasl client authentication*
+nio.ConnectionManager:saslContext not established*
+nio.ConnectionManager:Creating sasl Server*
+nio.ConnectionManager:Server sasl completed: * for: *
+nio.ConnectionManager:Server sasl not completed: * for: *
+nio.ConnectionManager:Error in server auth negotiation: *
+nio.ConnectionManager:connection already established for this connection id: *
+nio.ConnectionManager:This is security neg message*
+nio.ConnectionManager:Client handleAuth for id: *
+nio.ConnectionManager:Server handleAuth for id: *
+nio.ConnectionManager:message sent that is not security negotiation message on connection *not authenticated yet, ignoring it!!*
+nio.ConnectionManager:Handling [*] from [*]*
+nio.ConnectionManager:After handleAuth result was true, returning*
+nio.ConnectionManager:Could not find reference for received ack Message **
+nio.ConnectionManager:Calling back*
+nio.ConnectionManager:Not calling back as callback is null*
+nio.ConnectionManager:Response to * is not a buffer message, it is of type *
+nio.ConnectionManager:Response to * does not have ack id set*
+nio.ConnectionManager:Exception was thrown while processing message*
+nio.ConnectionManager:adding connectionsAwaitingSasl id: * to: *
+nio.ConnectionManager:Error getting first response from the SaslClient.*
+nio.ConnectionManager:Sasl already established *
+nio.ConnectionManager:creating new sending connection for security! *
+nio.ConnectionManager:Sending Security [*] to [*]*
+nio.ConnectionManager:Exception while sending message.*
+nio.ConnectionManager:creating new sending connection: *
+nio.ConnectionManager:Before Sending [*] to [*]* *connectionid: *
+nio.ConnectionManager:Sending [*] to [*]*
+nio.ConnectionManager:Notifying *
+nio.ConnectionManager:no messageStatus for failed message id: *
+nio.ConnectionManager:Ignore error because promise is completed*
+nio.ConnectionManager:Promise was garbage collected; this should never happen!*
+nio.ConnectionManager:Ignore error because promise is completed*
+nio.ConnectionManager:Ignore error because promise is completed*
+nio.ConnectionManager:Drop ackMessage because promise is completed*
+nio.ConnectionManager:All connections not cleaned up*
+nio.ConnectionManager:ConnectionManager stopped*
+nio.NioBlockTransferService:Handling message *
+nio.NioBlockTransferService:Handling as a buffer message *
+nio.NioBlockTransferService:Parsed as a block message array*
+nio.NioBlockTransferService:Exception handling buffer message*
+nio.NioBlockTransferService:Received [*]*
+nio.NioBlockTransferService:Received [*]*
+nio.NioBlockTransferService:PutBlock * started from * with data: *
+nio.NioBlockTransferService:PutBlock * used *
+nio.NioBlockTransferService:GetBlock * started from *
+nio.NioBlockTransferService:GetBlock * used *
+nio.SecurityMessage:message total size is : *
+cluster.CoarseGrainedSchedulerBackend:Registered executor: * with ID *
+cluster.CoarseGrainedSchedulerBackend:Decremented number of pending executors (* left)*
+cluster.CoarseGrainedSchedulerBackend:Ignored task status update (* state *) *from unknown executor * with ID **
+cluster.CoarseGrainedSchedulerBackend:Attempted to kill task * for unknown executor *.*
+cluster.CoarseGrainedSchedulerBackend:Asking each executor to shut down*
+cluster.CoarseGrainedSchedulerBackend:Shutting down all executors*
+cluster.CoarseGrainedSchedulerBackend:SchedulerBackend is ready for scheduling beginning after *reached minRegisteredResourcesRatio: **
+cluster.CoarseGrainedSchedulerBackend:SchedulerBackend is ready for scheduling beginning after waiting *maxRegisteredResourcesWaitingTime: *(ms)*
+cluster.CoarseGrainedSchedulerBackend:Requesting * additional executor(s) from the cluster manager*
+cluster.CoarseGrainedSchedulerBackend:Number of pending executors is now **
+cluster.CoarseGrainedSchedulerBackend:Requesting to kill executor(s) **
+cluster.CoarseGrainedSchedulerBackend:Executor to kill * does not exist!*
+cluster.SimrSchedulerBackend:Writing to HDFS file: *
+cluster.SimrSchedulerBackend:Writing Akka address: *
+cluster.SimrSchedulerBackend:Writing Spark UI Address: *
+cluster.SparkDeploySchedulerBackend:Connected to Spark cluster with app ID *
+cluster.SparkDeploySchedulerBackend:Disconnected from Spark cluster! Waiting for reconnection...*
+cluster.SparkDeploySchedulerBackend:Application has been killed. Reason: *
+cluster.SparkDeploySchedulerBackend:Granted executor ID * on hostPort * with * cores, * RAM*
+cluster.SparkDeploySchedulerBackend:Executor * removed: **
+cluster.SparkDeploySchedulerBackend:Application ID is not initialized yet.*
+cluster.YarnSchedulerBackend:Add WebUI Filter. *, *, **
+cluster.YarnSchedulerBackend:ApplicationMaster registered as **
+cluster.YarnSchedulerBackend:Attempted to request executors before the AM has registered!*
+cluster.YarnSchedulerBackend:Attempted to kill executors before the AM has registered!*
+cluster.YarnSchedulerBackend:ApplicationMaster has disassociated: **
+hash.BlockStoreShuffleFetcher:Fetching outputs for shuffle *, reduce **
+hash.BlockStoreShuffleFetcher:Fetching map output location for shuffle *, reduce * took * ms*
+jobs.JobProgressListener:Job completed for unknown job **
+jobs.JobProgressListener:Stage completed for unknown stage *
+jobs.JobProgressListener:Task start for unknown stage *
+jobs.JobProgressListener:Task end for unknown stage *
+jobs.JobProgressListener:Metrics update for task in unknown stage *
+collection.Spillable:Thread * spilling in-memory map of * to disk (* time* so far)*s*
+logging.FileAppender:Started appending thread*
+logging.FileAppender:Error writing stream to file **
+logging.FileAppender:Opened file **
+logging.FileAppender:Closed file **
+logging.FileAppender:Rolling executor logs enabled for * with daily rolling*
+logging.FileAppender:Rolling executor logs enabled for * with hourly rolling*
+logging.FileAppender:Rolling executor logs enabled for * with rolling every minute*
+logging.FileAppender:Rolling executor logs enabled for * with rolling * seconds*
+logging.FileAppender:Illegal interval for rolling executor logs [*], *rolling logs not enabled*
+logging.FileAppender:Rolling executor logs enabled for * with rolling every * bytes*
+logging.FileAppender:Illegal size [*] for rolling executor logs, rolling logs not enabled*
+logging.FileAppender:Illegal strategy [*] for rolling executor logs, *rolling logs not enabled*
+logging.RollingFileAppender:Error rolling over **
+logging.RollingFileAppender:Attempting to rollover file * to file **
+logging.RollingFileAppender:Rolled over * to **
+logging.RollingFileAppender:Rollover file * already exists, *rolled over * to file **
+logging.RollingFileAppender:File * does not exist*
+logging.RollingFileAppender:Deleting file executor log file **
+logging.RollingFileAppender:Error cleaning logs in directory *
+logging.RollingPolicy:Rolling interval [* seconds] is too small. *Setting the interval to the acceptable minimum of * seconds.*
+logging.RollingPolicy:Current time: *, next rollover time: *
+logging.RollingPolicy:Next rollover time is **
+logging.RollingPolicy:Rolling size [* bytes] is too small. *Setting the size to the acceptable minimum of * bytes.*
+logging.RollingPolicy:* + * > **
+random.StratifiedSamplingUtils:Pre-accepted too many*
+random.StratifiedSamplingUtils:WaitList too short*
+ui.LogPage:Sorted log files of type * in *:\n**
+ui.LogPage:Getting log from * to **
+ui.LogPage:Got log of length * bytes*
+ui.LogPage:Error getting * logs from directory **
+mesos.CoarseMesosSchedulerBackend:driver.run() returned with code *
+mesos.CoarseMesosSchedulerBackend:Registered as framework ID *
+mesos.CoarseMesosSchedulerBackend:Mesos task * is now *
+mesos.CoarseMesosSchedulerBackend:Blacklisting Mesos slave * due to too many failures; *is Spark installed on it?*
+mesos.CoarseMesosSchedulerBackend:Mesos error: *
+mesos.CoarseMesosSchedulerBackend:Mesos slave lost: *
+mesos.CoarseMesosSchedulerBackend:Executor lost: *, marking slave * as lost*
+mesos.CoarseMesosSchedulerBackend:Application ID is not initialized yet.*
+mesos.MesosSchedulerBackend:driver.run() returned with code *
+mesos.MesosSchedulerBackend:Registered as framework ID *
+mesos.MesosSchedulerBackend:Mesos error: *
+mesos.MesosSchedulerBackend:Mesos slave lost: *
+mesos.MesosSchedulerBackend:Executor lost: *, marking slave * as lost*
+mesos.MesosSchedulerBackend:Application ID is not initialized yet.*
+mesos.MesosTaskLaunchData:ByteBuffer size: [*]*
+mesos.MesosTaskLaunchData:ByteBuffer size: [*]*
