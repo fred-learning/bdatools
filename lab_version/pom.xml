@@ -2,20 +2,20 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>lab.paramcfg.backend</groupId>
-	<artifactId>backend</artifactId>
+	<artifactId>backend_local</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<dependencies>
 		<dependency>
-			<groupId>org.iq80.leveldb</groupId>
-			<artifactId>leveldb</artifactId>
-			<version>0.7</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 			<version>20090211</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.7.2</version>
 		</dependency>
 
 		<dependency>
@@ -37,21 +37,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>net.schmizz</groupId>
-			<artifactId>sshj</artifactId>
-			<version>0.10.0</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.mongodb</groupId>
 			<artifactId>mongo-java-driver</artifactId>
 			<version>3.0.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.2.4</version>
 		</dependency>
 
 		<dependency>
@@ -64,19 +52,12 @@
 			<groupId>com.alexmerz</groupId>
 			<artifactId>graphviz</artifactId>
 			<version>1.0.0</version>
-
 		</dependency>
 		
 		<dependency>
-			<groupId>bda</groupId>
+			<groupId>org.processmining.analysis</groupId>
 			<artifactId>graphmatching</artifactId>
 			<version>1.0.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.jsoup</groupId>
-			<artifactId>jsoup</artifactId>
-			<version>1.7.2</version>
 		</dependency>
 
 	</dependencies>

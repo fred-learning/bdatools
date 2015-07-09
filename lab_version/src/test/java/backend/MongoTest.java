@@ -5,14 +5,14 @@ import java.util.Scanner;
 
 import junit.framework.Assert;
 import lab.paramcfg.backend.common.Util;
-import lab.paramcfg.backend.mongodb.DBInstance;
-import lab.paramcfg.backend.mongodb.JobConfig;
-import lab.paramcfg.backend.mongodb.JobData;
-import lab.paramcfg.backend.mongodb.JobResource;
-import lab.paramcfg.backend.mongodb.JournalData;
-import lab.paramcfg.backend.mongodb.MonitoringData;
-import lab.paramcfg.backend.mongodb.RDDSData;
-import lab.paramcfg.backend.mongodb.YarnUtils;
+import lab.paramcfg.backend.storage.JobData;
+import lab.paramcfg.backend.storage.graph.RDDSData;
+import lab.paramcfg.backend.storage.journal.JournalData;
+import lab.paramcfg.backend.storage.mongodb.DBInstance;
+import lab.paramcfg.backend.storage.monitor.MonitoringData;
+import lab.paramcfg.backend.storage.others.JobConfig;
+import lab.paramcfg.backend.storage.others.JobResource;
+import lab.paramcfg.backend.storage.others.YarnUtils;
 
 import org.junit.Test;
 
