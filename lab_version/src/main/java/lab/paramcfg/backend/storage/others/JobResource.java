@@ -2,9 +2,8 @@ package lab.paramcfg.backend.storage.others;
 
 import java.io.Serializable;
 
-public class JobResource implements Serializable {
+public class JobResource {
 
-    private static final long serialVersionUID = 1L;
     private int available_memory_in_megabyte;
 	private int available_vcores;
 

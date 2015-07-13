@@ -3,10 +3,9 @@ package lab.paramcfg.backend.storage.others;
 import java.io.Serializable;
 import java.util.HashMap;
 
-public class JobConfig implements Serializable {
-  private static final long serialVersionUID = 1L;
-  private String configcmd;
-	private HashMap<String, String> configMap;
+public class JobConfig {
+    private String configcmd;
+    private HashMap<String, String> configMap;
 
 	public JobConfig() {
 		configMap = new HashMap<String, String>();

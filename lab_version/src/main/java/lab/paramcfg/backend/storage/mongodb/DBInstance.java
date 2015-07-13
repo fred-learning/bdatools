@@ -13,6 +13,7 @@ import lab.paramcfg.backend.storage.others.JobResource;
 
 import org.bson.Document;
 
+import com.google.gson.Gson;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 
@@ -43,18 +44,25 @@ public class DBInstance {
 		String id = doc.getString("id");
 		int status = doc.getInteger("status");
 
-		JobConfig config = Util.deserializeFromMongo(doc.get("config"),
-				JobConfig.class);
-		JobResource resource = Util.deserializeFromMongo(
-				doc.get("limited_resource"), JobResource.class);
+//		JobConfig config = Util.deserializeFromMongo(doc.get("config"),
+//				JobConfig.class);
+//		JobResource resource = Util.deserializeFromMongo(
+//				doc.get("limited_resource"), JobResource.class);
 		Date startTime = doc.getDate("startTime");
 		Date endTime = doc.getDate("endTime");
-		JournalData jData = Util.deserializeFromMongo(doc.get("journal_data"),
-				JournalData.class);
-		MonitoringData mData = Util.deserializeFromMongo(
-				doc.get("monitoring_data"), MonitoringData.class);
-		RDDSData rData = Util.deserializeFromMongo(doc.get("rdds_data"),
-				RDDSData.class);
+//		JournalData jData = Util.deserializeFromMongo(doc.get("journal_data"),
+//				JournalData.class);
+//		MonitoringData mData = Util.deserializeFromMongo(
+//				doc.get("monitoring_data"), MonitoringData.class);
+//		RDDSData rData = Util.deserializeFromMongo(doc.get("rdds_data"),
+//				RDDSData.class);
+		
+		Gson gson = new Gson();
+		JobConfig config = gson.fromJson(doc.getString("config"), JobConfig.class);
+		JobResource resource = gson.fromJson(doc.getString("limited_resource"), JobResource.class);
+		JournalData jData = gson.fromJson(doc.getString("journal_data"), JournalData.class);
+		MonitoringData mData = gson.fromJson(doc.getString("monitoring_data"), MonitoringData.class);
+		RDDSData rData = gson.fromJson(doc.getString("rdds_data"), RDDSData.class);
 
 		return new JobData(id, status, config, resource, startTime, endTime,
 				jData, mData, rData);
@@ -64,24 +72,23 @@ public class DBInstance {
 			JobResource limitedResource, Date startTime, Date endTime,
 			JournalData journalData, MonitoringData monitoringData,
 			RDDSData rddsData) throws IOException {
+	    Gson gson = new Gson();
 		// serialize non structure data
 		Document doc = new Document()
 				.append("id", id)
 				.append("status", status)
 				.append("config",
-						Util.serializeToMongo(config, JobConfig.class))
+				        gson.toJson(config, JobConfig.class))
 				.append("limited_resource",
-						Util.serializeToMongo(limitedResource,
-								JobResource.class))
+						gson.toJson(limitedResource, JobResource.class))
 				.append("startTime", startTime)
 				.append("endTime", endTime)
 				.append("journal_data",
-						Util.serializeToMongo(journalData, JournalData.class))
+				        gson.toJson(journalData, JournalData.class))
 				.append("monitoring_data",
-						Util.serializeToMongo(monitoringData,
-								MonitoringData.class))
+				        gson.toJson(monitoringData, MonitoringData.class))
 				.append("rdds_data",
-						Util.serializeToMongo(rddsData, RDDSData.class));
+				        gson.toJson(rddsData, RDDSData.class));
 		getMongoCollection().insertOne(doc);
 	}
 

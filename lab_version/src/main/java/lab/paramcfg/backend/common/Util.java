@@ -20,6 +20,7 @@ import lab.paramcfg.backend.storage.others.JobResource;
 import org.bson.Document;
 import org.bson.types.Binary;
 
+import com.google.gson.Gson;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
@@ -57,16 +58,26 @@ public class Util {
         String id = doc.getString("id");
         int status = doc.getInteger("status");
 
-        JobConfig config = Util.deserializeFromMongo(doc.get("config"),	JobConfig.class);
-        JobResource resource = Util.deserializeFromMongo(
-                doc.get("limited_resource"), JobResource.class);
+        Gson gson = new Gson();
+
         Date startTime = doc.getDate("startTime");
         Date endTime = doc.getDate("endTime");
-        JournalData jData = Util.deserializeFromMongo(
-                doc.get("journal_data"), JournalData.class);
-        MonitoringData mData = Util.deserializeFromMongo(
-                doc.get("monitoring_data"), MonitoringData.class);
-        RDDSData rData = Util.deserializeFromMongo(	doc.get("rdds_data"), RDDSData.class);
+        
+//        JobConfig config = Util.deserializeFromMongo(doc.get("config"), JobConfig.class);
+//        JobResource resource = Util.deserializeFromMongo(
+//                doc.get("limited_resource"), JobResource.class);
+//        JournalData jData = Util.deserializeFromMongo(
+//                doc.get("journal_data"), JournalData.class);
+//        MonitoringData mData = Util.deserializeFromMongo(
+//                doc.get("monitoring_data"), MonitoringData.class);
+//        RDDSData rData = Util.deserializeFromMongo(	doc.get("rdds_data"), RDDSData.class);
+        
+        JobConfig config = gson.fromJson(doc.getString("config"), JobConfig.class);
+        JobResource resource = gson.fromJson(doc.getString("limited_resource"), JobResource.class);
+        JournalData jData = gson.fromJson(doc.getString("journal_data"), JournalData.class);
+        MonitoringData mData = gson.fromJson(doc.getString("monitoring_data"), MonitoringData.class);
+        RDDSData rData = gson.fromJson(doc.getString("rdds_data"), RDDSData.class);
+        
         JobData ret = new JobData(id, status, config, resource,
                 startTime, endTime, jData, mData, rData);
 

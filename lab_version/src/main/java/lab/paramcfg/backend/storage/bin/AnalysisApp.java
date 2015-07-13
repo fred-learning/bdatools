@@ -105,7 +105,7 @@ public class AnalysisApp {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(data.getId() + " already be saved");
+		System.out.println(data.getId() + " saved");
 
 		// 计算与其他所有的相似度
 		long minitime = Long.MAX_VALUE;

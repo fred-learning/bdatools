@@ -1,5 +1,5 @@
 {
-	"rrds_path":"/home/spark/wangjue/software/ganglia-3.6.0/rrds/apache-cluster/",
+	"rrds_path":"/var/lib/ganglia/rrds/419_pc57/",
 	"mongodb_config":"192.168.3.57,test,job",
 	"nodenames":"pc57,pc59,pc61,pc63",
 	"dag_path":"http://192.168.3.57:18080",

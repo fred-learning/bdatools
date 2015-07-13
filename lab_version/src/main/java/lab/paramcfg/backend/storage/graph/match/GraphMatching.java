@@ -133,7 +133,7 @@ public class GraphMatching {
 		SimpleGraph sg2 = new SimpleGraph(vertices2, outgoingEdges2, incomingEdges2, labels2, null, null, null);
 		
 		/* compute the similarity by distanceAlgo */
-		double sim = distanceAlgo.compute(sg1, sg2);
+		double sim = 1 - distanceAlgo.compute(sg1, sg2);
 		
 		return sim;
 	}

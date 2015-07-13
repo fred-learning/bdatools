@@ -53,7 +53,9 @@ public class JobData {
 		double sim_monitor = monitoringData.similarity(other.monitoringData);
 		double sim_rdds = rddsData.similarity(other.rddsData);
 		double sum = sim_journal + sim_monitor + sim_rdds;
-		logger.info("journal simi:"+sim_journal+"-------rdds simi:"+sim_rdds);
+		
+		String log = String.format("sim, journal: %f, monitor: %f, rrds: %f", sim_journal, sim_monitor, sim_rdds);
+		logger.info(log);
 		return sum;
 	}
 
@@ -88,7 +90,7 @@ public class JobData {
 				// + ", simi " + sim);
 			}
 		} catch (Exception e) {
-		    logger.error(e);
+		    logger.error("search failed:", e);
 		} finally {
 			cursor.close();
 		}

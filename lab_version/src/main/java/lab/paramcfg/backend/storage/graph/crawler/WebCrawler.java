@@ -63,33 +63,33 @@ public class WebCrawler {
         ArrayList<Nodem> nodems = new ArrayList<Nodem>();
     	Hashtable<String, Integer> maps = new Hashtable<String, Integer>();
     	/* used to crawl one page */
-    	String url = Config.DAG_PATH + "/history/" + appId + "/jobs/";
+    	String url = Config.DAG_PATH + "/history/" + appId + "/1/jobs/";
     	Document doc;
     	String content = null;
     	
     	try {
-			Thread.sleep(5*1000);
+			Thread.sleep(10*1000);
 		} catch (InterruptedException e) {
 		    logger.error("Thread sleep error", e);
 		}
     	
     	try {
-//			String tmpUrl = "http://pc57:8088/proxy/application_1435046041249_0017/history/application_1435046041249_0017/1";
+    	    //String tmpUrl = "http://pc57:8088/proxy/application_1435046041249_0017/history/application_1435046041249_0017/1";
 			String tmpUrl = "http://"+Config.REST_URL+"/proxy/"+appId+"/history/"+appId+"/1";
 			logger.info(tmpUrl);
-			Jsoup.connect(tmpUrl).userAgent("Mozilla").ignoreContentType(true).get();//post();
+			Jsoup.connect(tmpUrl).userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0").get();//post();
 		} catch (Exception e) {
 		    logger.info(e);
 		}
     	
-		try {
-//				String tmpUrl = "http://pc57:18080/history/application_1435046041249_0031/1/history/application_1435046041249_0031/1";
-			String tmpUrl =  Config.DAG_PATH + "/history/" + appId + "/1/history/"+appId+"/1";
-			logger.info(tmpUrl);
-			Jsoup.connect(tmpUrl).userAgent("Mozilla").ignoreContentType(true).get();//post();
-		} catch (Exception e) {
-		    logger.error("", e);
-		}
+//		try {
+//			//String tmpUrl = "http://pc57:18080/history/application_1435046041249_0031/1/"
+//			String tmpUrl =  Config.DAG_PATH + "/history/" + appId + "/1/";
+//			logger.info(tmpUrl);
+//			Jsoup.connect(tmpUrl).userAgent("Mozilla").ignoreContentType(true).get();//post();
+//		} catch (Exception e) {
+//		    logger.error("", e);
+//		}
 			
 		try {
 			doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0")
@@ -201,6 +201,7 @@ public class WebCrawler {
                 }
                 
                 DAG retDag = new DAG(graph, nodems);
+                logger.info(retDag.toString());
                 logger.info("This Dag nodes size:" + nodems.size());
                 return retDag;
         	}

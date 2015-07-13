@@ -7,9 +7,8 @@ import lab.paramcfg.backend.storage.graph.crawler.WebCrawler;
 import lab.paramcfg.backend.storage.graph.match.GraphMatching;
 
 
-public class RDDSData implements Serializable {
+public class RDDSData {
 
-    private static final long serialVersionUID = 1L;
     private String jobid;
 	private DAG dag;
 

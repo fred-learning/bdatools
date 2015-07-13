@@ -11,8 +11,7 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 
-public class JournalData implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class JournalData {
     private static Logger logger = Logger.getLogger(JournalData.class);
 
     public enum BSize {
