@@ -1,6 +1,5 @@
 package lab.paramcfg.backend.storage.graph;
 
-import java.io.Serializable;
 
 import lab.paramcfg.backend.storage.graph.crawler.DAG;
 import lab.paramcfg.backend.storage.graph.crawler.WebCrawler;

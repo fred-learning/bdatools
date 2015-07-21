@@ -1,6 +1,5 @@
 package lab.paramcfg.backend.storage.others;
 
-import java.io.Serializable;
 
 public class JobResource {
 

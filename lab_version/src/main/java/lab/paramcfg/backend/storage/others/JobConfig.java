@@ -1,6 +1,5 @@
 package lab.paramcfg.backend.storage.others;
 
-import java.io.Serializable;
 import java.util.HashMap;
 
 public class JobConfig {
