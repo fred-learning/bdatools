@@ -52,18 +52,21 @@ public class SAXRepresentation implements RealTimeSeriesRepresentation{
 	}
 
 	public List<List<Double>> getRealRepresentation(List<List<Double>> timeSeriesData,ParametersObject paramtersObject) {
-		SAXParametersObject saxParametersObject = (SAXParametersObject)paramtersObject;
-		if( saxParametersObject.getAlphabet_size() > 20){
-			System.out.println("��ǰalphabet_size ���ܳ���20");
-			return null;
-		}
-		long winsize = MathUtil.floor(saxParametersObject.getN()/saxParametersObject.get_n());
-		SymbolicObject symbolicObject = new SymbolicObject(saxParametersObject.get_n());
 		
 		List<List<Double>> results = new ArrayList<List<Double>>();
 		
 		for(List<Double> timeSeries : timeSeriesData){
 		
+			SAXParametersObject saxParametersObject = (SAXParametersObject)paramtersObject;
+			if( saxParametersObject.getAlphabet_size() > 20){
+				System.out.println("��ǰalphabet_size ���ܳ���20");
+				return null;
+			}
+			saxParametersObject.setN(timeSeries.size());
+			saxParametersObject.set_n(timeSeries.size()>8? 8 : timeSeries.size());
+			long winsize = MathUtil.floor(saxParametersObject.getN()/saxParametersObject.get_n());
+			SymbolicObject symbolicObject = new SymbolicObject(saxParametersObject.get_n());
+			
 			int[][] allString = new int[timeSeries.size()-saxParametersObject.getN()+1][saxParametersObject.get_n()];
 			List<Double> PAA = null;
 			double average = MathUtil.mean(timeSeries);

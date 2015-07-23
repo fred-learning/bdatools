@@ -12,7 +12,7 @@ public class LpSimilarity implements RealTimeSeriesSimilarity {
 			List<Double> timeSerie = timeSeries.get(i);
 			List<Double> compareTimeSerie = compareTimeSeries.get(i);
 			
-			for(int j = 0 ; j < timeSerie.size(); j ++){
+			for(int j = 0 ; j < (timeSerie.size() > compareTimeSerie.size() ? compareTimeSerie.size() : timeSerie.size()); j ++){
 				
 				distance += Math.pow(timeSerie.get(j)-compareTimeSerie.get(j),2);
 			}
