@@ -201,7 +201,6 @@ public class WebCrawler {
                 }
                 
                 DAG retDag = new DAG(graph, nodems);
-                logger.info(retDag.toString());
                 logger.info("This Dag nodes size:" + nodems.size());
                 return retDag;
         	}

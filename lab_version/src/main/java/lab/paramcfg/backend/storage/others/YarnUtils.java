@@ -10,6 +10,10 @@ import lab.paramcfg.backend.common.Config;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 public class YarnUtils {
     private static Logger logger = Logger.getLogger(YarnUtils.class);
@@ -61,11 +65,28 @@ public class YarnUtils {
 		}
 		return ret;
 	}
+	
+	public static String pullNewestAppId() throws Exception {
+	  String metricUrl = String.format("http://%s/ws/v1/cluster/metrics", Config.REST_URL);
+	  Document doc1 = Jsoup.connect(metricUrl).header("Accept", "application/xml").get();
+	  Elements e1 = doc1.select("appsSubmitted");
+	  int lastSubmitId = Integer.parseInt(e1.first().text());
+	  
+	  String infoUrl = String.format("http://%s/ws/v1/cluster/info", Config.REST_URL);
+	  Document doc2 = Jsoup.connect(infoUrl).header("Accept", "application/xml").get();
+	  Elements e2 = doc2.select("startedOn");
+	  if (e2.size() == 0) throw new Exception("Can't crawl newest appid.");
+	  String startedOn = e2.first().text();
+
+	  String ret = String.format("application_%s_%04d", startedOn, lastSubmitId + 1);
+	  return ret;
+	}
 
 	/**
 	 * 
 	 * @return
 	 */
+	@Deprecated
 	public static String pullNewestAppId(long starttime, long endtime) {
 		String ret = "application_00";
 		try {
@@ -166,4 +187,14 @@ public class YarnUtils {
 		
 		return ret;
 	}
+	
+	public static void main(String[] args) {
+	  YarnUtils ys = new YarnUtils();
+	  try {
+	    ys.pullNewestAppId();
+	  } catch (Exception e) {
+	    e.printStackTrace();
+	  }
+	}
+	
 }
