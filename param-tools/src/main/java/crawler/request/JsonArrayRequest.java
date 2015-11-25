@@ -1,4 +1,4 @@
-package crawler.DAG;
+package crawler.request;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.type.CollectionType;
 
 import crawler.DAG.pojo.Job;
 
-public class JsonArrayRequest<T> extends JsonRequest<List<T>> {
+public class JsonArrayRequest<T> extends Request<List<T>> {
 	private static ObjectMapper mapper = 
 			new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 	// Java没办法获取当前泛型参数：http://stackoverflow.com/questions/3437897/how-to-get-a-class-instance-of-generics-type-t
@@ -25,7 +25,7 @@ public class JsonArrayRequest<T> extends JsonRequest<List<T>> {
 	@Override
 	List<T> process(String json) {
 		try {
-			logger.info(typeParameterClass);
+			logger.debug(typeParameterClass);
 			CollectionType valueType = mapper.getTypeFactory().constructCollectionType(ArrayList.class, typeParameterClass);
 			return mapper.readValue(json, valueType);
 		} catch (Exception e) {

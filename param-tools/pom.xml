@@ -22,6 +22,37 @@
 		<artifactId>jackson-databind</artifactId>
 		<version>2.6.1</version>
 	</dependency>
+	
+	<dependency>
+		<groupId>org.jsoup</groupId>
+		<artifactId>jsoup</artifactId>
+		<version>1.8.3</version>
+	</dependency>
+
+	<dependency>
+	   <groupId>org.mongodb</groupId>
+	   <artifactId>mongo-java-driver</artifactId>
+	   <version>3.0.4</version>
+	</dependency>
+
+	<dependency>
+	  <groupId>com.google.code.gson</groupId>
+	  <artifactId>gson</artifactId>
+	  <version>2.3.1</version>
+	</dependency>
+
+	  <dependency>
+		<groupId>com.alexmerz</groupId>
+		<artifactId>graphviz</artifactId>
+		<version>1.0.0</version>
+	</dependency>
+		
+	<dependency>
+		<groupId>org.processmining.analysis</groupId>
+		<artifactId>graphmatching</artifactId>
+		<version>1.0.0</version>
+	</dependency>
+	
   </dependencies>
 
 	<build>

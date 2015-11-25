@@ -1,4 +1,4 @@
-package crawler.DAG;
+package crawler.request;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -11,12 +11,23 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 
 import crawler.DAG.pojo.Job;
 
-public abstract class JsonRequest<T> {
-	protected static Logger logger = Logger.getLogger(JsonRequest.class);
+public abstract class Request<T> {
+	protected static Logger logger = Logger.getLogger(Request.class);
+	private String acceptType;
+	
+	public Request() {
+		acceptType = "application/json";
+	}
+	
+	public Request(String type) {
+		acceptType = type;
+	}
 	
 	public T handle(String url) {
+		logger.debug("Handling html request: " + url);
+
 		try {
-			HttpResponse<String> resp = Unirest.get(url).header("accept", "application/json").asString();
+			HttpResponse<String> resp = Unirest.get(url).header("accept", acceptType).asString();
 			if (resp.getStatus() != 200) {
 				logger.fatal(String.format("Getting data from %s failed. Response status %d.", 
 						url, resp.getStatus()));
@@ -32,5 +43,5 @@ public abstract class JsonRequest<T> {
 		return null;
 	}
 	
-	abstract T process(String json);
+	abstract T process(String content);
 }
