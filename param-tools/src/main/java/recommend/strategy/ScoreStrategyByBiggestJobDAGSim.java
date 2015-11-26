@@ -1,12 +1,14 @@
 package recommend.strategy;
 
 import historydb.App;
+import org.apache.log4j.Logger;
 import recommend.DAG.JobDAG;
 import recommend.graphmatch.GraphMatching;
 
 import java.util.List;
 
 public class ScoreStrategyByBiggestJobDAGSim {
+    private static Logger logger = Logger.getLogger(ScoreStrategyByBiggestJobDAGSim.class);
 
     public static double score(App a, App b) {
         List<JobDAG> aJobDAGList = a.getSortedJobDAGs();

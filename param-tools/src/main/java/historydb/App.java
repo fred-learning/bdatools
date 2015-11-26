@@ -11,6 +11,7 @@ import java.util.*;
 
 public class App {
     private static Config conf = Config.getInstance();
+    private String clusterid;
     private String appid;
     private List<JobDAG> jobDAGs;
     private SparkSummary summary;
@@ -18,8 +19,9 @@ public class App {
     private Env yarnEnv;
     private List<SparkExecutor> executors;
 
-    public App(String appid, List<JobDAG> jobDAGs, SparkSummary summary,
+    public App(String clusterid, String appid, List<JobDAG> jobDAGs, SparkSummary summary,
                Env sparkEnv, Env yarnEnv, List<SparkExecutor> executors) {
+        this.clusterid = clusterid;
         this.appid = appid;
         this.jobDAGs = jobDAGs;
         this.summary = summary;
@@ -31,6 +33,8 @@ public class App {
     public String getAppid() {
         return appid;
     }
+
+    public String getClusterid() { return clusterid; }
 
     public List<JobDAG> getJobDAGs() {
         return jobDAGs;

@@ -36,6 +36,8 @@ public class Config {
 	public String getValue(String key) {
 		return P.getProperty(key);
 	}
+
+	public String getClusterID() { return P.getProperty("clusterID"); }
 	
 	public String getHistServerPath() {
 		return P.getProperty("historyServerPath");
@@ -51,10 +53,24 @@ public class Config {
 
     public String getMongoDBName() { return P.getProperty("mongoDBName"); }
 
-    public String getMongoDBCollection() { return P.getProperty("mongoDBCollection"); }
+    public String getMongoHistoryCollection() {
+		return P.getProperty("mongoHistoryCollection");
+	}
+
+	public String getMongoRecommendProgressCollection() {
+		return P.getProperty("mongoProgressCollection");
+	}
 
 	public List<String> getSparkRecommendParams() {
 		String recommendStr = P.getProperty("recommendParams");
 		return Arrays.asList(recommendStr.split(","));
+	}
+
+	public Integer getJettyPort() {
+		return Integer.parseInt(P.getProperty("jettyPort"));
+	}
+
+	public Integer getRecommendServiceNum() {
+		return Integer.parseInt(P.getProperty("recommendServiceThread"));
 	}
 }

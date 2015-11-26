@@ -23,7 +23,7 @@ public class GraphMatching {
 		weights[4] = "eweight";
 		weights[5] = 0.5;
 		distanceAlgo.setWeight(weights);
-		
+
 		Set<Integer> vertices1 = GraphMatchingUtil.getVerticeIndex(firstDag);
 		Set<Integer> vertices2 = GraphMatchingUtil.getVerticeIndex(secondDag);
 		Map<Integer,Set<Integer>> outgoingEdges1 = GraphMatchingUtil.getOutgoingEdge(firstDag);
