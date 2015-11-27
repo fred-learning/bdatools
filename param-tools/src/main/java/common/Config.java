@@ -73,4 +73,8 @@ public class Config {
 	public Integer getRecommendServiceNum() {
 		return Integer.parseInt(P.getProperty("recommendServiceThread"));
 	}
+
+	public Integer getHistorySyncIntevalSec() {
+		return Integer.parseInt(P.getProperty("historySyncInterval"));
+	}
 }

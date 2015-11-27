@@ -18,7 +18,19 @@ public class SyncAppInfo {
     private static Logger logger = Logger.getLogger(SyncAppInfo.class);
 
     public static void main(String[] args) {
-        run();
+        if (conf.getHistorySyncIntevalSec() >= 1) {
+            while (true) {
+                try {
+                    Thread.sleep(conf.getHistorySyncIntevalSec() * 1000);
+                    run();
+                } catch (Exception e) {
+                    logger.fatal("Unexpected error:", e);
+                    System.exit(-1);
+                }
+            }
+        } else {
+            run();
+        }
     }
 
     public static void run() {

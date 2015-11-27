@@ -6,6 +6,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.processmining.analysis.graphmatching.algos.DistanceAlgo;
 import org.processmining.analysis.graphmatching.algos.GraphEditDistanceAStarSim;
+import org.processmining.analysis.graphmatching.algos.GraphEditDistanceGreedy;
 import org.processmining.analysis.graphmatching.graph.SimpleGraph;
 
 import recommend.DAG.JobDAG;
@@ -14,7 +15,7 @@ public class GraphMatching {
 	private static Logger logger = Logger.getLogger(GraphMatching.class);
 	
 	public static double similarity(JobDAG firstDag, JobDAG secondDag){
-		DistanceAlgo distanceAlgo = new GraphEditDistanceAStarSim();
+		DistanceAlgo distanceAlgo = new GraphEditDistanceGreedy();
 		Object weights[] = new Object[6];
 		weights[0] = "vweight";
 		weights[1] = 0.5;

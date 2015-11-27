@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+  <head>
+    <title> My title </title>
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <script src="/static/jquery.min.js"></script>
+    <script src="/static/bootstrap.js"></script>
+  </head>
+  <body>
+    
+    <div class="container-fluid">
+      
+      <!-- submit form -->
+      <div class="row">
+        <form action="/submit/" method="post" class="form">
+          <fieldset class="well col-md-offset-3 col-md-6">
+            <legend>Param Recomm</legend>
+            <div class="form-group">
+              <label for="clusterid">ClusterID</label>
+              <input type="text" class="form-control" id="clusterid" name="clusterid" placeholder="cluster id">
+            </div>
+            <div class="form-group">
+              <label for="appid">AppID</label>
+              <input type="text" class="form-control" id="appid" name="appid" placeholder="app id">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </fieldset>
+        </form> 
+      </div>
+
+      <!-- message table -->
+      <table class="row table table-bordered">
+        <thead>
+          <th class="col-md-1">ProgressID</th>
+          <th class="col-md-1">ClusterID</th>
+          <th class="col-md-1">AppID</th>
+          <th class="col-md-1">Start Time</th>
+          <th class="col-md-1">End Time</th>
+          <th class="col-md-7">Result</th>
+        </thead>
+        <tbody>
+          {% for item in items %}
+          <tr>
+            <th class="col-md-1">{{ item.progressid }}</th>
+            <th class="col-md-1">{{ item.clusterid }}</th>
+            <th class="col-md-1">{{ item.appid }}</th>
+            <th class="col-md-1">{{ item.startTime }}</th>
+            <th class="col-md-1">{{ item.endTime }}</th>
+            <th class="col-md-7">
+              {% if item.status == "finished" %}
+              <a class="btn btn-success" role="button" data-toggle="collapse"
+                 href="#{{ item.progressid }}" aria-expanded="false"  aria-controls="{{
+                item.progressid }}">
+                查看结果
+              </a>
+              <div class="collapse" id="{{ item.progressid }}">
+                <table class="table table-striped">
+                  <thead>
+                    <th class="col-sm-1">AppName</th>
+                    <th class="col-sm-1">Similarity</th>
+                    <th class="col-sm-1">ClusterID</th>
+                    <th class="col-sm-1">AppID</th>
+                    <th class="col-sm-1">Input Datasize</th>
+                    <th class="col-sm-1">Runtime</th>
+                    <th class="col-sm-1">Params</th>
+                  </thead>
+                  <tbody>
+                    {% for result in item.result.recommendItemList %}
+                    <tr>
+                      <th class="col-sm-1">{{ result.appname }}</th>
+                      <th class="col-sm-1">{{ result.similarity }}</th>
+                      <th class="col-sm-1">{{ result.clusterid }}</th>
+                      <th class="col-sm-1">{{ result.appid }}</th>
+                      <th class="col-sm-1">{{ result.datasizeMB }}</th>
+                      <th class="col-sm-1">{{ result.runtime }}</th>
+                      <th class="col-sm-1">
+                        {% for key, val in result.params.iteritems() %}
+                        {{ key }}: {{ val }} </br>
+                        {% endfor %}
+                      </th>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              {% elif item.status == "running" %}
+              <a class="btn btn-primary disabled">运行中</a>
+              {% elif item.status == "error" %}
+              <a class="btn btn-danger" role="button" data-toggle="collapse"
+                 href="#{{ item.progressid }}" aria-expanded="false"  aria-controls="{{
+                item.progressid }}">
+                运行错误
+              </a>
+              <div class="collapse" id="{{ item.progressid }}">
+                {{ item.result.errMsg }}
+              </div>
+              {% endif %}
+            </th>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <!-- pagination -->
+      <nav class="row">
+        <ul class="pagination">
+          {% for i in range(1, page_count + 1) %}
+            {% if i != active_page %}
+            <li><a href="/?startIdx={{(i - 1) * 10}}">{{ i }}</a></li>
+            {% else %}
+            <li class="active"><a href="/?startIdx={{(i - 1)
+                                                 * 10}}">{{ i }}</a></li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+    
+  </body>
+</html>
