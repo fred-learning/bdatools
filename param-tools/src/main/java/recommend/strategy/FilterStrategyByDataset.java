@@ -12,7 +12,7 @@ public class FilterStrategyByDataset {
         else if (originSize == 0L) return targetSize == 0L;
         else {
             double frac = targetSize / originSize;
-            return Math.abs(Math.log(frac)) <= INPUT_LOG_DISCREPANCY_RATIO;
+            return frac <= INPUT_LOG_DISCREPANCY_RATIO && 1 / frac <= INPUT_LOG_DISCREPANCY_RATIO;
         }
     }
 

@@ -14,6 +14,7 @@ public class RankStrategyBySimilarityTime {
     public static List<AppResult> rank(final List<AppResult> apps) {
         Collections.sort(apps, new Comparator<AppResult>() {
             public int compare(AppResult o1, AppResult o2) {
+                /*
                 Double o1sim = o1.getSimilarity();
                 Double o2sim = o2.getSimilarity();
 
@@ -25,7 +26,10 @@ public class RankStrategyBySimilarityTime {
                     Long o1Runtime = o1.getApp().getRuntime();
                     Long o2Runtime = o2.getApp().getRuntime();
                     return o1Runtime.compareTo(o2Runtime);
-                }
+                }*/
+                Double score1 = o1.getSimilarity() / o1.getApp().getRuntime();
+                Double score2 = o2.getSimilarity() / o2.getApp().getRuntime();
+                return -score1.compareTo(score2);
             }
         });
 

@@ -20,7 +20,7 @@ public class ScoreStrategyByBiggestJobDAGSim {
         return GraphMatching.similarity(aDAG, bDAG);
     }
 
-    private static JobDAG getBiggestJobDAG(List<JobDAG> jobDAGList) {
+    public static JobDAG getBiggestJobDAG(List<JobDAG> jobDAGList) {
         JobDAG ret = null;
         for (JobDAG jobDAG : jobDAGList) {
             if (ret == null) {

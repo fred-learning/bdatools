@@ -6,10 +6,7 @@ import historydb.AppIterator;
 import historydb.HistoryClient;
 import org.apache.log4j.Logger;
 import recommend.basic.AppResult;
-import recommend.strategy.FilterStrategyByDataset;
-import recommend.strategy.FilterStrategyByYarnResources;
-import recommend.strategy.RankStrategyBySimilarityTime;
-import recommend.strategy.ScoreStrategyByBiggestJobDAGSim;
+import recommend.strategy.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +45,8 @@ public class RecommendParamsJob implements Runnable {
         } else {
             List<App> yarnMatchedApps = getYarnMatchedApps(app, historyClient.getIterator());
             List<App> dataMatchedApps = getDatasizeMatchedApps(app, yarnMatchedApps);
-            List<AppResult> appSimiarities = calculateSimilarity(app, dataMatchedApps);
+            List<App> dagMatchedApps = getDagsizeMatchedApps(app, dataMatchedApps);
+            List<AppResult> appSimiarities = calculateSimilarity(app, dagMatchedApps);
             List<AppResult> similarAppResultList = getSimilarApps(appSimiarities, SIM_THRESHOLD);
             info("Ranking recommend parameters.");
             List<AppResult> rankResult = RankStrategyBySimilarityTime.rank(similarAppResultList);
@@ -84,6 +82,17 @@ public class RecommendParamsJob implements Runnable {
         List<App> ret = new ArrayList<App>();
         for (App other : yarnMatchedApps) {
             if (FilterStrategyByDataset.matched(app, other))
+                ret.add(other);
+        }
+        info("Matched result size:" + ret.size());
+        return ret;
+    }
+
+    public List<App> getDagsizeMatchedApps(App app, List<App> datasizeMatched) {
+        info("Search dag size matched results.");
+        List<App> ret = new ArrayList<App>();
+        for (App other : datasizeMatched) {
+            if (FilterStrategyByBiggestDagsize.matched(app, other))
                 ret.add(other);
         }
         info("Matched result size:" + ret.size());
