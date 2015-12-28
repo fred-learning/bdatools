@@ -1,5 +1,7 @@
 package common;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -29,6 +31,16 @@ public class Config {
 			P.load(stream);
 		} catch (IOException e) {
 			log.fatal("Error when reading settings.properties:\n", e);
+			System.exit(-1);
+		}
+	}
+
+	public void loadOrDie(String filePath) {
+		assert P != null;
+		try {
+			P.load(new FileInputStream(filePath));
+		} catch (IOException e) {
+			log.fatal(String.format("load config from %s failed.", filePath));
 			System.exit(-1);
 		}
 	}
@@ -68,6 +80,10 @@ public class Config {
 
 	public Integer getJettyPort() {
 		return Integer.parseInt(P.getProperty("jettyPort"));
+	}
+
+	public String getServletPath() {
+		return P.getProperty("servletPath");
 	}
 
 	public Integer getRecommendServiceNum() {

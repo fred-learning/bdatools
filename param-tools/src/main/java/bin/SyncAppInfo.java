@@ -13,27 +13,25 @@ import recommend.DAG.JobDAG;
 
 import java.util.List;
 
-public class SyncAppInfo {
+public class SyncAppInfo implements Runnable {
     private static Config conf = Config.getInstance();
     private static Logger logger = Logger.getLogger(SyncAppInfo.class);
 
-    public static void main(String[] args) {
-        if (conf.getHistorySyncIntevalSec() >= 1) {
-            while (true) {
-                try {
-                    Thread.sleep(conf.getHistorySyncIntevalSec() * 1000);
-                    run();
-                } catch (Exception e) {
-                    logger.fatal("Unexpected error:", e);
-                    System.exit(-1);
-                }
+    public void run() {
+        assert conf.getHistorySyncIntevalSec() > 0;
+
+        while (true) {
+            try {
+                sync();
+                Thread.sleep(conf.getHistorySyncIntevalSec() * 1000);
+            } catch (Exception e) {
+                logger.fatal("Unexpected error:", e);
+                System.exit(-1);
             }
-        } else {
-            run();
         }
     }
 
-    public static void run() {
+    public void sync() {
         logger.info("Get application summary");
         List<SparkSummary> appSummaryList = EnvUtils.getAppSummarys();
 
