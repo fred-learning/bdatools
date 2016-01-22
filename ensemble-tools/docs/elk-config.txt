@@ -1,0 +1,21 @@
+
+配置ELK
+1. 修改elasticsearch配置文件, conf/elasticsearch.yml
+   cluster.name, network.host, http.port
+2. 按照以下路径安装elasticsearch
+    https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-repositories.html
+3. 将elasticsearch.yml拷贝到/etc/elasticsearch/elasticsearch.yml中
+4. 修改kibana配置文件, conf/kibana.yml
+   elasticsearch.url
+5. 修改logstash配置文件, 在ensemble-tools/log_stash_test/logstash.conf
+   output.elasticsearch.hosts项 每个节点均不同
+6. 配置log4j.properties配置文件下，添加log4j server appender
+   hadoop/etc/hadoop/log4j.properties
+   spark/conf/log4j.properties
+   cassandra，未解决
+
+开机启动
+1. sudo service elasticsearch start
+2. nohup <kibana> > <log_loc> 2>&1 &
+3. nohup <logstash> > /dev/null 2>&1 &
+4. 打开5601观察

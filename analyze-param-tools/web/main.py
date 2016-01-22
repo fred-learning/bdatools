@@ -11,7 +11,7 @@ app = Flask(__name__)
 # -------------------- ANALYZE SPARK PARAM TOOLS -------------------- #
 
 # spark param tools index page
-@app.route('/analyze/spark/param_tools/')
+@app.route('/')
 def spark_param_tools_index():
     startStr = request.args.get('startIdx', None)
     startIdx = int(startStr) \
@@ -25,7 +25,7 @@ def spark_param_tools_index():
                            pageCount=pageCount, activePage=activePage)
 
 # spark param tools submit page
-@app.route('/analyze/spark/param_tools/submit/', methods=['POST'])
+@app.route('/submit/', methods=['POST'])
 def spark_param_tools_submit():
     if request.form.get('appid') is not None:
         app_id = request.form['appid']
@@ -36,7 +36,7 @@ def spark_param_tools_submit():
         return u"缺少参数"
 
 # spark param tools retrieve page
-@app.route('/analyze/spark/param_tools/retrieve/', methods=['GET'])
+@app.route('/retrieve/', methods=['GET'])
 def spark_param_tools_retrieve():
     if request.args.get('progressid') is not None:
         progressid = request.args['progressid']

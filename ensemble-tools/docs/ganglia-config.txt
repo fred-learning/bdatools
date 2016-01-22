@@ -1,0 +1,42 @@
+
+Ganglia 安装
+
+1.修改/etc/hosts本机hostname所绑定的IP（相当重要）
+2.安装ganglia各种服务
+    sudo apt-get update
+    sudo apt-get install ganglia-monitor rrdtool gmetad ganglia-webfrontend
+3.拷贝配置文件
+sudo cp /etc/ganglia-webfrontend/apache.conf /etc/apache2/sites-enabled/ganglia.conf
+4.修改配置文件 /etc/ganglia/gmetad.conf
+    44行, data_source, 修改ganglia集群名，绑丁本机监听数据地址,
+          data_source "OPENSTACK_ALL" 192.168.111.71
+5.修改配置文件 /etc/ganglia/gmond.conf
+    第22行，修改cluster name，以gmetad配置文件的名字为准。
+    第28-30行，host块注释掉
+    第35行，mcast_join用#注释掉。并调加一行，host = 192.168.112.71。表
+    示gmetad所在位置。
+    第52行, uda_recv_channel.mcast_join用#注释掉，bind注释掉。
+6.重启动服务
+    sudo service gmetad restart
+    sudo service ganglia-monitor restart
+    sudo service apache2 restart
+7.检查服务是否打开，使用浏览器访问 192.168.112.71/ganglia
+    (外部访问时Master需要开启端口: 80)
+
+
+Ganglia 集群配置
+
+配置ganglia接受数据节点(目前为192.168.112.127)
+1.修改/etc/ganglia/gmetad.conf
+    如上面4所示
+2.修改/etc/ganglia/gmond.conf
+    如上面5所示
+3.重新启动ganglia
+    sudo service gmetad restart
+    sudo service ganglia-monitor restart
+    
+配置ganglia发送数据节点(每个节点)
+1.修改/etc/ganglia/gmond.conf
+    如上面4所示
+2.测试
+    打开192.168.112.127/ganglia观察

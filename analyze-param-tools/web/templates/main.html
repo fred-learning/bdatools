@@ -16,7 +16,7 @@
       
       <!-- start: FORM -->
       <div class="row">
-        <form action="/analyze/spark/param_tools/submit/" method="post" class="form-inline col-md-12">
+        <form action="/submit/" method="post" class="form-inline col-md-12">
           <div class="panel panel-white">
             <div class="panel-heading">
               <h4 class="panel-title">参数推荐</h4>
@@ -65,7 +65,7 @@
                   <th class="col-md-4">
                     {% if item.status == "finished" %}
                     <a class="btn btn-success" role="button"
-                      href="/analyze/spark/param_tools/retrieve/?progressid={{ item.progressid }}">
+                      href="/retrieve/?progressid={{ item.progressid }}">
                       查看结果
                     </a>
                     {% elif item.status == "running" %}
