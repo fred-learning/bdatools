@@ -1,0 +1,55 @@
+{
+    "cluster-status": {
+        "cassandra": ["pc57", "pc59", "pc61", "pc63"],
+        "hdfs-master": "pc57",
+        "yarn-master": "pc57",
+        "hdfs-slave": ["pc57", "pc59", "pc61", "pc63"],
+        "yarn-slave": ["pc57", "pc59", "pc61", "pc63"]
+    },
+    "node-status": {
+        "disk_in_gb": "50",
+        "memory_in_gb": "50",
+        "cpu_core": "8"
+    },
+    "spark-defaults.conf": {
+        "file_location": "/home/kaze/Storage/bda/bdatools/manage-param-tools/config/temp/spark-defaults.conf",
+        "allow_params": {
+            "spark.driver.memory": "1g",
+            "spark.executor.memory": "1g",
+            "spark.shuffle.memoryFraction": "0.2",
+            "spark.serializer": "org.apache.spark.serializer.JavaSerializer",
+            "spark.default.parallelism": "2",
+            "spark.storage.memoryFraction": "0.6",
+            "spark.speculation": "false"
+        }
+    },
+    "cassandra.yaml": {
+        "file_location": "/home/kaze/Storage/bda/bdatools/manage-param-tools/config/temp/spark-defaults.conf",
+        "allow_params": {
+            "key_cache_size_in_mb": "100",
+            "row_cache_size_in_mb": "0",
+            "commitlog_sync_period_in_ms": "10000"
+        }
+    },
+    "mapred-site.xml": {
+        "file_location": "/home/kaze/Storage/bda/bdatools/manage-param-tools/config/temp/mapred-site.xml",
+        "allow_params": {
+            "mapreduce.map.memory.mb": "1024",
+            "mapreduce.reduce.memory.mb": "1024",
+            "mapreduce.task.io.sort.factor": "10",
+            "mapreduce.task.io.sort.mb": "100",
+            "mapreduce.reduce.shuffle.parallelcopies": "5"
+        }
+    },
+    "yarn-site.xml": {
+        "file_location":  "/home/kaze/Storage/bda/bdatools/manage-param-tools/config/temp/yarn-site.xml",
+        "allow_params": {
+            "yarn.nodemanager.resource.memory-mb": "8192",
+            "yarn.nodemanager.resource.cpu-vcores": "8",
+            "yarn.scheduler.maximum-allocation-mb": "8192",
+            "yarn.scheduler.minimum-allocation-mb": "1024",
+            "yarn.scheduler.maximum-allocation-vcores": "32",
+            "yarn.scheduler.minimum-allocation-vcores": "1"
+        }
+    }
+}
