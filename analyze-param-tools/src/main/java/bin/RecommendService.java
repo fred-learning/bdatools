@@ -8,13 +8,15 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import server.service.RecommendParamsService;
 
+import java.net.InetSocketAddress;
+
 public class RecommendService implements Runnable {
     private static Logger logger = Logger.getLogger(RecommendService.class);
     private static Config conf = Config.getInstance();
 
     public void run() {
         warmup();
-        Server server = new Server(conf.getJettyPort());
+        Server server = new Server(new InetSocketAddress(conf.getJettyIP(), conf.getJettyPort()));
         ServletContextHandler handler = new ServletContextHandler(server, "/");
         handler.addServlet(server.servlet.RecommendParams.class, conf.getServletPath());
         try {

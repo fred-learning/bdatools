@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Analyze Tools for Spark Parameter Recommendation</title>
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <script src="/static/jquery.min.js"></script>
+    <script src="/static/bootstrap.js"></script>
+    <script src="/static/d3.min.js"></script>
+  </head>
+  <body>
+    
+    <!-- start: PAGE -->
+    <div class="main-content container">
+
+      </br>
+      <!-- start: LIST TABLE -->
+      <div class="row">
+        <div class="col-md-12">
+        <div class="panel panel-white">
+          <div class="panel-heading">
+            <h3 class="panel-title">参数推荐</h3>
+          </div>
+
+          <div class="panel-body">
+            <h5>任务 {{ item.appid }} 推荐结果</h5>
+            <table class="table table-striped">
+              <thead>
+                <th class="col-md-2">推荐任务类型</th>
+                <th class="col-md-2">推荐任务ID</th>
+                <th class="col-md-1">数据大小/MB</th>
+                <th class="col-md-1">置信度</th>
+                <th class="col-md-2">预测时间/ms</th>
+                <th class="col-md-4">推荐参数</th>
+              </thead>
+              <tbody>
+                {% for result in item.result.recommendItemList %}
+                <tr>
+                  <th class="col-md-2" style="word-break: break-all;">{{ result.appname }}</th>
+                  <th class="col-md-2" style="word-break: break-all;">{{ result.appid }}</th>
+                  <th class="col-md-1">{{ result.datasizeMB }}</th>
+                  <th class="col-md-1">{{ result.similarity }}</th>
+                  <th class="col-md-1">{{ result.runtime }}</th>
+                  <th class="col-md-5">
+                    {% for key, val in result.params.iteritems() %}
+                    {{ key }}: {{ val }} </br>
+                    {% endfor %}
+                  </th>
+                </tr>
+                {% endfor %}
+              
+              </tbody>
+            </table>
+          </div>
+        </div>
+        </div>
+      </div>
+      <!-- end: LIST_TABLE -->
+
+    </div>
+    <!-- end: PAGE -->
+    
+  </body>
+</html>

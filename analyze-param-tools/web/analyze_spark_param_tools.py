@@ -1,16 +1,18 @@
 
 import json
+from bson import json_util
 import pymongo
 from pyjavaproperties import Properties
 from flask import render_template, redirect, request
 import requests as Requests
-import settings
 
 class Config:
     def __init__(self):
         p = Properties()
-        p.load(open(settings.ANALYZE_SPARK_PARAM_TOOLS_SETTINGS))
         self.properties_ = p
+
+    def load(self, path):
+        self.properties_.load(open(path))
 
     def GetMongoURL(self):
         return 'mongodb://%s:%s/' % (self.properties_['mongoIP'],
@@ -50,6 +52,12 @@ class ProgressClient:
     def Close(self):
         if self.client_ is not None:
             self.client_.close()
+
+    def GetItemByProgressId(self, progressid):
+        item = self.col_.find_one({'progressid': progressid})
+        ret = json.loads(json_util.dumps(item))
+        ret['result'] = json.loads(ret['result'])
+        return ret
 
             
 def is_integer(num):

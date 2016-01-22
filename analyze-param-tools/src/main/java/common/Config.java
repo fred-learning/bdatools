@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -80,6 +81,10 @@ public class Config {
 
 	public Integer getJettyPort() {
 		return Integer.parseInt(P.getProperty("jettyPort"));
+	}
+
+	public String getJettyIP() {
+		return P.getProperty("jettyIP");
 	}
 
 	public String getServletPath() {
