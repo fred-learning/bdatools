@@ -1,4 +1,4 @@
-package server.service;
+package server.recommendservice;
 
 import recommend.basic.AppResult;
 

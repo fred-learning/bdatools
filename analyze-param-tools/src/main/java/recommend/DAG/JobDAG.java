@@ -17,6 +17,7 @@ public class JobDAG {
 	}
 	
 	public void addStageDAG(StageDAG stageDAG) {
+		if (stageDAG == null) return;
 		edgeMap.addEdges(stageDAG.getEdgeMap());
 		nodeSet.addAll(stageDAG.getNodeSet());
 	}

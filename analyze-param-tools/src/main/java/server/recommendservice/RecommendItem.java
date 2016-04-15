@@ -1,4 +1,4 @@
-package server.service;
+package server.recommendservice;
 
 import historydb.App;
 import recommend.basic.AppResult;

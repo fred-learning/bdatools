@@ -3,7 +3,7 @@ package server.servlet;
 import common.Config;
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.http.HttpStatus;
-import server.service.RecommendParamsService;
+import server.recommendservice.RecommendParamsService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-public class RecommendParams extends HttpServlet {
-    private static Logger logger = Logger.getLogger(RecommendParams.class);
+public class RecommendServlet extends HttpServlet {
+    private static Logger logger = Logger.getLogger(RecommendServlet.class);
     private static RecommendParamsService service = RecommendParamsService.getInstance();
     private static Config conf = Config.getInstance();
 

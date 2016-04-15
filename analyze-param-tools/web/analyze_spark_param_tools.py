@@ -6,6 +6,7 @@ from pyjavaproperties import Properties
 from flask import render_template, redirect, request
 import requests as Requests
 
+
 class Config:
     def __init__(self):
         p = Properties()
@@ -24,11 +25,27 @@ class Config:
     def GetMongoDBCollection(self):
         return self.properties_['mongoProgressCollection']
 
-    def GetServletURL(self):
+    def GetRecommendServletURL(self):
         return 'http://%s:%s%s' % (self.properties_['jettyIP'],
                                    self.properties_['jettyPort'],
-                                   self.properties_['servletPath'])
-    
+                                   self.properties_['recommendServletPath'])
+
+    def GetRunParamHistoryServletURL(self):
+        return 'http://%s:%s%s' % (self.properties_['jettyIP'],
+                                   self.properties_['jettyPort'],
+                                   self.properties_['runParamHistoryServletPath'])
+
+    def GetRunParamServletURL(self):
+        return 'http://%s:%s%s' % (self.properties_['jettyIP'],
+                                   self.properties_['jettyPort'],
+                                   self.properties_['runParamServletPath'])
+
+    def GetRunParamLogServletURL(self):
+        return 'http://%s:%s%s' % (self.properties_['jettyIP'],
+                                   self.properties_['jettyPort'],
+                                   self.properties_['runParamLogServletPath'])
+
+
 class ProgressClient:
     def __init__(self):
         self.client_ = pymongo.MongoClient(config.GetMongoURL())

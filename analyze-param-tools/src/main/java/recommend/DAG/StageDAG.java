@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.alexmerz.graphviz.TokenMgrError;
 import org.apache.log4j.Logger;
 
 import recommend.basic.EdgeMap;
@@ -20,21 +21,30 @@ import com.alexmerz.graphviz.objects.Node;
 import common.TypeUtil;
 
 public class StageDAG {
-	private Logger logger = Logger.getLogger(StageDAG.class);
+	private static Logger logger = Logger.getLogger(StageDAG.class);
 	private Stage stage;
 	private Set<Nodem> nodeSet;
 	private EdgeMap edgeMap;
-	
-	public StageDAG(Stage stage) {
-		this.stage = stage;
+
+	public static StageDAG constructInstance(Stage stage) {
+		StageDAG dag = new StageDAG(stage);
 		try {
-			construct();
+			dag.construct();
+			return dag;
+		} catch (TokenMgrError e) {
+			logger.error("Parse dag error.", e);
+			return null;
 		} catch (Exception e) {
-			logger.fatal("Error when parsing " + stage.getDotFile() + "\n", e);
+			logger.error("Unknown error.", e);
+			return null;
 		}
 	}
+
+	private StageDAG(Stage stage) {
+		this.stage = stage;
+	}
 	
-	private void construct() throws ParseException {
+	private void construct() throws Exception, TokenMgrError {
 		Parser p = new Parser();
 		p.parse(new StringReader(stage.getDotFile()));
 		Graph graph = p.getGraphs().get(0);

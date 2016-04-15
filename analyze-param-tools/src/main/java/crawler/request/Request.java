@@ -23,24 +23,18 @@ public abstract class Request<T> {
 		acceptType = type;
 	}
 	
-	public T handle(String url) {
+	public T handle(String url) throws UnirestException {
 		logger.debug("Handling html request: " + url);
 
-		try {
-			HttpResponse<String> resp = Unirest.get(url).header("accept", acceptType).asString();
-			if (resp.getStatus() != 200) {
-				logger.fatal(String.format("Getting data from %s failed. Response status %d.", 
-						url, resp.getStatus()));
-				System.exit(-1);
-			} else {
-				String content = resp.getBody();
-				return process(content);
-			}
-		} catch (UnirestException e) {
-			logger.fatal("Error when getting data from " + url, e);
-			System.exit(-1);
+		HttpResponse<String> resp = Unirest.get(url).header("accept", acceptType).asString();
+		if (resp.getStatus() != 200) {
+			logger.error(String.format("Getting data from %s failed. Response status %d.",
+					url, resp.getStatus()));
+			return null;
+		} else {
+			String content = resp.getBody();
+			return process(content);
 		}
-		return null;
 	}
 	
 	abstract T process(String content);

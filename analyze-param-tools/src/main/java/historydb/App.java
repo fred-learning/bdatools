@@ -56,6 +56,10 @@ public class App {
         return sparkEnv.get("spark.app.name");
     }
 
+    public String getJavaCMD() {
+        return sparkEnv.get("sun.java.command");
+    }
+
     public Long getRuntime() {
         String startTime = summary.getAttempts().get(0).getStartTime();
         String endTime = summary.getAttempts().get(0).getEndTime();
@@ -69,17 +73,6 @@ public class App {
             }
         });
         return jobDAGs;
-    }
-
-    public String getRecommendParamsStr() {
-        StringBuffer sb = new StringBuffer();
-        for (String recommendKey : conf.getSparkRecommendParams()) {
-            if (sparkEnv.get(recommendKey) == null) continue;
-            if (sb.length() != 0) sb.append(", ");
-            String pair = String.format("%s:%s", recommendKey, sparkEnv.get(recommendKey));
-            sb.append(pair);
-        }
-        return sb.toString();
     }
 
     public Map<String, String> getRecommendParams() {

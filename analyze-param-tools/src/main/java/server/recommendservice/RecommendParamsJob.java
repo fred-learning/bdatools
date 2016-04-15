@@ -1,4 +1,4 @@
-package server.service;
+package server.recommendservice;
 
 import common.Config;
 import historydb.App;
@@ -124,21 +124,4 @@ public class RecommendParamsJob implements Runnable {
         return result;
     }
 
-    /*
-    public static String resultToStr(List<AppResult> appResults) {
-        StringBuilder sb = new StringBuilder();
-        String FORMAT = "%d. clusterid:%s, appid:%s, appname:%s, similarity:%f, time:%fs, datasize:%f MB, appparams:[%s]";
-        int count_sofar = 1;
-        for (AppResult appResult : appResults) {
-            App app = appResult.getApp();
-            String msg = String.format(FORMAT,
-                    count_sofar, app.getClusterid(), app.getAppid(), app.getAppName(),
-                    appResult.getSimilarity(), app.getRuntime()/1000.0, app.getInputSizeMB(),
-                    app.getRecommendParamsStr());
-            sb.append(msg + "\n");
-            count_sofar ++;
-        }
-        return sb.toString();
-    }
-   */
 }

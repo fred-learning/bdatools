@@ -15,7 +15,7 @@ public class GraphMatching {
 	private static Logger logger = Logger.getLogger(GraphMatching.class);
 	
 	public static double similarity(JobDAG firstDag, JobDAG secondDag){
-		DistanceAlgo distanceAlgo = new GraphEditDistanceGreedy();
+		DistanceAlgo distanceAlgo = new GraphEditDistanceAStarSim();
 		Object weights[] = new Object[6];
 		weights[0] = "vweight";
 		weights[1] = 0.5;

@@ -60,6 +60,12 @@ public class Config {
 		return P.getProperty("yarnPath");
 	}
 
+	public List<String> getSparkRecommendParams() {
+		String recommendStr = P.getProperty("recommendParams");
+		return Arrays.asList(recommendStr.split(","));
+	}
+
+	// mongo db
 	public String getMongoIP() { return P.getProperty("mongoIP"); }
 
     public String getMongoPort() { return P.getProperty("mongoPort"); }
@@ -74,11 +80,7 @@ public class Config {
 		return P.getProperty("mongoProgressCollection");
 	}
 
-	public List<String> getSparkRecommendParams() {
-		String recommendStr = P.getProperty("recommendParams");
-		return Arrays.asList(recommendStr.split(","));
-	}
-
+	// jetty
 	public Integer getJettyPort() {
 		return Integer.parseInt(P.getProperty("jettyPort"));
 	}
@@ -87,15 +89,45 @@ public class Config {
 		return P.getProperty("jettyIP");
 	}
 
-	public String getServletPath() {
-		return P.getProperty("servletPath");
+	// recommend service
+	public String getRecommendServletPath() {
+		return P.getProperty("recommendServletPath");
+	}
+
+	public Integer getHistorySyncIntevalSec() {
+		return Integer.parseInt(P.getProperty("historySyncInterval"));
 	}
 
 	public Integer getRecommendServiceNum() {
 		return Integer.parseInt(P.getProperty("recommendServiceThread"));
 	}
 
-	public Integer getHistorySyncIntevalSec() {
-		return Integer.parseInt(P.getProperty("historySyncInterval"));
+	// run param service
+	public String getRunParamServletPath() {
+		return P.getProperty("runParamServletPath");
+	}
+
+	public String getRunParamHistoryServletPath() {
+		return P.getProperty("runParamHistoryServletPath");
+	}
+
+	public String getRunParamLogServletPath() {
+		return P.getProperty("runParamLogServletPath");
+	}
+
+	public String getSSHIP() {
+		return P.getProperty("sshIP");
+	}
+
+	public String getSSHUser() {
+		return P.getProperty("sshUser");
+	}
+
+	public String getSSHOutputDir() {
+		return P.getProperty("sshOutputDir");
+	}
+
+	public Integer getSSHConcurrency() {
+		return Integer.parseInt(P.getProperty("sshConcurrency"));
 	}
 }

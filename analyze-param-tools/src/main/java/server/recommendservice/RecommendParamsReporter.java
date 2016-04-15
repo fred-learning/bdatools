@@ -1,4 +1,4 @@
-package server.service;
+package server.recommendservice;
 
 import com.google.gson.Gson;
 import org.apache.log4j.Logger;

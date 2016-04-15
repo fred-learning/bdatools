@@ -1,5 +1,7 @@
 package bin;
 
+import com.alexmerz.graphviz.ParseException;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import common.Config;
 import crawler.DAG.DAGUtils;
 import crawler.env.Env;
@@ -32,8 +34,14 @@ public class SyncAppInfo implements Runnable {
     }
 
     public void sync() {
-        logger.info("Get application summary");
-        List<SparkSummary> appSummaryList = EnvUtils.getAppSummarys();
+        List<SparkSummary> appSummaryList;
+        try {
+            logger.info("Get application summary");
+            appSummaryList = EnvUtils.getAppSummarys();
+        } catch (UnirestException e) {
+            logger.error("Can't get app summarys:", e);
+            return;
+        }
 
         logger.info("Connect to mongodb");
         HistoryClient client = new HistoryClient();
@@ -43,20 +51,27 @@ public class SyncAppInfo implements Runnable {
         for (SparkSummary appSummary : appSummaryList) {
             if (!appSummary.getAttempts().get(0).getCompleted()) continue;
             if (client.findApp(conf.getClusterID(), appSummary.getId()) != null) continue;
-            logger.info("Crawling apllication " + appSummary.getId());
 
-            logger.info("\tGeting DAG.");
-            List<JobDAG> jobDAGList = DAGUtils.getJobDAGsByAppSummary(appSummary);
-            logger.info("\tGeting spark environment.");
-            Env sparkEnv = EnvUtils.getSparkEnvByAppSummary(appSummary);
-            logger.info("\tGeting yarn environment.");
-            Env yarnEnv = EnvUtils.getYarnEnv();
-            logger.info("\tGeting spark executor information.");
-            List<SparkExecutor> executors = EnvUtils.getSparkExecutorsByAppSummary(appSummary);
+            try {
+                logger.info("Crawling apllication " + appSummary.getId());
+                logger.info("\tGeting DAG.");
+                List<JobDAG> jobDAGList = DAGUtils.getJobDAGsByAppSummary(appSummary);
+                if (jobDAGList.size() == 0) continue;
 
-            App app = new App(conf.getClusterID(), appSummary.getId(), jobDAGList,
-                    appSummary, sparkEnv, yarnEnv, executors);
-            client.insertApp(app);
+                logger.info("\tGeting spark environment.");
+                Env sparkEnv = EnvUtils.getSparkEnvByAppSummary(appSummary);
+                logger.info("\tGeting yarn environment.");
+                Env yarnEnv = EnvUtils.getYarnEnv();
+                logger.info("\tGeting spark executor information.");
+                List<SparkExecutor> executors = EnvUtils.getSparkExecutorsByAppSummary(appSummary);
+
+                App app = new App(conf.getClusterID(), appSummary.getId(), jobDAGList,
+                        appSummary, sparkEnv, yarnEnv, executors);
+                client.insertApp(app);
+            } catch (Exception e) {
+                logger.error("Can't sync " + appSummary.getId(), e);
+            }
+
         }
         logger.info("Sync finished.");
     }

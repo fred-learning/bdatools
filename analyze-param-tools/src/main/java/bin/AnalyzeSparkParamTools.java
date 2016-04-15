@@ -29,18 +29,18 @@ public class AnalyzeSparkParamTools {
         }
 
         // start sync service
-        logger.info("Start SyncAppInfo thread.");
-        Thread syncThread = new Thread(new SyncAppInfo());
-        syncThread.start();
+//        logger.info("Start SyncAppInfo thread.");
+//        Thread syncThread = new Thread(new SyncAppInfo());
+//        syncThread.start();
 
-        // start recommend service
+        // start jetty recommendservice
         logger.info("Start RecommendService thread.");
-        Thread recommendThread = new Thread(new RecommendService());
-        recommendThread.start();
+        Thread jettyThread = new Thread(new JettyService());
+        jettyThread.start();
 
         try {
-            syncThread.join();
-            recommendThread.join();
+            //syncThread.join();
+            jettyThread.join();
         } catch (Exception e) {
             logger.fatal("Join thread error:", e);
         }

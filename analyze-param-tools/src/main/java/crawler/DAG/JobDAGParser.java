@@ -24,10 +24,15 @@ public class JobDAGParser {
 	public JobDAG getJobDAG() {
 		JobDAG jobDAG = new JobDAG();
 		for (Stage stage : getStageList()) {
-			StageDAG stageDAG = new StageDAG(stage);
+			StageDAG stageDAG = StageDAG.constructInstance(stage);
 			jobDAG.addStageDAG(stageDAG);
 		}
-		return jobDAG;
+
+		if (jobDAG.getNodeSet().size() == 0) {
+			return null;
+		} else {
+			return jobDAG;
+		}
 	}
 	
 	public List<Stage> getStageList() {

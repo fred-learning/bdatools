@@ -16,7 +16,7 @@
       
       <!-- start: FORM -->
       <div class="row">
-        <form action="/submit/" method="post" class="form-inline col-md-12">
+        <form action="/recommend_submit/" method="post" class="form-inline col-md-12">
           <div class="panel panel-white">
             <div class="panel-heading">
               <h4 class="panel-title">参数推荐</h4>
@@ -49,8 +49,7 @@
               <!-- start: LIST TABLE -->
               <table class="table table-striped">
                 <thead>
-                  <th class="col-md-2">推荐任务ID</th>
-                  <th class="col-md-2">应用程序ID</th>
+                  <th class="col-md-4">应用程序ID</th>
                   <th class="col-md-2">开始时间</th>
                   <th class="col-md-2">结束时间</th>
                   <th class="col-md-4">推荐结果</th>
@@ -58,14 +57,13 @@
                 <tbody>
                 {% for item in items %}
                 <tr>
-                  <th class="col-md-2">{{ item.progressid }}</th>
-                  <th class="col-md-2">{{ item.appid }}</th>
+                  <th class="col-md-4">{{ item.appid }}</th>
                   <th class="col-md-2">{{ item.startTime }}</th>
                   <th class="col-md-2">{{ item.endTime }}</th>
                   <th class="col-md-4">
                     {% if item.status == "finished" %}
                     <a class="btn btn-success" role="button"
-                      href="/retrieve/?progressid={{ item.progressid }}">
+                      href="/recommend_retrieve/?progressid={{ item.progressid }}">
                       查看结果
                     </a>
                     {% elif item.status == "running" %}
@@ -99,9 +97,9 @@
           <ul class="pagination">
             {% for i in range(1, pageCount + 1) %}
               {% if i != activePage %}
-              <li><a href="/analyze/spark/param_tools/?startIdx={{(i - 1) * 10}}">{{ i }}</a></li>
+              <li><a href="/?startIdx={{(i - 1) * 10}}">{{ i }}</a></li>
               {% else %}
-              <li class="active"><a href="/analyze/spark/param_tools/?startIdx={{(i - 1) * 10}}">{{ i }}</a></li>
+              <li class="active"><a href="/?startIdx={{(i - 1) * 10}}">{{ i }}</a></li>
               {% endif %}
             {% endfor %}
           </ul>

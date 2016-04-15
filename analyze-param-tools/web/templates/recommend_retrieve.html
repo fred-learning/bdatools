@@ -8,7 +8,7 @@
     <script src="/static/d3.min.js"></script>
   </head>
   <body>
-    
+
     <!-- start: PAGE -->
     <div class="main-content container">
 
@@ -25,29 +25,39 @@
             <h5>任务 {{ item.appid }} 推荐结果</h5>
             <table class="table table-striped">
               <thead>
-                <th class="col-md-2">推荐任务类型</th>
-                <th class="col-md-2">推荐任务ID</th>
-                <th class="col-md-1">数据大小/MB</th>
-                <th class="col-md-1">置信度</th>
-                <th class="col-md-2">预测时间/ms</th>
-                <th class="col-md-4">推荐参数</th>
+                <th class="col-md-3">任务类型</th>
+                <th class="col-md-3">任务ID</th>
+                <th class="col-md-5">任务信息</th>
+                <th class="col-md-2"></th>
               </thead>
               <tbody>
                 {% for result in item.result.recommendItemList %}
                 <tr>
-                  <th class="col-md-2" style="word-break: break-all;">{{ result.appname }}</th>
-                  <th class="col-md-2" style="word-break: break-all;">{{ result.appid }}</th>
-                  <th class="col-md-1">{{ result.datasizeMB }}</th>
-                  <th class="col-md-1">{{ result.similarity }}</th>
-                  <th class="col-md-1">{{ result.runtime }}</th>
+                  <th class="col-md-3" style="word-break: break-all;">{{ result.appname }}</th>
+                  <th class="col-md-3" style="word-break: break-all;">{{ result.appid }}</th>
                   <th class="col-md-5">
+                    数据大小/MB：{{ result.datasizeMB }} </br>
+                    相似度: {{ result.similarity }} </br>
+                    运行时间/ms: {{ result.runtime }} </br>
+                    任务参数： </br>
+                    <ul>
                     {% for key, val in result.params.iteritems() %}
-                    {{ key }}: {{ val }} </br>
+                    <li>{{ key }}: {{ val }}</li>
                     {% endfor %}
+                    </ul>
+                  </th>
+                  <th class="col-md-2">
+                    <form action="/run_params/" method="post">
+                      <input type="hidden" name="progressid" value="{{ item.progressid }}">
+                      <input type="hidden" name="appid" value="{{ item.appid }}">
+                      <input type="hidden" name="params"
+                             value="{% for key, val in result.params.iteritems() %}{{key}}:{{val}} {% endfor %}">
+                      <button type="submit" class="btn btn-info" role="button">应用参数</button>
+                    </form>
                   </th>
                 </tr>
                 {% endfor %}
-              
+
               </tbody>
             </table>
           </div>
@@ -58,6 +68,6 @@
 
     </div>
     <!-- end: PAGE -->
-    
+
   </body>
 </html>

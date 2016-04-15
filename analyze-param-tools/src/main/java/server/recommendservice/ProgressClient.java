@@ -1,4 +1,4 @@
-package server.service;
+package server.recommendservice;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;

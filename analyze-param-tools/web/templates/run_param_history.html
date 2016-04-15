@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Analyze Tools for Spark Parameter Recommendation</title>
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <script src="/static/jquery.min.js"></script>
+    <script src="/static/bootstrap.js"></script>
+    <script src="/static/d3.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- start: PAGE -->
+    <div class="main-content container">
+
+      </br>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-white">
+            <div class="panel-heading">
+              <h3 class="panel-title">参数推荐</h3>
+            </div>
+
+            <!-- start: LIST TABLE -->
+            <div class="panel-body">
+              <h5>任务优化历史记录</h5>
+              <table class="table table-striped">
+                <thead>
+                  <th class="col-md-3">原应用程序ID</th>
+                  <th class="col-md-2">开始时间</th>
+                  <th class="col-md-2">运行时间/s</th>
+                  <th class="col-md-2">程序输出日志</th>
+                  <th class="col-md-2">运行状态</th>
+                </thead>
+                <tbody>
+                  {% for item in items %}
+                  <tr>
+                    <th class="col-md-3" style="word-break: break-all;">{{ item.appid }}</th>
+                    <th class="col-md-2">{{ item.startTime }}</th>
+                    <th class="col-md-2">{{ item.runTimeInSec }}</th>
+                    <th class="col-md-2">
+                      <a href="{{run_params_log_path}}?filePrefix={{item.filePrefix}}">点击查看</a>
+                    </th>
+                    {% if item.succeed == "UNDEFINED" %}
+                      <th class="col-md-2 text-info">运行中</th>
+                    {% elif item.succeed == "SUCCEED" %}
+                      <th class="col-md-2 text-success">运行成功</th>
+                    {% else %}
+                      <th class="col-md-2 text-danger">运行失败</th>
+                    {% endif %}
+                  </tr>
+                  {% endfor %}
+
+                </tbody>
+              </table>
+            </div>
+            <!-- end: LIST_TABLE -->
+            <!-- start: PAGINATION -->
+            <nav class="row">
+              <div class="col-md-12">
+                <ul class="pagination">
+                  {% for i in range(1, pageCount + 1) %}
+                  {% if i != activePage %}
+                  <li><a href="/run_param_history/?pageIdx={{i}}">{{ i }}</a></li>
+                  {% else %}
+                  <li class="active"><a href="/?pageIdx={{i}}">{{ i }}</a></li>
+                  {% endif %}
+                  {% endfor %}
+                </ul>
+              </div>
+            </nav>
+            <!-- end: PAGINATION -->
+          </div>
+        </div>
+
+
+
+      </div>
+
+    </div>
+    <!-- end: PAGE -->
+
+  </body>
+</html>
