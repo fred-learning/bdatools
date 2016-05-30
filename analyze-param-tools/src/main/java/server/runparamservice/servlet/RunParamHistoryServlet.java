@@ -1,13 +1,17 @@
-package server.servlet;
+package server.runparamservice.servlet;
 
 import com.google.gson.Gson;
 import common.Config;
 import common.DateUtil;
+import common.ServletUtil;
+import common.TypeUtil;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.jetty.http.HttpStatus;
 import server.runparamservice.pojo.ItemStatus;
 import server.runparamservice.pojo.ParamHistoryItem;
+import server.runparamservice.response.RunParamHistoryResponse;
+import server.runparamservice.response.RunParamHistoryResponseStatus;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -30,22 +34,38 @@ public class RunParamHistoryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        Collection<File> files = FileUtils.listFiles(
-                new File(conf.getSSHOutputDir()), new String[]{"meta"}, false);
-        List<ParamHistoryItem> items = new ArrayList<ParamHistoryItem>();
-        for (File f : files) {
-            try {
-                ParamHistoryItem item = parseMetaData(f);
-                if (item != null) items.add(item);
-            } catch (Exception e) {
-                logger.warn("Exception in parsing " + f.getName(), e);
+        RunParamHistoryResponse response;
+        String pageIdxStr = req.getParameter("pageIdx");
+        if (pageIdxStr == null || !TypeUtil.isInteger(pageIdxStr)) {
+            response = new RunParamHistoryResponse(RunParamHistoryResponseStatus.INVALID_ARGUMENT);
+        } else {
+            Collection<File> files = FileUtils.listFiles(
+                    new File(conf.getSSHOutputDir()), new String[]{"meta"}, false);
+            List<ParamHistoryItem> items = new ArrayList<ParamHistoryItem>();
+            for (File f : files) {
+                try {
+                    ParamHistoryItem item = parseMetaData(f);
+                    if (item != null) items.add(item);
+                } catch (Exception e) {
+                    logger.warn("Exception in parsing " + f.getName(), e);
+                }
             }
-        }
-        Collections.sort(items);
+            Collections.sort(items);
 
-        String json = gson.toJson(items);
-        resp.getWriter().write(json);
-        resp.setStatus(HttpStatus.OK_200);
+            int pageCount = Math.max((int) Math.ceil(1.0 * items.size() / conf.getMongoNumItemsPerPage()), 1);
+            int pageIdx = Math.max(1, Math.min(Integer.parseInt(pageIdxStr), pageCount));
+            int startIdx = (pageIdx - 1) * conf.getMongoNumItemsPerPage();
+            int endIdx = Math.min(startIdx + conf.getMongoNumItemsPerPage(), items.size());
+            List<ParamHistoryItem> itemsSubList = items.subList(startIdx, endIdx);
+
+            response = new RunParamHistoryResponse(RunParamHistoryResponseStatus.SUCCESS);
+            response.setItems(itemsSubList);
+            response.setActivePage(pageIdx);
+            response.setPageCount(pageCount);
+        }
+
+        String msg = gson.toJson(response, RunParamHistoryResponse.class);
+        ServletUtil.setResponse(resp, msg);
     }
 
     private ParamHistoryItem parseMetaData(File file) throws IOException {

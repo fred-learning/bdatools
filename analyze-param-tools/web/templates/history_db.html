@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Analyze Tools for Spark Parameter Recommendation</title>
+    <link rel="stylesheet" href="/static/bootstrap-3.3.6-dist/css/bootstrap.css">
+    <script src="/static/jquery.min.js"></script>
+    <script src="/static/bootstrap-3.3.6-dist/js/bootstrap.js"></script>
+    <script src="/static/d3.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('[data-toggle="popover"]').popover({});
+      });
+    </script>
+  </head>
+
+  <body>
+
+    <!-- start: PAGE -->
+    <div class="main-content container">
+
+      <br>
+
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <div class="panel panel-primary">
+
+            <div class="panel-heading"><!-- start: PANEL HEAD -->
+              <span class="panel-title">参数优化工具</span>
+
+              <div class="row text-right">
+                <ol class="breadcrumb">
+                  <li>
+                    <a href="{{ config.get_recommend_progress_view_servlet_relative_url() }}">
+                      <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                      任务参数优化
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{{ config.get_run_param_history_servlet_relative_url() }}">
+                      <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                      优化运行记录
+                    </a>
+                  </li>
+                  <li class="active">
+                    <span class="glyphicon glyphicon-hdd" aria-hidden="true"></span>
+                    历史数据库
+                  </li>
+                </ol>
+              </div>
+            </div><!-- end: PANEL HEAD -->
+
+            <div class="panel-body">
+              <div class="row text-right"> <!-- start: SUBMIT -->
+                  <form action="{{ config.get_historydb_add_servlet_relative_url() }}"
+                        method="post" class="form-inline col-md-12">
+                    <div class="form-group">
+                      <label for="appid">应用程序ID</label>
+                      <input type="text" class="form-control" id="appid" name="appid" placeholder="app id">
+                    </div>
+                    <button type="submit" class="btn btn-success">添加</button>
+                  </form>
+              </div> <!-- end: SUBMIT -->
+              <br>
+
+              <div class="row"> <!-- start: LIST TABLE -->
+                <table class="table table-hover">
+                  <thead>
+                    <th class="col-md-3 text-center">名称</th>
+                    <th class="col-md-1 text-center">运行时间</th>
+                    <th class="col-md-2 text-center">数据大小</th>
+                    <th class="col-md-3 text-center">运行参数</th>
+                    <th class="col-md-3 text-center">操作</th>
+                  </thead>
+                  <tbody>
+                    {% for item in items %}
+                    <tr>
+                      <th class="col-md-3 text-center" style="word-break: break-all;">{{ item.appName | truncate(30) }}</th>
+                      <th class="col-md-1 text-center">{{ (item.runTime  | int) // 1000 }} s</th>
+                      <th class="col-md-2 text-center">{{ item.inputSizeMB | round | int }} MB</th>
+                      <th class="col-md-3">
+                        <small>
+                        <ul style="word-break: break-word;">
+                          {% for key, val in item.recommendParams.iteritems() %}
+                          <li>{{ key }}: {{ val }}</li>
+                          {% endfor %}
+                        </ul>
+                        </small>
+                      </th>
+                      <th class="col-md-3 text-center">
+                        <form action="{{ config.get_historydb_delete_servlet_relative_url() }}" method="post">
+                          <input name="appid" value="{{ item.appid }}" hidden="hidden">
+                          <input name="activePage" value="{{ activePage }}" hidden="hidden">
+                          <button type="submit" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> 删除
+                          </button>
+
+                          <button type="button" class="btn btn-info" data-toggle="popover" data-placement="bottom"
+                                data-container="body" title="命令信息" data-content="{{ item.javaCMD }}">
+                          <span class="glyphicon glyphicon-console" aria-hidden="true"></span> 命令
+                        </button>
+                        </form>
+                      </th>
+                    </tr>
+                    {% endfor %}
+
+                  </tbody>
+                </table>
+              </div><!-- end: LIST_TABLE -->
+
+            </div> <!-- end panel body -->
+
+            <div class="panel-footer">
+              <div class="row"> <!-- start: PAGINATION -->
+                <nav class="col-md-6 col-md-offset-3 text-center">
+                  <ul class="pagination">
+                    {% if activePage != 1 %}
+                    <li>
+                      <a href="{{ config.get_historydb_view_servlet_relative_url() }}?pageIdx={{activePage - 1}}"
+                         aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                    </li>
+                    {% endif %}
+
+                    {% for i in pageRange %}
+                    {% if i != activePage %}
+                    <li><a href="{{ config.get_historydb_view_servlet_relative_url() }}?pageIdx={{i}}">{{ i }}</a></li>
+                    {% else %}
+                    <li class="active"><a href="{{ config.get_historydb_view_servlet_relative_url() }}?pageIdx={{i}}">{{ i }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+
+                    {% if activePage != pageCount %}
+                    <li>
+                      <a href="{{ config.get_historydb_view_servlet_relative_url() }}?pageIdx={{ activePage + 1 }}"
+                         aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    </li>
+                    {% endif %}
+                  </ul>
+                </nav>
+              </div><!-- end: PAGINATION -->
+            </div><!-- end: panel-footer -->
+
+          </div> <!-- end panel -->
+        </div> <!-- end col-md-12 -->
+      </div> <!-- end row -->
+
+    </div>
+    <!-- end: PAGE -->
+
+  </body>
+</html>

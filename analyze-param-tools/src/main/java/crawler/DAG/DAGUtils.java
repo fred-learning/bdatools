@@ -21,20 +21,6 @@ import crawler.request.TextRequest;
 public class DAGUtils {
 	private static Logger logger = Logger.getLogger(DAGUtils.class);
 	private static Config conf = Config.getInstance();
-	
-	public static List<Job> getJobsByAppSummary(SparkSummary summary) throws UnirestException {
-        String attemptId = summary.getAttempts().get(0).getAttemptId();
-        String apiPath;
-        if (attemptId == null) {
-            apiPath = String.format("%s/api/v1/applications/%s/jobs",
-                    conf.getHistServerPath(), summary.getId());
-        } else {
-            apiPath = String.format("%s/api/v1/applications/%s/%s/jobs/",
-                    conf.getHistServerPath(), summary.getId(), attemptId);
-        }
-		JsonArrayRequest<Job> request = new JsonArrayRequest<Job>(Job.class);
-        return request.handle(apiPath);
-	}
 
 	public static List<JobDAG> getJobDAGsByAppSummary(SparkSummary summary) throws UnirestException {
         List<JobDAG> ret = new ArrayList<JobDAG>();
@@ -44,6 +30,20 @@ public class DAGUtils {
             if (jobDAG != null) ret.add(jobDAG);
         }
         return ret;
+    }
+
+    private static List<Job> getJobsByAppSummary(SparkSummary summary) throws UnirestException {
+        String attemptId = summary.getAttempts().get(0).getAttemptId();
+        String apiPath;
+        if (attemptId == null) {
+            apiPath = String.format("%s/api/v1/applications/%s/jobs",
+                    conf.getHistServerPath(), summary.getId());
+        } else {
+            apiPath = String.format("%s/api/v1/applications/%s/%s/jobs/",
+                    conf.getHistServerPath(), summary.getId(), attemptId);
+        }
+        JsonArrayRequest<Job> request = new JsonArrayRequest<Job>(Job.class);
+        return request.handle(apiPath);
     }
 	
 	private static JobDAG getJobDAG(SparkSummary summary, Integer jobid) throws UnirestException {

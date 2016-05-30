@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Analyze Tools for Spark Parameter Recommendation</title>
+    <link rel="stylesheet" href="/static/bootstrap-3.3.6-dist/css/bootstrap.css">
+    <script src="/static/jquery.min.js"></script>
+    <script src="/static/bootstrap-3.3.6-dist/js/bootstrap.js"></script>
+    <script src="/static/d3.min.js"></script>
+  </head>
+  <body>
+    
+    <!-- start: PAGE -->
+    <div class="main-content container">
+      <br>
+
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <div class="panel panel-primary">
+
+            <div class="panel-heading"> <!-- start: panel-heading -->
+              <span class="panel-title">参数优化工具</span>
+              <div class="row text-right">
+                <ol class="breadcrumb">
+                  <li class="active">
+                    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                    任务参数优化
+                  </li>
+                  <li>
+                    <a href="{{ config.get_run_param_history_servlet_relative_url() }}">
+                      <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                      优化运行记录
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{{ config.get_historydb_view_servlet_relative_url() }}">
+                      <span class="glyphicon glyphicon-hdd" aria-hidden="true"></span>
+                      历史数据库
+                    </a>
+                  </li>
+                </ol>
+              </div>
+            </div><!-- end: panel-heading -->
+
+            <div class="panel-body"><!-- start: panel-body -->
+              <div class="row text-right"> <!-- start: SUBMIT -->
+                <form action="{{ config.get_recommend_job_submit_servlet_relative_url() }}"
+                      method="post" class="form-inline col-md-12">
+                  <div class="form-group">
+                    <label for="appid">应用程序ID</label>
+                    <input type="text" class="form-control" id="appid" name="appid" placeholder="app id">
+                  </div>
+                  <button type="submit" class="btn btn-success">优化</button>
+                </form>
+              </div> <!-- end: SUBMIT -->
+
+              <div class="row"> <!-- start: LIST TABLE -->
+                <table class="table table-hover"><!-- start: TABLE -->
+                  <thead>
+                    <th class="col-md-4 text-center">应用程序ID</th>
+                    <th class="col-md-2 text-center">任务运行原时间</th>
+                    <th class="col-md-2 text-center">优化开始时间</th>
+                    <th class="col-md-2 text-center">优化结束时间</th>
+                    <th class="col-md-2 text-center">优化结果</th>
+                  </thead>
+                  <tbody>
+                  {% for item in items %}
+                  <tr>
+                    <th class="col-md-4 text-center">{{ item.appid }}</th>
+                    <th class="col-md-2 text-center">
+                      {% if item.status != "running" %}
+                      {{ (item.result.originRunTime | int) // 1000 }} s
+                      {% else %}
+                      0 s
+                      {% endif %}
+                    </th>
+                    <th class="col-md-2 text-center">{{ item.startTime }}</th>
+                    <th class="col-md-2 text-center">{{ item.endTime }}</th>
+                    <th class="col-md-2 text-center">
+                      {% if item.status == "finished" %}
+                      <a class="btn btn-success" role="button"
+                        href="{{ config.get_recommend_progress_detail_servlet_relative_url() }}?progressid={{ item.progressid }}">
+                        查看结果
+                      </a>
+                      {% elif item.status == "running" %}
+                      <a class="btn btn-primary disabled">运行中</a>
+                      {% elif item.status == "error" %}
+                      <a class="btn btn-danger" role="button" data-toggle="collapse"
+                        href="#{{ item.progressid }}" aria-expanded="false"  aria-controls="{{ item.progressid }}">
+                        运行错误
+                      </a>
+                      <div class="collapse" id="{{ item.progressid }}">
+                        {{ item.result.errMsg }}
+                      </div>
+                      {% endif %}
+                    </th>
+                  </tr>
+                  {% endfor %}
+                  </tbody>
+                </table><!-- end: TABLE -->
+              </div> <!-- end: LIST TABLE -->
+            </div> <!-- end: panel-body -->
+
+            <div class="panel-footer"><!-- start: panel-footer -->
+              <div class="row"> <!-- start: PAGINATION -->
+                  <nav class="col-md-6 col-md-offset-3 text-center">
+                    <ul class="pagination">
+                      {% if activePage != 1 %}
+                      <li>
+                        <a href="{{ config.get_recommend_progress_view_servlet_relative_url() }}?pageIdx={{activePage - 1}}"
+                           aria-label="Previous">
+                          <span aria-hidden="true">&laquo;</span>
+                        </a>
+                      </li>
+                      {% endif %}
+
+                      {% for i in pageRange %}
+                      {% if i != activePage %}
+                      <li>
+                        <a href="{{ config.get_recommend_progress_view_servlet_relative_url() }}?pageIdx={{i}}">{{ i }}</a>
+                      </li>
+                      {% else %}
+                      <li class="active">
+                        <a href="{{ config.get_recommend_progress_view_servlet_relative_url() }}?pageIdx={{i}}">{{ i }}</a>
+                      </li>
+                      {% endif %}
+                      {% endfor %}
+
+                      {% if activePage != pageCount %}
+                      <li>
+                        <a href="{{ config.get_recommend_progress_view_servlet_relative_url() }}?pageIdx={{ activePage + 1 }}" aria-label="Next">
+                          <span aria-hidden="true">&raquo;</span>
+                        </a>
+                      </li>
+                      {% endif %}
+                    </ul>
+                  </nav>
+                </div><!-- end: PAGINATION -->
+              </div><!-- end: panel-footer -->
+
+          </div><!-- end panel -->
+        </div><!-- end col-md-10 -->
+      </div><!-- end row -->
+    </div><!-- end container -->
+  </body>
+</html>

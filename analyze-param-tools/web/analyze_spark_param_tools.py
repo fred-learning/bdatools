@@ -1,10 +1,5 @@
 
-import json
-from bson import json_util
-import pymongo
 from pyjavaproperties import Properties
-from flask import render_template, redirect, request
-import requests as Requests
 
 
 class Config:
@@ -15,74 +10,88 @@ class Config:
     def load(self, path):
         self.properties_.load(open(path))
 
-    def GetMongoURL(self):
+    def get_mongodb_url(self):
         return 'mongodb://%s:%s/' % (self.properties_['mongoIP'],
                                      self.properties_['mongoPort'])
 
-    def GetMongoDBName(self):
+    def get_mongodb_name(self):
         return self.properties_['mongoDBName']
 
-    def GetMongoDBCollection(self):
+    def get_mongodb_collection(self):
         return self.properties_['mongoProgressCollection']
 
-    def GetRecommendServletURL(self):
-        return 'http://%s:%s%s' % (self.properties_['jettyIP'],
-                                   self.properties_['jettyPort'],
-                                   self.properties_['recommendServletPath'])
+    def get_servlet_prefix(self):
+        return 'http://%s:%s' % (self.properties_['jettyIP'],
+                                 self.properties_['jettyPort'])
 
-    def GetRunParamHistoryServletURL(self):
-        return 'http://%s:%s%s' % (self.properties_['jettyIP'],
-                                   self.properties_['jettyPort'],
-                                   self.properties_['runParamHistoryServletPath'])
+    # recommend
+    def get_recommend_progress_view_servlet_absolute_url(self):
+        return '%s%s' % (self.get_servlet_prefix(),
+                         self.properties_['recommendProgressViewServletPath'])
 
-    def GetRunParamServletURL(self):
-        return 'http://%s:%s%s' % (self.properties_['jettyIP'],
-                                   self.properties_['jettyPort'],
-                                   self.properties_['runParamServletPath'])
+    def get_recommend_progress_detail_servlet_absolute_url(self):
+        return '%s%s' % (self.get_servlet_prefix(),
+                         self.properties_['recommendProgressDetailServletPath'])
 
-    def GetRunParamLogServletURL(self):
-        return 'http://%s:%s%s' % (self.properties_['jettyIP'],
-                                   self.properties_['jettyPort'],
-                                   self.properties_['runParamLogServletPath'])
+    def get_recommend_job_submit_servlet_absolute_url(self):
+        return '%s%s' % (self.get_servlet_prefix(),
+                         self.properties_['recommendJobSubmitServletPath'])
+
+    def get_recommend_progress_view_servlet_relative_url(self):
+        return self.properties_['recommendProgressViewServletPath']
+
+    def get_recommend_progress_detail_servlet_relative_url(self):
+        return self.properties_['recommendProgressDetailServletPath']
+
+    def get_recommend_job_submit_servlet_relative_url(self):
+        return self.properties_['recommendJobSubmitServletPath']
+
+    # run param
+    def get_run_param_history_servlet_absolute_url(self):
+        return '%s%s' % (self.get_servlet_prefix(),
+                         self.properties_['runParamHistoryServletPath'])
+
+    def get_run_param_submit_servlet_absolute_url(self):
+        return '%s%s' % (self.get_servlet_prefix(),
+                         self.properties_['runParamSubmitServletPath'])
+
+    def get_run_param_log_servlet_absolute_url(self):
+        return '%s%s' % (self.get_servlet_prefix(),
+                         self.properties_['runParamLogServletPath'])
+
+    def get_run_param_history_servlet_relative_url(self):
+        return self.properties_['runParamHistoryServletPath']
+
+    def get_run_param_submit_servlet_relative_url(self):
+        return self.properties_['runParamSubmitServletPath']
+
+    def get_run_param_log_servlet_relative_url(self):
+        return self.properties_['runParamLogServletPath']
+
+    # history db
+    def get_historydb_view_servlet_absolute_url(self):
+        return '%s%s' % (self.get_servlet_prefix(),
+                         self.properties_['historyDBViewServletPath'])
+
+    def get_historydb_add_servlet_absolute_url(self):
+        return '%s%s' % (self.get_servlet_prefix(),
+                         self.properties_['historyDBAddServletPath'])
+
+    def get_historydb_delete_servlet_absolute_url(self):
+        return '%s%s' % (self.get_servlet_prefix(),
+                         self.properties_['historyDBDeleteServletPath'])
+
+    def get_historydb_view_servlet_relative_url(self):
+        return self.properties_['historyDBViewServletPath']
+
+    def get_historydb_add_servlet_relative_url(self):
+        return self.properties_['historyDBAddServletPath']
+
+    def get_historydb_delete_servlet_relative_url(self):
+        return self.properties_['historyDBDeleteServletPath']
 
 
-class ProgressClient:
-    def __init__(self):
-        self.client_ = pymongo.MongoClient(config.GetMongoURL())
-        self.db_ = self.client_[config.GetMongoDBName()]
-        self.col_ = self.db_[config.GetMongoDBCollection()]
+    def get_spark_history_url(self):
+        return self.properties_['historyServerPath']
 
-    def GetRecentItems(self, startIdx=0, num=10):
-        sortedResult = self.col_.find({}).sort("_id",
-                                               direction=pymongo.DESCENDING)
-        limitResult = sortedResult.skip(startIdx).limit(num)
-        items = []
-        for item in limitResult:
-            if len(item['result']) > 0:
-                item['result'] = json.loads(item['result'])
-            items.append(item)
-        return items
-
-    def GetItemCount(self):
-        return self.col_.count({})
-
-    def Close(self):
-        if self.client_ is not None:
-            self.client_.close()
-
-    def GetItemByProgressId(self, progressid):
-        item = self.col_.find_one({'progressid': progressid})
-        ret = json.loads(json_util.dumps(item))
-        ret['result'] = json.loads(ret['result'])
-        return ret
-
-            
-def is_integer(num):
-    try:
-        int(num)
-        return True
-    except:
-        return False
-
-                                           
-config = Config()            
+config = Config()

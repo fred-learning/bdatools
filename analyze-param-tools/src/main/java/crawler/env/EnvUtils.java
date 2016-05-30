@@ -6,6 +6,7 @@ import crawler.DAG.pojo.Stage;
 import crawler.env.pojo.SparkExecutor;
 import crawler.env.pojo.SparkSummary;
 import crawler.request.JsonArrayRequest;
+import crawler.request.JsonRequest;
 import crawler.request.TextRequest;
 import crawler.request.XmlRequest;
 import org.apache.log4j.Logger;
@@ -15,6 +16,12 @@ import java.util.List;
 public class EnvUtils {
     private static Logger logger = Logger.getLogger(EnvUtils.class);
     private static Config conf = Config.getInstance();
+
+    public static SparkSummary getAppSummary(String appid) throws UnirestException {
+        String apiPath = String.format("%s/api/v1/applications/%s", conf.getHistServerPath(), appid);
+        JsonRequest<SparkSummary> request = new JsonRequest<SparkSummary>(SparkSummary.class);
+        return request.handle(apiPath);
+    }
 
     public static Env getSparkEnvByAppSummary(SparkSummary summary) throws UnirestException {
         String attemptId = summary.getAttempts().get(0).getAttemptId();
@@ -51,12 +58,6 @@ public class EnvUtils {
         return request.handle(apiPath);
     }
 
-    public static List<SparkSummary> getAppSummarys() throws UnirestException {
-        String apiPath = String.format("%s/api/v1/applications/", conf.getHistServerPath());
-        JsonArrayRequest<SparkSummary> request = new JsonArrayRequest<SparkSummary>(SparkSummary.class);
-        return request.handle(apiPath);
-    }
-
     public static Env getYarnEnv() throws UnirestException {
         String apiPath = String.format("%s/ws/v1/cluster/metrics", conf.getYarnPath());
         XmlRequest request = new XmlRequest();
@@ -66,5 +67,4 @@ public class EnvUtils {
         logger.debug("Get environment: " + env.toString());
         return env;
     }
-
 }

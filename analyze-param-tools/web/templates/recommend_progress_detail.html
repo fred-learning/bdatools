@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Analyze Tools for Spark Parameter Recommendation</title>
+    <link rel="stylesheet" href="/static/bootstrap-3.3.6-dist/css/bootstrap.css">
+    <script src="/static/jquery.min.js"></script>
+    <script src="/static/bootstrap-3.3.6-dist/js/bootstrap.js"></script>
+    <script src="/static/d3.min.js"></script>
+  </head>
+  <body>
+
+    <!-- start: PAGE -->
+    <div class="main-content container">
+
+      <br>
+      <!-- start: LIST TABLE -->
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <span class="panel-title">参数优化工具</span>
+            <div class="row text-right">
+              <ol class="breadcrumb">
+                <li class="active">
+                  <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                  任务参数优化
+                </li>
+                <li>
+                  <a href="{{ config.get_run_param_history_servlet_relative_url() }}">
+                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                    优化运行记录
+                  </a>
+                </li>
+                <li>
+                  <a href="{{ config.get_historydb_view_servlet_relative_url() }}">
+                    <span class="glyphicon glyphicon-hdd" aria-hidden="true"></span>
+                    历史数据库
+                  </a>
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="panel-body">
+            <div class="text-info">
+              <strong>被优化参数的任务ID：</strong> {{ abstract.appid }}<br>
+              <strong>任务优化参数开始时间：</strong> {{ abstract.startTime }}<br>
+              <strong>任务优化参数结束时间：</strong> {{ abstract.endTime }}<br>
+            </div>
+
+            <table class="table table-hover">
+              <thead>
+                <th class="col-md-2 text-center">任务名称</th>
+                <th class="col-md-2 text-center">任务ID</th>
+                <th class="col-md-1 text-center">运行时间</th>
+                <th class="col-md-1 text-center">数据大小</th>
+                <th class="col-md-1 text-center">相似度</th>
+                <th class="col-md-1 text-center">得分</th>
+                <th class="col-md-3 text-center">运行参数</th>
+                <th class="col-md-1 text-center">操作</th>
+              </thead>
+              <tbody>
+                {% for item in items %}
+                <tr>
+                  <th class="col-md-2 text-center" style="word-break: break-all;">{{ item.appname | truncate(30) }}</th>
+                  <th class="col-md-2 text-center" style="word-break: break-all;">{{ item.appid }}</th>
+                  <th class="col-md-1 text-center">{{ (item.runtime | int) // 1000 }} s</th>
+                  <th class="col-md-1 text-center">{{ item.datasizeMB | round | int }} MB</th>
+                  <th class="col-md-1 text-center">{{ item.similarity | round(2) }}</th>
+                  <th class="col-md-1 text-center">{{ item.score | round(2) }}</th>
+                  <th class="col-md-3">
+                    <small>
+                      <ul style="word-break: break-word;">
+                      {% for key, val in item.params.iteritems() %}
+                      <li>{{ key }}: {{ val }}</li>
+                      {% endfor %}
+                      </ul>
+                    </small>
+                  </th>
+                  <th class="col-md-1">
+                    <form action="{{ config.get_run_param_submit_servlet_relative_url() }}" method="post">
+                      <input type="hidden" name="progressid" value="{{ item.progressid }}">
+                      <input type="hidden" name="appid" value="{{ abstract.appid }}">
+                      <input type="hidden" name="params"
+                             value="{% for key, val in item.params.iteritems() %}{{key}}:{{val}} {% endfor %}">
+                      <button type="submit" class="btn btn-info" role="button">应用参数</button>
+                    </form>
+                  </th>
+                </tr>
+                {% endfor %}
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+        </div>
+      </div>
+      <!-- end: LIST_TABLE -->
+
+    </div>
+    <!-- end: PAGE -->
+
+  </body>
+</html>

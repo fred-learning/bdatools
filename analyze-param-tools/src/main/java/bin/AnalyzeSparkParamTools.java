@@ -28,18 +28,12 @@ public class AnalyzeSparkParamTools {
             config.loadOrDie(confFile);
         }
 
-        // start sync service
-//        logger.info("Start SyncAppInfo thread.");
-//        Thread syncThread = new Thread(new SyncAppInfo());
-//        syncThread.start();
-
-        // start jetty recommendservice
-        logger.info("Start RecommendService thread.");
+        // start jetty
+        logger.info("Start jetty service.");
         Thread jettyThread = new Thread(new JettyService());
         jettyThread.start();
 
         try {
-            //syncThread.join();
             jettyThread.join();
         } catch (Exception e) {
             logger.fatal("Join thread error:", e);

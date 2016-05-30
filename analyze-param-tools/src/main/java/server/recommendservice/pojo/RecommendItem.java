@@ -1,4 +1,4 @@
-package server.recommendservice;
+package server.recommendservice.pojo;
 
 import historydb.App;
 import recommend.basic.AppResult;
@@ -10,6 +10,7 @@ public class RecommendItem {
     private String appid;
     private String appname;
     private double similarity;
+    private double score;
     private double runtime;
     private double datasizeMB;
     private Map<String, String> params;
@@ -20,6 +21,7 @@ public class RecommendItem {
         appid = app.getAppid();
         appname = app.getAppName();
         similarity = result.getSimilarity();
+        score = result.getScore();
         runtime = app.getRuntime();
         datasizeMB = app.getInputSizeMB();
         params = app.getRecommendParams();

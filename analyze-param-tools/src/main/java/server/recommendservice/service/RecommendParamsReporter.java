@@ -1,8 +1,9 @@
-package server.recommendservice;
+package server.recommendservice.service;
 
 import com.google.gson.Gson;
 import org.apache.log4j.Logger;
 import recommend.basic.AppResult;
+import server.recommendservice.pojo.RecommendParamsJobResult;
 
 import java.util.List;
 
@@ -22,15 +23,16 @@ public class RecommendParamsReporter {
         client.setRunning(progressid, appid);
     }
 
-    public void setFinished(List<AppResult> appResultList) {
+    public void setFinished(List<AppResult> appResultList, Long originRunTime) {
         logger.info(String.format("[%s] params recommendation finished", progressid));
-        RecommendResult result = new RecommendResult(appResultList);
+        RecommendParamsJobResult result = new RecommendParamsJobResult(appResultList);
+        result.setOriginRunTime(originRunTime);
         client.setFinished(progressid, gson.toJson(result));
     }
 
     public void setError(String errMsg) {
         logger.info(String.format("[%s] params recommendation error", progressid));
-        RecommendResult result = new RecommendResult(errMsg);
+        RecommendParamsJobResult result = new RecommendParamsJobResult(errMsg);
         client.setError(progressid, gson.toJson(result));
     }
 

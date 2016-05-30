@@ -80,6 +80,10 @@ public class Config {
 		return P.getProperty("mongoProgressCollection");
 	}
 
+	public Integer getMongoNumItemsPerPage() {
+		return Integer.parseInt(P.getProperty("mongoNumItemsPerPage"));
+	}
+
 	// jetty
 	public Integer getJettyPort() {
 		return Integer.parseInt(P.getProperty("jettyPort"));
@@ -90,12 +94,16 @@ public class Config {
 	}
 
 	// recommend service
-	public String getRecommendServletPath() {
-		return P.getProperty("recommendServletPath");
+	public String getRecommendProgressViewServletPath() {
+		return P.getProperty("recommendProgressViewServletPath");
 	}
 
-	public Integer getHistorySyncIntevalSec() {
-		return Integer.parseInt(P.getProperty("historySyncInterval"));
+	public String getRecommendProgressDetailServletPath() {
+		return P.getProperty("recommendProgressDetailServletPath");
+	}
+
+	public String getRecommendJobSubmitServletPath() {
+		return P.getProperty("recommendJobSubmitServletPath");
 	}
 
 	public Integer getRecommendServiceNum() {
@@ -103,8 +111,8 @@ public class Config {
 	}
 
 	// run param service
-	public String getRunParamServletPath() {
-		return P.getProperty("runParamServletPath");
+	public String getRunParamSubmitServletPath() {
+		return P.getProperty("runParamSubmitServletPath");
 	}
 
 	public String getRunParamHistoryServletPath() {
@@ -129,5 +137,18 @@ public class Config {
 
 	public Integer getSSHConcurrency() {
 		return Integer.parseInt(P.getProperty("sshConcurrency"));
+	}
+
+	// history DB
+	public String getHistoryDBAddServletPath() {
+		return P.getProperty("historyDBAddServletPath");
+	}
+
+	public String getHistoryDBDeleteServletPath() {
+		return P.getProperty("historyDBDeleteServletPath");
+	}
+
+	public String getHistoryDBViewServletPath() {
+		return P.getProperty("historyDBViewServletPath");
 	}
 }

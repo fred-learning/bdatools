@@ -1,10 +1,19 @@
-package server.recommendservice;
+package server.recommendservice.service;
 
+import com.mashape.unirest.http.exceptions.UnirestException;
 import common.Config;
+import crawler.DAG.DAGUtils;
+import crawler.app.AppUtils;
+import crawler.app.CrawlAppResult;
+import crawler.env.Env;
+import crawler.env.EnvUtils;
+import crawler.env.pojo.SparkExecutor;
+import crawler.env.pojo.SparkSummary;
 import historydb.App;
 import historydb.AppIterator;
 import historydb.HistoryClient;
 import org.apache.log4j.Logger;
+import recommend.DAG.JobDAG;
 import recommend.basic.AppResult;
 import recommend.strategy.*;
 
@@ -24,34 +33,30 @@ public class RecommendParamsJob implements Runnable {
     }
 
     public void run() {
-        List<AppResult> appResults = calculate();
-        if (appResults == null) {
-            reporter.setError("application doesn't exist.");
+        CrawlAppResult crawlAppResult = AppUtils.getApp(appid);
+        if (crawlAppResult.getValue() == 0) {
+            List<AppResult> result = calculate(crawlAppResult.getApp());
+            reporter.setFinished(result, crawlAppResult.getApp().getRuntime());
         } else {
-            reporter.setFinished(appResults);
+            reporter.setError(crawlAppResult.getMessage());
         }
     }
 
-    public List<AppResult> calculate() {
+    public List<AppResult> calculate(App app) {
         HistoryClient historyClient = new HistoryClient();
         info("Connect history db");
         historyClient.connect();
 
         List<AppResult> ret;
-        App app = historyClient.findApp(conf.getClusterID(), appid);
-        if (app == null) {
-            info("application doesn't exist");
-            ret = null;
-        } else {
-            List<App> yarnMatchedApps = getYarnMatchedApps(app, historyClient.getIterator());
-            List<App> dataMatchedApps = getDatasizeMatchedApps(app, yarnMatchedApps);
-            List<App> dagMatchedApps = getDagsizeMatchedApps(app, dataMatchedApps);
-            List<AppResult> appSimiarities = calculateSimilarity(app, dagMatchedApps);
-            List<AppResult> similarAppResultList = getSimilarApps(appSimiarities, SIM_THRESHOLD);
-            info("Ranking recommend parameters.");
-            List<AppResult> rankResult = RankStrategyBySimilarityTime.rank(similarAppResultList);
-            ret = rankResult;
-        }
+        List<App> yarnMatchedApps = getYarnMatchedApps(app, historyClient.getIterator());
+        List<App> dataMatchedApps = getDatasizeMatchedApps(app, yarnMatchedApps);
+        List<App> dagMatchedApps = getDagsizeMatchedApps(app, dataMatchedApps);
+        List<AppResult> appSimiarities = calculateSimilarity(app, dagMatchedApps);
+        List<AppResult> similarAppResultList = getSimilarApps(appSimiarities, SIM_THRESHOLD);
+        info("Ranking recommend parameters.");
+        List<AppResult> rankResult = RankStrategyByAll.rank(app, similarAppResultList);
+        ret = rankResult;
+        info(String.format("Rank result size: %s", ret.size()));
 
         info("Close history db");
         historyClient.close();

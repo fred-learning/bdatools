@@ -1,4 +1,4 @@
-package server.recommendservice;
+package server.recommendservice.service;
 
 import common.Config;
 import org.apache.log4j.Logger;
@@ -19,6 +19,7 @@ public class RecommendParamsService {
             progressClient = new ProgressClient();
             logger.info("connect to progress db.");
             progressClient.connect();
+            progressClient.resetState();
             logger.info("create recommend threadpool with thread " + conf.getRecommendServiceNum());
             executorService = Executors.newFixedThreadPool(conf.getRecommendServiceNum());
             service = new RecommendParamsService();
@@ -28,6 +29,7 @@ public class RecommendParamsService {
 
     public void addJob(String appid) {
         String progressid = UUID.randomUUID().toString();
+        logger.info(String.format("add recommend job (appid: %s, progressid: %s)", appid, progressid));
         RecommendParamsReporter reporter = new RecommendParamsReporter(progressid, progressClient);
         reporter.setRunning(appid);
         RecommendParamsJob job = new RecommendParamsJob(reporter, appid);
